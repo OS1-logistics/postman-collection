@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "8ca6e884-e02e-4b18-b191-6e1a32e659b9",
-		"name": "OS1 Postman Collection",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"name": "CoreOs Services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17290048"
 	},
 	"item": [
 		{
@@ -4603,6 +4603,160 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Container Custom Code APIs",
+					"item": [
+						{
+							"name": "register custom code",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"var customCodeId = jsonData.data.id;",
+											"",
+											"pm.environment.set(\"customCodeId\", customCodeId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"url\": {{customCodeUrl}},\n    \"requestHeader\": {},\n    \"method\": \"GET\",\n    \"wait\": true,\n    \"methodName\": \"create:onRequest\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/config/handlers/"
+							},
+							"response": []
+						},
+						{
+							"name": "update custom code",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"url\": {{customCodeUrl}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/config/handlers/{{customCodeId}}"
+							},
+							"response": []
+						},
+						{
+							"name": "get custom code",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/config/handlers/{{customCodeId}}"
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -6002,6 +6156,160 @@
 										}
 									]
 								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Entity Custom Code APIs",
+					"item": [
+						{
+							"name": "register custom code",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"var customCodeId = jsonData.data.id;",
+											"",
+											"pm.environment.set(\"customCodeId\", customCodeId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"url\": {{customCodeUrl}},\n    \"requestHeader\": {},\n    \"method\": \"GET\",\n    \"wait\": true,\n    \"methodName\": \"create:onRequest\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/entity-type/{{entityTypePluralName}}/config/handlers/"
+							},
+							"response": []
+						},
+						{
+							"name": "update custom code",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"url\": {{customCodeUrl}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/entity-type/{{entityTypePluralName}}/config/handlers/{{customCodeId}}"
+							},
+							"response": []
+						},
+						{
+							"name": "get custom code",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/entity-type/{{entityTypePluralName}}/config/handlers/{{customCodeId}}"
 							},
 							"response": []
 						}
@@ -15482,16 +15790,650 @@
 			]
 		},
 		{
-			"name": "Logistics Framework Services",
+			"name": "Tenant FPA Service",
 			"item": [
 				{
-					"name": "User API",
+					"name": "Get Tenant Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "{{request_id}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-ACCESS",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-TID",
+								"value": "{{tenant_id}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-USERINFO",
+								"value": "{{user_info}}",
+								"type": "text"
+							}
+						],
+						"url": "{{baseURI}}/core/api/v1/tenantService/"
+					},
+					"response": []
+				},
+				{
+					"name": "Tenant : PUT",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-COREOS-ACCESS",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "{{request_id}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-TID",
+								"value": "{{tenant_id}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-USERINFO",
+								"value": "{{user_info}}",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"org\": \"delhivery\",\n    \"country\": {\n        \"code\": \"IN\",\n        \"name\": \"India\"\n    },\n    \"timeZone\": \"Asia/Kolkata\",\n    \"properties\": {}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURI}}/core/api/v1/tenantService/"
+					},
+					"response": []
+				},
+				{
+					"name": "TenantType - PUT",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "{{request_id}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-ACCESS",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-TID",
+								"value": "{{tenant_id}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-USERINFO",
+								"value": "{{user_info}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tenantType\": \"LIVE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURI}}/core/api/v1/tenantService/tenantType"
+					},
+					"response": []
+				},
+				{
+					"name": "Tenant Attributes : GET",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-COREOS-ACCESS",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "{{request_id}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-TID",
+								"value": "{{tenant_id}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-USERINFO",
+								"value": "{{user_info}}",
+								"type": "text"
+							}
+						],
+						"url": "{{baseURI}}/core/api/v1/tenantService/attributes/config/"
+					},
+					"response": []
+				},
+				{
+					"name": "Tenant Attributes - PUT",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-COREOS-ACCESS",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "{{request_id}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-TID",
+								"value": "{{tenant_id}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-USERINFO",
+								"value": "{{user_info}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attributes\": [\n        {\n            \"name\": \"headquater\",\n            \"dataType\": \"string\",\n            \"indexed\": false,\n            \"validation\": {\n                \"required\": true\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURI}}/core/api/v1/tenantService/attributes/config/"
+					},
+					"response": []
+				},
+				{
+					"name": "Logistics Framework Services",
 					"item": [
 						{
-							"name": "User operation",
+							"name": "User API",
 							"item": [
 								{
-									"name": "User: POST",
+									"name": "User operation",
+									"item": [
+										{
+											"name": "User: POST",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-ACCESS",
+														"value": "{{token}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "{{request_id}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-TID",
+														"value": "{{tenant_id}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"userOwnerId\": \"{{tenant}}:06676c3b-ab94-48cf-9435-dbe92f2dfcdf\",\n  \"userOwnerType\": \"alpha\",\n  \"function\": \"FE\",\n  \"firstName\": {{$randomFirstName}},\n    \"middleName\": {{$randomFirstName}},\n    \"lastName\": {{$randomLastName}},\n    \"email\": {{$randomEmail}},\n    \"primaryMobile\": {\n        \"countryCode\": \"+91\",\n        \"number\": {{$randomPhoneNumber}}\n    },\n    \"secondaryMobile\": {\n        \"countryCode\": \"+91\",\n        \"number\": {{$randomPhoneNumber}}\n    },\n    \"designation\": \"Field-Executive\",\n    \"subFunction\": {{$randomNoun}},\n    \"category\": \"Regular\",\n    \"employmentType\": \"Full-time\",\n    \"workLocations\": [\"facilities:{{$randomUUID}}\"],\n    \"manager\": \"users:{{$randomUUID}}\",\n    \"identification\": {\n        \"idType\": \"Adhar\",\n        \"validIdNumber\": {{$randomBankAccount}}\n    },\n    \"fileID\": \"file:{{$randomUUID}}\"\n}"
+												},
+												"url": {
+													"raw": "{{baseURI}}/app/fpa/api/v1/users",
+													"host": [
+														"{{baseURI}}"
+													],
+													"path": [
+														"app",
+														"fpa",
+														"api",
+														"v1",
+														"users"
+													],
+													"query": [
+														{
+															"key": "",
+															"value": "",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "User all: GET",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-ACCESS",
+														"value": "{{token}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "{{request_id}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-TID",
+														"value": "{{tenant_id}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{baseURI}}/app/fpa/api/v1/users",
+													"host": [
+														"{{baseURI}}"
+													],
+													"path": [
+														"app",
+														"fpa",
+														"api",
+														"v1",
+														"users"
+													],
+													"query": [
+														{
+															"key": "",
+															"value": "",
+															"disabled": true
+														},
+														{
+															"key": "",
+															"value": "",
+															"disabled": true
+														},
+														{
+															"key": "",
+															"value": "",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "User: GET",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-ACCESS",
+														"value": "{{token}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "{{request_id}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-TID",
+														"value": "{{tenant_id}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{baseURI}}/app/fpa/api/v1/users/:userId",
+													"host": [
+														"{{baseURI}}"
+													],
+													"path": [
+														"app",
+														"fpa",
+														"api",
+														"v1",
+														"users",
+														":userId"
+													],
+													"query": [
+														{
+															"key": "",
+															"value": "",
+															"disabled": true
+														}
+													],
+													"variable": [
+														{
+															"key": "userId",
+															"value": "participant_id"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "User: PUT",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-ACCESS",
+														"value": "{{token}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "{{request_id}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-TID",
+														"value": "{{tenant_id}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"firstName\": {{$randomFirstName}},\n    \"middleName\": {{$randomFirstName}},\n    \"lastName\": {{$randomLastName}},\n    \"email\": {{$randomEmail}},\n    \"primaryMobile\": {\n        \"countryCode\": \"+91\",\n        \"number\": {{$randomPhoneNumber}}\n    },\n    \"secondaryMobile\": {\n        \"countryCode\": \"+91\",\n        \"number\": {{$randomPhoneNumber}}\n    },\n    \"designation\": \"Field-Executive\",\n    \"subFunction\": {{$randomNoun}},\n    \"category\": \"Regular\",\n    \"employmentType\": \"Full-time\",\n    \"workLocations\": [\"facilities:{{$randomUUID}}\"],\n    \"manager\": \"users:{{$randomUUID}}\",\n    \"identification\": {\n        \"idType\": \"Adhar\",\n        \"validIdNumber\": {{$randomBankAccount}}\n    },\n    \"fileID\": \"file:{{$randomUUID}}\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURI}}/app/fpa/api/v1/users/:userId",
+													"host": [
+														"{{baseURI}}"
+													],
+													"path": [
+														"app",
+														"fpa",
+														"api",
+														"v1",
+														"users",
+														":userId"
+													],
+													"query": [
+														{
+															"key": "",
+															"value": "",
+															"disabled": true
+														}
+													],
+													"variable": [
+														{
+															"key": "userId",
+															"value": "participant_id"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "User state: GET",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-ACCESS",
+														"value": "{{token}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "{{request_id}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-TID",
+														"value": "{{tenant_id}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{baseURI}}/app/fpa/api/v1/users/:userId/state",
+													"host": [
+														"{{baseURI}}"
+													],
+													"path": [
+														"app",
+														"fpa",
+														"api",
+														"v1",
+														"users",
+														":userId",
+														"state"
+													],
+													"query": [
+														{
+															"key": "",
+															"value": "",
+															"disabled": true
+														}
+													],
+													"variable": [
+														{
+															"key": "userId",
+															"value": "participant_id"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "User state: PUT",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-ACCESS",
+														"value": "{{token}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "{{request_id}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-TID",
+														"value": "{{tenant_id}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"toState\": \"active:available\",\n    \"reasonCode\": \"R-111\",\n    \"data\": null\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURI}}/app/fpa/api/v1/users/:userId/transition",
+													"host": [
+														"{{baseURI}}"
+													],
+													"path": [
+														"app",
+														"fpa",
+														"api",
+														"v1",
+														"users",
+														":userId",
+														"transition"
+													],
+													"query": [
+														{
+															"key": "",
+															"value": "",
+															"disabled": true
+														}
+													],
+													"variable": [
+														{
+															"key": "userId",
+															"value": "participant_id"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Designation: GET",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-ACCESS",
+														"value": "{{token}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "{{request_id}}",
+														"type": "text"
+													},
+													{
+														"key": "X-COREOS-TID",
+														"value": "{{tenant_id}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{baseURI}}/app/fpa/api/v1/users/designation",
+													"host": [
+														"{{baseURI}}"
+													],
+													"path": [
+														"app",
+														"fpa",
+														"api",
+														"v1",
+														"users",
+														"designation"
+													],
+													"query": [
+														{
+															"key": "",
+															"value": "",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Vehicle API",
+							"item": [
+								{
+									"name": "Vehicle: POST",
 									"request": {
 										"method": "POST",
 										"header": [
@@ -15523,10 +16465,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"userOwnerId\": \"{{tenant}}:06676c3b-ab94-48cf-9435-dbe92f2dfcdf\",\n  \"userOwnerType\": \"alpha\",\n  \"function\": \"FE\",\n  \"firstName\": {{$randomFirstName}},\n    \"middleName\": {{$randomFirstName}},\n    \"lastName\": {{$randomLastName}},\n    \"email\": {{$randomEmail}},\n    \"primaryMobile\": {\n        \"countryCode\": \"+91\",\n        \"number\": {{$randomPhoneNumber}}\n    },\n    \"secondaryMobile\": {\n        \"countryCode\": \"+91\",\n        \"number\": {{$randomPhoneNumber}}\n    },\n    \"designation\": \"Field-Executive\",\n    \"subFunction\": {{$randomNoun}},\n    \"category\": \"Regular\",\n    \"employmentType\": \"Full-time\",\n    \"workLocations\": [\"facilities:{{$randomUUID}}\"],\n    \"manager\": \"users:{{$randomUUID}}\",\n    \"identification\": {\n        \"idType\": \"Adhar\",\n        \"validIdNumber\": {{$randomBankAccount}}\n    },\n    \"fileID\": \"file:{{$randomUUID}}\"\n}"
+											"raw": "{\n    \"modelName\": {{$randomNoun}},\n    \"referenceNumber\": {{$guid}},\n    \"ownerName\": \"{{tenant}}:06676c3b-ab94-48cf-9435-dbe92f2dfcdf\",\n    \"vehicleCategory\": \"Two-Wheeler\",\n    \"vehicleSubCategory\": \"Cycle\",\n    \"vehicleMode\": \"Surface\",\n    \"vehicleStructure\": \"Two-Wheeler\",\n    \"fuelType\": \"NA\",\n    \"modelYear\": 2019,\n    \"registrationNumber\": {{$randomInt}},\n    \"registrationYear\": 2019,\n    \"ownershipType\": \"Vendor\",\n    \"reportingCenter\": \"facilities:{{$randomUUID}}\",\n    \"operator\": \"users:{{$randomUUID}}\",\n    \"numberOfJobs\": 10,\n    \"totalDistance\": 10,\n    \"totalTravelTime\": 8,\n    \"totalLateTime\": 2,\n    \"payload\": 2,\n    \"payloadVolumetric\": 2,\n    \"fuelTankCapacity\": 2,\n    \"batteryCapacity\": 2\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/app/fpa/api/v1/users",
+											"raw": "{{baseURI}}/app/fpa/api/v1/vehicles",
 											"host": [
 												"{{baseURI}}"
 											],
@@ -15535,7 +16477,7 @@
 												"fpa",
 												"api",
 												"v1",
-												"users"
+												"vehicles"
 											],
 											"query": [
 												{
@@ -15549,7 +16491,7 @@
 									"response": []
 								},
 								{
-									"name": "User all: GET",
+									"name": "Vehicle all: GET",
 									"request": {
 										"method": "GET",
 										"header": [
@@ -15580,7 +16522,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/app/fpa/api/v1/users",
+											"raw": "{{baseURI}}/app/fpa/api/v1/vehicles",
 											"host": [
 												"{{baseURI}}"
 											],
@@ -15589,31 +16531,14 @@
 												"fpa",
 												"api",
 												"v1",
-												"users"
-											],
-											"query": [
-												{
-													"key": "",
-													"value": "",
-													"disabled": true
-												},
-												{
-													"key": "",
-													"value": "",
-													"disabled": true
-												},
-												{
-													"key": "",
-													"value": "",
-													"disabled": true
-												}
+												"vehicles"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "User: GET",
+									"name": "Vehicle: GET",
 									"request": {
 										"method": "GET",
 										"header": [
@@ -15644,7 +16569,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/app/fpa/api/v1/users/:userId",
+											"raw": "{{baseURI}}/app/fpa/api/v1/vehicles/:vehicleId",
 											"host": [
 												"{{baseURI}}"
 											],
@@ -15653,8 +16578,8 @@
 												"fpa",
 												"api",
 												"v1",
-												"users",
-												":userId"
+												"vehicles",
+												":vehicleId"
 											],
 											"query": [
 												{
@@ -15665,7 +16590,7 @@
 											],
 											"variable": [
 												{
-													"key": "userId",
+													"key": "vehicleId",
 													"value": "participant_id"
 												}
 											]
@@ -15674,7 +16599,7 @@
 									"response": []
 								},
 								{
-									"name": "User: PUT",
+									"name": "Vehicle: PUT",
 									"request": {
 										"method": "PUT",
 										"header": [
@@ -15706,7 +16631,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"firstName\": {{$randomFirstName}},\n    \"middleName\": {{$randomFirstName}},\n    \"lastName\": {{$randomLastName}},\n    \"email\": {{$randomEmail}},\n    \"primaryMobile\": {\n        \"countryCode\": \"+91\",\n        \"number\": {{$randomPhoneNumber}}\n    },\n    \"secondaryMobile\": {\n        \"countryCode\": \"+91\",\n        \"number\": {{$randomPhoneNumber}}\n    },\n    \"designation\": \"Field-Executive\",\n    \"subFunction\": {{$randomNoun}},\n    \"category\": \"Regular\",\n    \"employmentType\": \"Full-time\",\n    \"workLocations\": [\"facilities:{{$randomUUID}}\"],\n    \"manager\": \"users:{{$randomUUID}}\",\n    \"identification\": {\n        \"idType\": \"Adhar\",\n        \"validIdNumber\": {{$randomBankAccount}}\n    },\n    \"fileID\": \"file:{{$randomUUID}}\"\n}",
+											"raw": "{\n    \"vehicleMode\": \"Surface\",\n    \"vehicleStructure\": \"Two-Wheeler\",\n    \"fuelType\": \"NA\",\n    \"modelYear\": 2019,\n    \"registrationNumber\": {{$randomInt}},\n    \"registrationYear\": 2019,\n    \"ownershipType\": \"Vendor\",\n    \"reportingCenter\": \"facilities:{{$randomUUID}}\",\n    \"operator\": \"users:{{$randomUUID}}\",\n    \"numberOfJobs\": 10,\n    \"totalDistance\": 10,\n    \"totalTravelTime\": 8,\n    \"totalLateTime\": 2,\n    \"payload\": 2,\n    \"payloadVolumetric\": 2,\n    \"fuelTankCapacity\": 2,\n    \"batteryCapacity\": 2\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -15714,7 +16639,7 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/app/fpa/api/v1/users/:userId",
+											"raw": "{{baseURI}}/app/fpa/api/v1/vehicles/:vehicleId",
 											"host": [
 												"{{baseURI}}"
 											],
@@ -15723,8 +16648,8 @@
 												"fpa",
 												"api",
 												"v1",
-												"users",
-												":userId"
+												"vehicles",
+												":vehicleId"
 											],
 											"query": [
 												{
@@ -15735,7 +16660,7 @@
 											],
 											"variable": [
 												{
-													"key": "userId",
+													"key": "vehicleId",
 													"value": "participant_id"
 												}
 											]
@@ -15744,7 +16669,7 @@
 									"response": []
 								},
 								{
-									"name": "User state: GET",
+									"name": "Vehicle state: GET",
 									"request": {
 										"method": "GET",
 										"header": [
@@ -15775,7 +16700,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/app/fpa/api/v1/users/:userId/state",
+											"raw": "{{baseURI}}/app/fpa/api/v1/vehicles/:vehicleId/state",
 											"host": [
 												"{{baseURI}}"
 											],
@@ -15784,8 +16709,8 @@
 												"fpa",
 												"api",
 												"v1",
-												"users",
-												":userId",
+												"vehicles",
+												":vehicleId",
 												"state"
 											],
 											"query": [
@@ -15797,7 +16722,7 @@
 											],
 											"variable": [
 												{
-													"key": "userId",
+													"key": "vehicleId",
 													"value": "participant_id"
 												}
 											]
@@ -15806,7 +16731,7 @@
 									"response": []
 								},
 								{
-									"name": "User state: PUT",
+									"name": "Vehicle state: PUT",
 									"request": {
 										"method": "PUT",
 										"header": [
@@ -15838,7 +16763,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"toState\": \"active:available\",\n    \"reasonCode\": \"R-111\",\n    \"data\": null\n}",
+											"raw": "{\n    \"toState\": \"active:active\",\n    \"reasonCode\": \"R-111\",\n    \"data\": null\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -15846,7 +16771,7 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/app/fpa/api/v1/users/:userId/transition",
+											"raw": "{{baseURI}}/app/fpa/api/v1/vehicles/:vehicleId/transition",
 											"host": [
 												"{{baseURI}}"
 											],
@@ -15855,9 +16780,71 @@
 												"fpa",
 												"api",
 												"v1",
-												"users",
-												":userId",
+												"vehicles",
+												":vehicleId",
 												"transition"
+											],
+											"variable": [
+												{
+													"key": "vehicleId",
+													"value": "participant_id"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Property API",
+							"item": [
+								{
+									"name": "Property: POST",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"propertyName\": {{$randomProduct}},\n    \"propertyCode\": {{$randomInt}},\n    \"propertyOwnerId\": \"{{tenant}}:06676c3b-ab94-48cf-9435-dbe92f2dfcdf\",\n    \"location\": {\n        \"address\": {\n            \"buildingNumber\": {{$randomInt}},\n            \"addressLine1\": {{$randomStreetAddress}},\n            \"addressLine2\": {{$randomStreetAddress}},\n            \"addressLine3\": {{$randomStreetAddress}},\n            \"apartmentNumber\": {{$randomInt}},\n            \"floor\": {{$randomInt}},\n            \"zipCode\": \"560047\",\n            \"city\": {{$randomCity}},\n            \"state\": {{$randomCity}},\n            \"country\": {\n                \"code\": \"IN\",\n                \"name\": \"India\"\n            }\n        },\n        \"geolocation\": {\n            \"lat\": {{$randomLatitude}},\n            \"long\": {{$randomLongitude}}\n        }\n    },\n    \"area\": {{$randomInt}}\n}"
+										},
+										"url": {
+											"raw": "{{baseURI}}/app/fpa/api/v1/properties",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"fpa",
+												"api",
+												"v1",
+												"properties"
 											],
 											"query": [
 												{
@@ -15865,19 +16852,13 @@
 													"value": "",
 													"disabled": true
 												}
-											],
-											"variable": [
-												{
-													"key": "userId",
-													"value": "participant_id"
-												}
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "Designation: GET",
+									"name": "Property all: GET",
 									"request": {
 										"method": "GET",
 										"header": [
@@ -15908,7 +16889,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/app/fpa/api/v1/users/designation",
+											"raw": "{{baseURI}}/app/fpa/api/v1/properties",
 											"host": [
 												"{{baseURI}}"
 											],
@@ -15917,8 +16898,7 @@
 												"fpa",
 												"api",
 												"v1",
-												"users",
-												"designation"
+												"properties"
 											],
 											"query": [
 												{
@@ -15930,1329 +16910,845 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "Property: GET",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURI}}/app/fpa/api/v1/properties/:propertyId",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"fpa",
+												"api",
+												"v1",
+												"properties",
+												":propertyId"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "propertyId",
+													"value": "participant_id"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Property: PUT",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}",
+												"equals": true
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"location\": {\n        \"address\": {\n            \"buildingNumber\": {{$randomInt}},\n            \"addressLine1\": {{$randomStreetAddress}},\n            \"addressLine2\": {{$randomStreetAddress}},\n            \"addressLine3\": {{$randomStreetAddress}},\n            \"apartmentNumber\": {{$randomInt}},\n            \"floor\": {{$randomInt}},\n            \"zipCode\": \"560047\",\n            \"city\": {{$randomCity}},\n            \"state\": {{$randomCity}},\n            \"country\": {\n                \"code\": \"IN\",\n                \"name\": \"India\"\n            }\n        },\n        \"geolocation\": {\n            \"lat\": {{$randomLatitude}},\n            \"long\": {{$randomLongitude}}\n        }\n    },\n    \"area\": {{$randomInt}}\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURI}}/app/fpa/api/v1/properties/:propertyId",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"fpa",
+												"api",
+												"v1",
+												"properties",
+												":propertyId"
+											],
+											"variable": [
+												{
+													"key": "propertyId",
+													"value": "participant_id"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Property state: GET",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURI}}/app/fpa/api/v1/properties/:propertyId/state",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"fpa",
+												"api",
+												"v1",
+												"properties",
+												":propertyId",
+												"state"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "propertyId",
+													"value": "participant_id"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Property state: PUT",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"toState\": \"active:active\",\n    \"reasonCode\": \"R-111\",\n    \"data\": null\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURI}}/app/fpa/api/v1/properties/:propertyId/transition",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"fpa",
+												"api",
+												"v1",
+												"properties",
+												":propertyId",
+												"transition"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "propertyId",
+													"value": "participant_id"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "LogisticsOrder API",
+							"item": [
+								{
+									"name": "CREATE Order API",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"var orderid = jsonData.data.id;",
+													"pm.environment.set(\"order_id\", orderid);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}"
+											},
+											{
+												"key": "X-COREOS-USERINFO",
+												"value": "{{user_info}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"dropDetails\": {\n        \"contact\": {\n            \"name\": \"ordertest\",\n            \"phone\": {\n                \"countryCode\": \"+91\",\n                \"number\": \"0000000000\",\n                \"isMobile\": true\n            }\n        },\n        \"location\": {\n            \"address\": {\n                \"addressLine1\": \"Kalyan\",\n                \"city\": \"Mumbai\",\n                \"country\": {\n                    \"code\": \"IND\",\n                    \"name\": \"India\"\n                }\n            }\n        }\n    },\n    \"orderSummary\": {\n        \"invoiceNumber\": \"H_Xv:9OhhCety_ZR4WRnMmIGeGHT5HWM14cJwDx70_41pIYW0vclc3xvGWbwq29O\",\n        \"orderDescription\": \"string\",\n        \"totalWeight\": {\n            \"value\": 0,\n            \"unit\": \"Kg\"\n        },\n        \"totalItems\": 0,\n        \"totalOrderCost\": {\n            \"cost\": 100,\n            \"minorUnit\": 2\n        }\n    },\n    \"productType\": \"PARCEL\",\n    \"shipmentFlow\": \"REVERSE\",\n    \"speedOfTransport\": \"EXPRESS\",\n    \"modeOfTransport\": \"AIR\",\n    \"mps\": false,\n    \"pickupDetails\": {\n        \"contact\": {\n            \"name\": \"ordertest\",\n            \"phone\": {\n                \"countryCode\": \"+91\",\n                \"number\": \"0000000000\",\n                \"isMobile\": true\n            }\n        },\n        \"location\": {\n            \"address\": {\n                \"addressLine1\": \"Kalyan\",\n                \"city\": \"Mumbai\",\n                \"country\": {\n                    \"code\": \"IND\",\n                    \"name\": \"India\"\n                }\n            }\n        },\n        \"pickupSlot\": {\n            \"from\": 21216521,\n            \"to\": 276216712\n        },\n        \"serviceTime\": 1\n    },\n    \"returnDetails\": {\n        \"contact\": {\n            \"name\": \"ordertest\",\n            \"phone\": {\n                \"countryCode\": \"+91\",\n                \"number\": \"0000000000\",\n                \"isMobile\": true\n            }\n        },\n        \"location\": {\n            \"address\": {\n                \"addressLine1\": \"Kalyan\",\n                \"city\": \"Mumbai\",\n                \"country\": {\n                    \"code\": \"IND\",\n                    \"name\": \"India\"\n                }\n            }\n        },\n        \"returnSlot\": {\n            \"from\": 162733,\n            \"to\": 2162172\n        },\n        \"serviceTime\": 1\n    },\n    \"teamId\": \"Team01\",\n    \"containers\": [\n        {\n            \"containerType\": \"orderfpastest\",\n            \"dimensions\": {\n                \"length\": \"string\",\n                \"breadth\": \"string\",\n                \"height\": \"string\",\n                \"unit\": \"string\"\n            },\n            \"weight\": {\n                \"value\": \"string\",\n                \"unit\": \"string\"\n            },\n            \"trackingDetails\": {\n                \"operator\": \"string\",\n                \"trackingId\": \"string\",\n                \"isPrimary\": true\n            },\n            \"shipmentDetails\": [\n                {\n                    \"name\": \"string\",\n                    \"code\": \"string\",\n                    \"quantity\": 1,\n                    \"totalCost\": {\n                        \"cost\": 0,\n                        \"currencyCode\": \"string\",\n                        \"minorUnit\": 0\n                    }\n                }\n            ]\n        }\n    ],\n    \"clientDetails\": {\n        \"clientName\": \"delhivery\",\n        \"clientId\": \"delhivery\",\n        \"clientOrderId\": \"order:d5c28bf8-e376-42e4-b64b-614168b725a8\"\n    },\n    \"actions\": {\n        \"qcValidation\": {\n            \"isRequired\": true,\n            \"requiredAt\": \"PICKUP\"\n        },\n        \"qcValidationChecklist\": {},\n        \"kycVerification\": {\n            \"isRequired\": true,\n            \"requiredAt\": \"PICKUP\"\n        },\n        \"otpVerification\": {\n            \"isRequired\": true,\n            \"requiredAt\": \"PICKUP\"\n        },\n        \"signatureCollection\": {\n            \"isRequired\": true,\n            \"requiredAt\": \"PICKUP\"\n        }\n    },\n    \"notificationDetails\": {\n        \"notificationType\": \"PICKUP\",\n        \"notificationMode\": \"SMS\"\n    },\n    \"paymentInformation\": {\n        \"paymentType\": \"prepaid\",\n        \"paymentOption\": \"CARD\"\n    }\n}"
+										},
+										"url": {
+											"raw": "{{baseURI}}/app/logisticsorders/v1/api/orders/",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"logisticsorders",
+												"v1",
+												"api",
+												"orders",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GET Order API",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}"
+											},
+											{
+												"key": "X-COREOS-USERINFO",
+												"value": "{{user_info}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseURI}}/app/logisticsorders/v1/api/orders/{{orderId}}",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"logisticsorders",
+												"v1",
+												"api",
+												"orders",
+												"{{orderId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "CANCEL order API",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"var orderid = jsonData.data.id;",
+													"pm.environment.set(\"order_id\", orderid);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}"
+											},
+											{
+												"key": "X-COREOS-USERINFO",
+												"value": "{{user_info}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseURI}}/app/logisticsorders/v1/api/orders/{{orderId}}/cancel",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"logisticsorders",
+												"v1",
+												"api",
+												"orders",
+												"{{orderId}}",
+												"cancel"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Facility API",
+							"item": [
+								{
+									"name": "Facility: POST",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"facilityName\": {{$randomProduct}},\n    \"facilityCode\": {{$randomInt}},\n    \"facilityOwnerId\": \"{{tenant}}:06676c3b-ab94-48cf-9435-dbe92f2dfcdf\",\n    \"facilityType\": \"PUDCenter\",\n    \"propertyId\": \"properties:{{$randomUUID}}\",\n    \"area\": {{$randomInt}},\n    \"startTime\": \"08:00AM\",\n    \"endTime\": \"10:00PM\",\n    \"operatingDuration\": \"08:00AM-10:00PM\",\n    \"operatingDays\": [{{$randomWeekday}}, {{$randomWeekday}}]\n}"
+										},
+										"url": {
+											"raw": "{{baseURI}}/app/fpa/api/v1/facilities",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"fpa",
+												"api",
+												"v1",
+												"facilities"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Facility all: GET",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURI}}/app/fpa/api/v1/facilities",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"fpa",
+												"api",
+												"v1",
+												"facilities"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Facility: GET",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURI}}/app/fpa/api/v1/facilities/:facilityId",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"fpa",
+												"api",
+												"v1",
+												"facilities",
+												":facilityId"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "facilityId",
+													"value": "participant_id"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Facility: PUT",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"facilityType\": \"PUDCenter\",\n    \"propertyId\": \"properties:{{$randomUUID}}\",\n    \"area\": {{$randomInt}},\n    \"startTime\": \"08:00AM\",\n    \"endTime\": \"10:00PM\",\n    \"operatingDuration\": \"08:00AM-10:00PM\",\n    \"operatingDays\": [{{$randomWeekday}}, {{$randomWeekday}}]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURI}}/app/fpa/api/v1/facilities/:facilityId",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"fpa",
+												"api",
+												"v1",
+												"facilities",
+												":facilityId"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "facilityId",
+													"value": "participant_id"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Facility state: GET",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseURI}}/app/fpa/api/v1/facilities/:facilityId/state",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"fpa",
+												"api",
+												"v1",
+												"facilities",
+												":facilityId",
+												"state"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "facilityId",
+													"value": "participant_id"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Facility state: PUT",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-ACCESS",
+												"value": "{{token}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "{{request_id}}",
+												"type": "text"
+											},
+											{
+												"key": "X-COREOS-TID",
+												"value": "{{tenant_id}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"toState\": \"active:active\",\n    \"reasonCode\": \"R-111\",\n    \"data\": null\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURI}}/app/fpa/api/v1/facilities/:facilityId/transition",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"app",
+												"fpa",
+												"api",
+												"v1",
+												"facilities",
+												":facilityId",
+												"transition"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											],
+											"variable": [
+												{
+													"key": "facilityId",
+													"value": "participant_id"
+												}
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						}
-					]
-				},
-				{
-					"name": "Vehicle API",
-					"item": [
+					],
+					"event": [
 						{
-							"name": "Vehicle: POST",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"modelName\": {{$randomNoun}},\n    \"referenceNumber\": {{$guid}},\n    \"ownerName\": \"{{tenant}}:06676c3b-ab94-48cf-9435-dbe92f2dfcdf\",\n    \"vehicleCategory\": \"Two-Wheeler\",\n    \"vehicleSubCategory\": \"Cycle\",\n    \"vehicleMode\": \"Surface\",\n    \"vehicleStructure\": \"Two-Wheeler\",\n    \"fuelType\": \"NA\",\n    \"modelYear\": 2019,\n    \"registrationNumber\": {{$randomInt}},\n    \"registrationYear\": 2019,\n    \"ownershipType\": \"Vendor\",\n    \"reportingCenter\": \"facilities:{{$randomUUID}}\",\n    \"operator\": \"users:{{$randomUUID}}\",\n    \"numberOfJobs\": 10,\n    \"totalDistance\": 10,\n    \"totalTravelTime\": 8,\n    \"totalLateTime\": 2,\n    \"payload\": 2,\n    \"payloadVolumetric\": 2,\n    \"fuelTankCapacity\": 2,\n    \"batteryCapacity\": 2\n}"
-								},
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/vehicles",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"vehicles"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
 						},
 						{
-							"name": "Vehicle all: GET",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/vehicles",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"vehicles"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Vehicle: GET",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/vehicles/:vehicleId",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"vehicles",
-										":vehicleId"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "vehicleId",
-											"value": "participant_id"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Vehicle: PUT",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"vehicleMode\": \"Surface\",\n    \"vehicleStructure\": \"Two-Wheeler\",\n    \"fuelType\": \"NA\",\n    \"modelYear\": 2019,\n    \"registrationNumber\": {{$randomInt}},\n    \"registrationYear\": 2019,\n    \"ownershipType\": \"Vendor\",\n    \"reportingCenter\": \"facilities:{{$randomUUID}}\",\n    \"operator\": \"users:{{$randomUUID}}\",\n    \"numberOfJobs\": 10,\n    \"totalDistance\": 10,\n    \"totalTravelTime\": 8,\n    \"totalLateTime\": 2,\n    \"payload\": 2,\n    \"payloadVolumetric\": 2,\n    \"fuelTankCapacity\": 2,\n    \"batteryCapacity\": 2\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/vehicles/:vehicleId",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"vehicles",
-										":vehicleId"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "vehicleId",
-											"value": "participant_id"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Vehicle state: GET",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/vehicles/:vehicleId/state",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"vehicles",
-										":vehicleId",
-										"state"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "vehicleId",
-											"value": "participant_id"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Vehicle state: PUT",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"toState\": \"active:active\",\n    \"reasonCode\": \"R-111\",\n    \"data\": null\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/vehicles/:vehicleId/transition",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"vehicles",
-										":vehicleId",
-										"transition"
-									],
-									"variable": [
-										{
-											"key": "vehicleId",
-											"value": "participant_id"
-										}
-									]
-								}
-							},
-							"response": []
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
 						}
 					]
-				},
-				{
-					"name": "Property API",
-					"item": [
-						{
-							"name": "Property: POST",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"propertyName\": {{$randomProduct}},\n    \"propertyCode\": {{$randomInt}},\n    \"propertyOwnerId\": \"{{tenant}}:06676c3b-ab94-48cf-9435-dbe92f2dfcdf\",\n    \"location\": {\n        \"address\": {\n            \"buildingNumber\": {{$randomInt}},\n            \"addressLine1\": {{$randomStreetAddress}},\n            \"addressLine2\": {{$randomStreetAddress}},\n            \"addressLine3\": {{$randomStreetAddress}},\n            \"apartmentNumber\": {{$randomInt}},\n            \"floor\": {{$randomInt}},\n            \"zipCode\": \"560047\",\n            \"city\": {{$randomCity}},\n            \"state\": {{$randomCity}},\n            \"country\": {\n                \"code\": \"IN\",\n                \"name\": \"India\"\n            }\n        },\n        \"geolocation\": {\n            \"lat\": {{$randomLatitude}},\n            \"long\": {{$randomLongitude}}\n        }\n    },\n    \"area\": {{$randomInt}}\n}"
-								},
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/properties",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"properties"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Property all: GET",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/properties",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"properties"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Property: GET",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/properties/:propertyId",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"properties",
-										":propertyId"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "propertyId",
-											"value": "participant_id"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Property: PUT",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"equals": true
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"location\": {\n        \"address\": {\n            \"buildingNumber\": {{$randomInt}},\n            \"addressLine1\": {{$randomStreetAddress}},\n            \"addressLine2\": {{$randomStreetAddress}},\n            \"addressLine3\": {{$randomStreetAddress}},\n            \"apartmentNumber\": {{$randomInt}},\n            \"floor\": {{$randomInt}},\n            \"zipCode\": \"560047\",\n            \"city\": {{$randomCity}},\n            \"state\": {{$randomCity}},\n            \"country\": {\n                \"code\": \"IN\",\n                \"name\": \"India\"\n            }\n        },\n        \"geolocation\": {\n            \"lat\": {{$randomLatitude}},\n            \"long\": {{$randomLongitude}}\n        }\n    },\n    \"area\": {{$randomInt}}\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/properties/:propertyId",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"properties",
-										":propertyId"
-									],
-									"variable": [
-										{
-											"key": "propertyId",
-											"value": "participant_id"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Property state: GET",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/properties/:propertyId/state",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"properties",
-										":propertyId",
-										"state"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "propertyId",
-											"value": "participant_id"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Property state: PUT",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"toState\": \"active:active\",\n    \"reasonCode\": \"R-111\",\n    \"data\": null\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/properties/:propertyId/transition",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"properties",
-										":propertyId",
-										"transition"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "propertyId",
-											"value": "participant_id"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "LogisticsOrder API",
-					"item": [
-						{
-							"name": "CREATE Order API",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"var orderid = jsonData.data.id;",
-											"pm.environment.set(\"order_id\", orderid);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}"
-									},
-									{
-										"key": "X-COREOS-USERINFO",
-										"value": "{{user_info}}"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"dropDetails\": {\n        \"contact\": {\n            \"name\": \"ordertest\",\n            \"phone\": {\n                \"countryCode\": \"+91\",\n                \"number\": \"0000000000\",\n                \"isMobile\": true\n            }\n        },\n        \"location\": {\n            \"address\": {\n                \"addressLine1\": \"Kalyan\",\n                \"city\": \"Mumbai\",\n                \"country\": {\n                    \"code\": \"IND\",\n                    \"name\": \"India\"\n                }\n            }\n        }\n    },\n    \"orderSummary\": {\n        \"invoiceNumber\": \"H_Xv:9OhhCety_ZR4WRnMmIGeGHT5HWM14cJwDx70_41pIYW0vclc3xvGWbwq29O\",\n        \"orderDescription\": \"string\",\n        \"totalWeight\": {\n            \"value\": 0,\n            \"unit\": \"Kg\"\n        },\n        \"totalItems\": 0,\n        \"totalOrderCost\": {\n            \"cost\": 100,\n            \"minorUnit\": 2\n        }\n    },\n    \"productType\": \"PARCEL\",\n    \"shipmentFlow\": \"REVERSE\",\n    \"speedOfTransport\": \"EXPRESS\",\n    \"modeOfTransport\": \"AIR\",\n    \"mps\": false,\n    \"pickupDetails\": {\n        \"contact\": {\n            \"name\": \"ordertest\",\n            \"phone\": {\n                \"countryCode\": \"+91\",\n                \"number\": \"0000000000\",\n                \"isMobile\": true\n            }\n        },\n        \"location\": {\n            \"address\": {\n                \"addressLine1\": \"Kalyan\",\n                \"city\": \"Mumbai\",\n                \"country\": {\n                    \"code\": \"IND\",\n                    \"name\": \"India\"\n                }\n            }\n        },\n        \"pickupSlot\": {\n            \"from\": 21216521,\n            \"to\": 276216712\n        },\n        \"serviceTime\": 1\n    },\n    \"returnDetails\": {\n        \"contact\": {\n            \"name\": \"ordertest\",\n            \"phone\": {\n                \"countryCode\": \"+91\",\n                \"number\": \"0000000000\",\n                \"isMobile\": true\n            }\n        },\n        \"location\": {\n            \"address\": {\n                \"addressLine1\": \"Kalyan\",\n                \"city\": \"Mumbai\",\n                \"country\": {\n                    \"code\": \"IND\",\n                    \"name\": \"India\"\n                }\n            }\n        },\n        \"returnSlot\": {\n            \"from\": 162733,\n            \"to\": 2162172\n        },\n        \"serviceTime\": 1\n    },\n    \"teamId\": \"Team01\",\n    \"containers\": [\n        {\n            \"containerType\": \"orderfpastest\",\n            \"dimensions\": {\n                \"length\": \"string\",\n                \"breadth\": \"string\",\n                \"height\": \"string\",\n                \"unit\": \"string\"\n            },\n            \"weight\": {\n                \"value\": \"string\",\n                \"unit\": \"string\"\n            },\n            \"trackingDetails\": {\n                \"operator\": \"string\",\n                \"trackingId\": \"string\",\n                \"isPrimary\": true\n            },\n            \"shipmentDetails\": [\n                {\n                    \"name\": \"string\",\n                    \"code\": \"string\",\n                    \"quantity\": 1,\n                    \"totalCost\": {\n                        \"cost\": 0,\n                        \"currencyCode\": \"string\",\n                        \"minorUnit\": 0\n                    }\n                }\n            ]\n        }\n    ],\n    \"clientDetails\": {\n        \"clientName\": \"delhivery\",\n        \"clientId\": \"delhivery\",\n        \"clientOrderId\": \"order:d5c28bf8-e376-42e4-b64b-614168b725a8\"\n    },\n    \"actions\": {\n        \"qcValidation\": {\n            \"isRequired\": true,\n            \"requiredAt\": \"PICKUP\"\n        },\n        \"qcValidationChecklist\": {},\n        \"kycVerification\": {\n            \"isRequired\": true,\n            \"requiredAt\": \"PICKUP\"\n        },\n        \"otpVerification\": {\n            \"isRequired\": true,\n            \"requiredAt\": \"PICKUP\"\n        },\n        \"signatureCollection\": {\n            \"isRequired\": true,\n            \"requiredAt\": \"PICKUP\"\n        }\n    },\n    \"notificationDetails\": {\n        \"notificationType\": \"PICKUP\",\n        \"notificationMode\": \"SMS\"\n    },\n    \"paymentInformation\": {\n        \"paymentType\": \"prepaid\",\n        \"paymentOption\": \"CARD\"\n    }\n}"
-								},
-								"url": {
-									"raw": "{{baseURI}}/app/logisticsorders/v1/api/orders/",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"logisticsorders",
-										"v1",
-										"api",
-										"orders",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "GET Order API",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}"
-									},
-									{
-										"key": "X-COREOS-USERINFO",
-										"value": "{{user_info}}"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{baseURI}}/app/logisticsorders/v1/api/orders/{{orderId}}",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"logisticsorders",
-										"v1",
-										"api",
-										"orders",
-										"{{orderId}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "CANCEL order API",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"var orderid = jsonData.data.id;",
-											"pm.environment.set(\"order_id\", orderid);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}"
-									},
-									{
-										"key": "X-COREOS-USERINFO",
-										"value": "{{user_info}}"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{baseURI}}/app/logisticsorders/v1/api/orders/{{orderId}}/cancel",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"logisticsorders",
-										"v1",
-										"api",
-										"orders",
-										"{{orderId}}",
-										"cancel"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Facility API",
-					"item": [
-						{
-							"name": "Facility: POST",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"facilityName\": {{$randomProduct}},\n    \"facilityCode\": {{$randomInt}},\n    \"facilityOwnerId\": \"{{tenant}}:06676c3b-ab94-48cf-9435-dbe92f2dfcdf\",\n    \"facilityType\": \"PUDCenter\",\n    \"propertyId\": \"properties:{{$randomUUID}}\",\n    \"area\": {{$randomInt}},\n    \"startTime\": \"08:00AM\",\n    \"endTime\": \"10:00PM\",\n    \"operatingDuration\": \"08:00AM-10:00PM\",\n    \"operatingDays\": [{{$randomWeekday}}, {{$randomWeekday}}]\n}"
-								},
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/facilities",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"facilities"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Facility all: GET",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/facilities",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"facilities"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Facility: GET",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/facilities/:facilityId",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"facilities",
-										":facilityId"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "facilityId",
-											"value": "participant_id"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Facility: PUT",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"facilityType\": \"PUDCenter\",\n    \"propertyId\": \"properties:{{$randomUUID}}\",\n    \"area\": {{$randomInt}},\n    \"startTime\": \"08:00AM\",\n    \"endTime\": \"10:00PM\",\n    \"operatingDuration\": \"08:00AM-10:00PM\",\n    \"operatingDays\": [{{$randomWeekday}}, {{$randomWeekday}}]\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/facilities/:facilityId",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"facilities",
-										":facilityId"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "facilityId",
-											"value": "participant_id"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Facility state: GET",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/facilities/:facilityId/state",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"facilities",
-										":facilityId",
-										"state"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "facilityId",
-											"value": "participant_id"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Facility state: PUT",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}",
-										"type": "text"
-									},
-									{
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"toState\": \"active:active\",\n    \"reasonCode\": \"R-111\",\n    \"data\": null\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseURI}}/app/fpa/api/v1/facilities/:facilityId/transition",
-									"host": [
-										"{{baseURI}}"
-									],
-									"path": [
-										"app",
-										"fpa",
-										"api",
-										"v1",
-										"facilities",
-										":facilityId",
-										"transition"
-									],
-									"query": [
-										{
-											"key": "",
-											"value": "",
-											"disabled": true
-										}
-									],
-									"variable": [
-										{
-											"key": "facilityId",
-											"value": "participant_id"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				}
-			],
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
+				}			
 			]
 		}
 	]
