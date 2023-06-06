@@ -1,0 +1,696 @@
+{
+	"id": "32983998-eede-4cda-a0c8-86348944955c",
+	"name": "OS1 APIs",
+	"values": [
+		{
+			"key": "token",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "baseURI",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "request_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "tenant_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "user_info",
+			"value": "{\"id\":\"id\",\"name\": \"name\",\"appId\": \"app:1d6ebc25-32df-4dfc-b93b-4af5750dff37\" }",
+			"enabled": true
+		},
+		{
+			"key": "client_secret",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "client_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "callback_url",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "participant_type_singular_name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "participant_type_plural_name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "categoryName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "subCategoryName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "ownerId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "participantTypeId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entityCode",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "templateName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "templateId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "participantId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "eventCode",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "reasonCode",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "expiry",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "folder_name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "folderId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "createdAt",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "limit",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "offset",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "locationId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "countryName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "deviceId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "geofenceId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "subscriptionId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "signature",
+			"value": "rGkU6cYHozlleLg0+0JECd7oHT2q3VI0bfDFamgw2AxOzK6qf7MtwKwBBjUeXqOyYkwm3Obz9YTIGNttPr6U27ploWuoUq3WTUjSeDv5wuPV9HYTWbFdBz7acS2+kcnV3HJYItQ6WgLBh8HdTu9KYjdrZ5hh+APpNXO5mppxUoP42yZDVkc0mcVm0C1VK52fwsWen6CycJb9JY+K5UILkAps1GiEZDX59Moh7roe4Jn1As3FDvkAne5TiyN+YP3lKV2mJxo/ibXTz1pEy6fcqOABd70KgZcB62CDoJPtX+6+kexX/SNKQcY/mXG6YUUQXZ2n+UWjajSCyzQHD2hIUA==.dGVzdGFwcDE=",
+			"enabled": true
+		},
+		{
+			"key": "dataId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "appId",
+			"value": "app:7505f4ba-a143-4163-8852-df8d44208416",
+			"enabled": true
+		},
+		{
+			"key": "fileId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "publicKey",
+			"value": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0eemZ2SXFSPQArpuR+ZgNQXBAP6ZFt7SF+PYqFkQzNUMNgGd5pXJ901t92RVowD35i6/DySn5U5tekNOscxaJ8mZClFFwjz01C60jXABpBOzfXOre+hk197bll9CEQYhC9L4Arv65Zr/Uf2ULt7DC/dSlG6gvqZt7hgk+lDuqf+r3LdSGcLsaV4BRz5azyLRdNwmNLmtCeuM7riokctGdjYbl/Y8S2a9z7WZIjALSCWP0XKImezD+oWUM25L//RtW9KPUbVyvaQ6np/0+zYOYEQ5tyNJsfLSoNJZL5kDNH18De2xfX7vwpjXXZuTbvOHegh5LLKI52LTMU+g3D7l3wIDAQAB",
+			"enabled": true
+		},
+		{
+			"key": "appName",
+			"value": "testapp1",
+			"enabled": true
+		},
+		{
+			"key": "vaultName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "callbackUrl",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "tags",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "signPrefix",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "tagMap",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_type",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "containertype_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "tracking_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_change_log_from",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_change_log_duration",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_change_log_limit",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_change_log_offset",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_change_log_sortBy",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "groupByTag",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "searchByTag",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_limit",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_offset",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_select",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_query",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_sortKey",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_sortBy",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "batch_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entity_type_plural_name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entityTypePluralName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entity_type_singular_name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entityTypeCategoryName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entity_type_category_name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entityTypeSubCategoryName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entity_type_sub_category_name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entityTypeId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entityTemplateId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entity_type_template_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entityInstanceId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "entityBatchID",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "app_id",
+			"value": "app:7505f4ba-a143-4163-8852-df8d44208416",
+			"enabled": true
+		},
+		{
+			"key": "aaa_appName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_appType_mobile",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_rolename",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_resourceName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_resourcePath",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_actionName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_tenantName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_tenantId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_tenant_displayName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_groupName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_social_connectionName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_sms_connectionName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_sms_gatewayUrl",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_from_countryCode",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_fromNumber",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_sms_template",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_saml_connectionName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_user_firstname",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_user_middlename",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_user_lastname",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_user_email",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_primaryMobile",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_secondaryMobile",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_countryCode",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_callbackUrl",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_tenantRoleName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_clientId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_audience",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_clientSecret",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_sms_recipient",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_sms_sender",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "aaa_appType_backend",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "dispatchTypeId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "dispatchId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "jobTypeId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "jobId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "participantIdForDispatch",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "jobWorkflowId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "jobRef",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "workflowInstanceIdForDispatch",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "taskIdForDispatch",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "taskId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "macroId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "workflowId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "workflowInstanceId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "taskInstanceId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "workflowDraftId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "container_type_plural_name",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "containeinstanceId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "containeinstanceParantId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "participantTypePluralName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "countryName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "payloadId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "pluginId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "pluginWorkflowId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "orderId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "",
+			"value": "",
+			"enabled": false
+		},
+		{
+			"key": "filterId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "callbackMeta",
+			"value": "{ \"url\": \"https://delhivery.requestcatcher.com\",\"meta\":{}}",
+			"enabled": true
+		},
+		{
+			"key": "callbackSecret",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "subCategoryName",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "containerInstanceIds",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "groupId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "customCodeId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "customCodeUrl",
+			"value": "",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-03-24T11:29:28.885Z",
+	"_postman_exported_using": "Postman/8.12.5"
+}
