@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "f43f2179-ef76-4549-83b8-2112229a0ff5",
-		"name": "CoreOs Services 14th Jun",
+		"_postman_id": "6eeca86e-80ce-484c-88a9-a440f393d126",
+		"name": "CoreOs Services",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25690782"
 	},
@@ -5289,7 +5289,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": {\n        \"plural\": {{entity_type_plural_name}},\n        \"singular\": {{entity_type_singular_name}}\n    },\n    \"category\": [\n        {\n            \"name\": {{entity_type_category_name}},\n            \"description\": {{$randomLoremSentence}},\n            \"subCategory\": [\n                {{entity_type_sub_category_name}}\n            ]\n        }\n    ],\n    \"attributes\": [\n        {\n            \"name\": {{$randomNoun}},\n            \"dataType\": \"string\",\n            \"indexed\": false,\n            \"validation\": {\n                \"regex\": \"^[a-z]+$\",\n                \"required\": true\n            }\n        }\n    ],\n    \"isStateMachineEnabled\": true,\n    \"events\": [\n        {{eventCode}}\n    ],\n    \"callback\": {\n        \"url\": \"{{callback_url}}\",\n        \"meta\": {}\n    }\n}"
+									"raw": "{\n  \"name\": {\n    \"plural\": \"vehicles\",\n    \"singular\": \"vehicle\"\n  },\n  \"category\": [\n    {\n      \"name\": \"vehicle\",\n      \"description\": \"string\",\n      \"subCategory\": [\n        \"string\"\n      ]\n    }\n  ],\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"isReadPublic\": false,\n      \"tag\": [\n        \"string\"\n      ],\n      \"dataType\": \"string\",\n      \"indexed\": false,\n      \"defaultValue\": 0,\n      \"validation\": {\n        \"range\": {\n          \"min\": 0,\n          \"max\": 0\n        },\n        \"regex\": \"string\",\n        \"valueOneOf\": [\n          0,\n          \"string\",\n          [\n            \"string\"\n          ],\n          true,\n          {}\n        ],\n        \"required\": false\n      }\n    }\n  ],\n  \"callback\": {\n    \"url\": \"string\",\n    \"meta\": {\n      \"additionalProp1\": {}\n    }\n  },\n  \"isStateMachineEnabled\": false,\n  \"events\": [\n    \"string\"\n  ],\n  \"entityCode\": \"string\"\n}"
 								},
 								"url": {
 									"raw": "{{baseURI}}/core/api/v2/entity/entity-type/",
@@ -5555,7 +5555,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"states\": [\n        {\n\t\t\t\"name\": \"onboarding\",\n\t\t\t\"defaultSubState\": \"onboarding\",\n\t\t\t\"subStates\": [{\n                \"name\": \"onboarding\",\n                \"transitions\": [{\n                    \"eventCode\": \"E-001\",\n                    \"destination\": \"active:active\"\n                    \n                }]\n\t\t    }]\n\t\t},{\n\t\t\t\"name\": \"active\",\n\t\t\t\"defaultSubState\": \"active\",\n\t\t\t\"subStates\": [{\n                \"name\": \"active\",\n                \"transitions\": [{\n                    \"eventCode\": \"E-002\",\n                    \"destination\": \"inactive:inactive\"\n                    \n                }]\n\t\t    }]\n\t\t},{\n\t\t\t\"name\": \"inactive\",\n\t\t\t\"defaultSubState\": \"inactive\",\n\t\t\t\"subStates\": [{\n                \"name\": \"inactive\",\n                \"transitions\": [{\n                    \"eventCode\": \"E-004\",\n                    \"destination\": \"inactive:inactive\"\n                    \n                }]\n\t\t    }]\n\t\t}\n\t],\n    \"callback\": {{$randomUrl}}\n}",
+									"raw": "{\n   \"states\":[\n      {\n         \"name\":\"onboarding\",\n         \"defaultSubState\":\"onboarding\",\n         \"subStates\":[\n            {\n               \"name\":\"onboarding\",\n               \"transitions\":[\n                  {\n                     \"eventCode\":\"E-022\",\n                     \"destination\":\"onboarding:verifying\",\n                     \"reasonCode\":\"R-0001\"\n                  }\n               ]\n            },\n            {\n               \"name\":\"verifying\",\n               \"transitions\":[\n                  {\n                     \"eventCode\":\"E-022\",\n                     \"destination\":\"active:active\"\n                  }\n               ]\n            }\n         ]\n      },\n      {\n         \"name\":\"active\",\n         \"defaultSubState\":\"active\",\n         \"subStates\":[\n            {\n               \"name\":\"active\",\n               \"transitions\":[\n                  {\n                     \"eventCode\":\"E-023\",\n                     \"destination\":\"inactive:inactive\",\n                     \"reasonCode\":\"R-0001\"\n                  }\n               ]\n            }\n         ]\n      },\n      {\n         \"name\":\"inactive\",\n         \"defaultSubState\":\"inactive\",\n         \"subStates\":[\n            {\n               \"name\":\"dead\"\n            },\n            {\n               \"name\":\"inactive\",\n               \"transitions\":[\n                  {\n                     \"eventCode\":\"E-024\",\n                     \"destination\":\"inactive:dead\",\n                     \"reasonCode\":\"R-0001\"\n                  }\n               ]\n            }\n         ],\n         \"ttl\":{\n            \"time\":\"1d\",\n            \"destination\":\"inactive:inactive\"\n         },\n         \"terminalStates\":[\n            \"dead\"\n         ]\n      }\n   ],\n   \"terminalTTL\":\"600s\",\n   \"callback\":\"http://examplecallbackurl.com\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5771,10 +5771,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": {{$randomNoun}},\n    \"subCategory\": {{entity_type_sub_category_name}},\n    \"attributes\": [ {\n                        \"name\": \"mode\",\n                        \"description\": \"first property update\",\n                        \"dataType\": \"number\",\n                        \"indexed\": true,\n                        \"defaultValue\": 2,\n                        \"validation\": {\n                            \"required\": false\n                        }\n                    }],\n    \"callback\": {\n        \"url\": \"{{callback_url}}\",\n        \"meta\": {}\n    }\n}"
+									"raw": "{\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"tag\": [\n        \"string\"\n      ],\n      \"dataType\": \"string\",\n      \"indexed\": false,\n      \"defaultValue\": 0,\n      \"validation\": {\n        \"range\": {\n          \"min\": 0,\n          \"max\": 0\n        },\n        \"regex\": \"string\",\n        \"valueOneOf\": [\n          0,\n          \"string\",\n          [\n            \"string\"\n          ],\n          true,\n          {}\n        ],\n        \"required\": false\n      }\n    }\n  ],\n  \"callback\": {\n    \"url\": \"string\",\n    \"meta\": {\n      \"additionalProp1\": {}\n    }\n  }\n}"
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/categories/{{entityTypeCategoryName}}/templates/",
+									"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/categories/{{categoryName}}/templates",
 									"host": [
 										"{{baseURI}}"
 									],
@@ -5786,9 +5786,8 @@
 										"entity-type",
 										"{{entityTypePluralName}}",
 										"categories",
-										"{{entityTypeCategoryName}}",
-										"templates",
-										""
+										"{{categoryName}}",
+										"templates"
 									]
 								}
 							},
@@ -6077,7 +6076,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"uniqueCode\": \"123\",\n    \"name\": {{$randomNoun}},\n    \"owner\": {{$randomFirstName}},\n    \"category\": {{entity_type_category_name}},\n    \"subCategory\": {{entity_type_sub_category_name}},\n    \"properties\": {\n        \"color\": {{$randomColor}}\n    },\n    \"templateId\": {{entity_type_template_id}},\n    \"callback\": {\n        \"url\": \"{{callback_url}}\",\n        \"meta\": {}\n    }\n}"
+									"raw": "{\n  \"uniqueCode\": \"string\",\n  \"name\": \"string\",\n  \"owner\": \"string\",\n  \"category\": \"string\",\n  \"subCategory\": \"string\",\n  \"properties\": {},\n  \"templateId\": \"string\",\n  \"state\": \"string\",\n  \"callback\": {\n    \"url\": \"string\",\n    \"meta\": {\n      \"additionalProp1\": {}\n    }\n  },\n  \"onRequest\": {\n    \"url\": \"string\",\n    \"requestHeader\": {},\n    \"requestBody\": {},\n    \"method\": \"POST\",\n    \"onResponse\": {\n      \"wait\": true,\n      \"acceptableStatusCodes\": [\n        0\n      ],\n      \"raiseErrorOnStatusMismatch\": true\n    }\n  },\n  \"onError\": {\n    \"url\": \"string\",\n    \"requestHeader\": {},\n    \"requestBody\": {},\n    \"method\": \"POST\",\n    \"onResponse\": {\n      \"wait\": true,\n      \"acceptableStatusCodes\": [\n        0\n      ],\n      \"raiseErrorOnStatusMismatch\": true\n    }\n  }\n}"
 								},
 								"url": {
 									"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}/",
@@ -6762,11 +6761,6 @@
 										"key": "X-COREOS-CALLBACK-SECRET",
 										"value": "{{callbackSecret}}",
 										"type": "text"
-									},
-									{
-										"key": "X-COREOS-APPID",
-										"value": "{{app_id}}",
-										"type": "text"
 									}
 								],
 								"body": {
@@ -6779,7 +6773,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}/{{entityInstanceId}}/event",
+									"raw": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/{{entityTypePluralName}}/{{entityInstanceId}}/event",
 									"host": [
 										"{{baseURI}}"
 									],
@@ -6788,6 +6782,8 @@
 										"api",
 										"v2",
 										"entity",
+										"apps",
+										"{{app_id}}",
 										"{{entityTypePluralName}}",
 										"{{entityInstanceId}}",
 										"event"
@@ -6823,11 +6819,6 @@
 										"key": "X-COREOS-USERINFO",
 										"value": "{{user_info}}",
 										"type": "text"
-									},
-									{
-										"key": "X-COREOS-APPID",
-										"value": "{{app_id}}",
-										"type": "text"
 									}
 								],
 								"body": {
@@ -6840,7 +6831,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}/{{entityInstanceId}}/state",
+									"raw": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/{{entityTypePluralName}}/{{entityInstanceId}}/state",
 									"host": [
 										"{{baseURI}}"
 									],
@@ -6849,6 +6840,8 @@
 										"api",
 										"v2",
 										"entity",
+										"apps",
+										"{{app_id}}",
 										"{{entityTypePluralName}}",
 										"{{entityInstanceId}}",
 										"state"
@@ -6905,11 +6898,6 @@
 										"key": "X-COREOS-USERINFO",
 										"value": "{{user_info}}",
 										"type": "text"
-									},
-									{
-										"key": "X-COREOS-APPID",
-										"value": "{{app_id}}",
-										"type": "text"
 									}
 								],
 								"body": {
@@ -6922,7 +6910,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/config/handlers/",
+									"raw": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/entity-type/{{entityTypePluralName}}/config/handlers/",
 									"host": [
 										"{{baseURI}}"
 									],
@@ -6931,6 +6919,8 @@
 										"api",
 										"v2",
 										"entity",
+										"apps",
+										"{{app_id}}",
 										"entity-type",
 										"{{entityTypePluralName}}",
 										"config",
@@ -6970,11 +6960,6 @@
 										"key": "X-COREOS-USERINFO",
 										"value": "{{user_info}}",
 										"type": "text"
-									},
-									{
-										"key": "X-COREOS-APPID",
-										"value": "{{app_id}}",
-										"type": "text"
 									}
 								],
 								"body": {
@@ -6987,7 +6972,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/config/handlers/{{customCodeId}}",
+									"raw": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/entity-type/{{entityTypePluralName}}/config/handlers/{{customCodeId}}",
 									"host": [
 										"{{baseURI}}"
 									],
@@ -6996,6 +6981,8 @@
 										"api",
 										"v2",
 										"entity",
+										"apps",
+										"{{app_id}}",
 										"entity-type",
 										"{{entityTypePluralName}}",
 										"config",
@@ -7038,11 +7025,6 @@
 										"key": "X-COREOS-USERINFO",
 										"value": "{{user_info}}",
 										"type": "text"
-									},
-									{
-										"key": "X-COREOS-APPID",
-										"value": "{{app_id}}",
-										"type": "text"
 									}
 								],
 								"body": {
@@ -7055,7 +7037,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/config/handlers/{{customCodeId}}",
+									"raw": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/entity-type/{{entityTypePluralName}}/config/handlers/{{customCodeId}}",
 									"host": [
 										"{{baseURI}}"
 									],
@@ -7064,6 +7046,8 @@
 										"api",
 										"v2",
 										"entity",
+										"apps",
+										"{{app_id}}",
 										"entity-type",
 										"{{entityTypePluralName}}",
 										"config",
@@ -18762,6 +18746,3701 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "DLQs Service",
+			"item": [
+				{
+					"name": "search",
+					"item": [
+						{
+							"name": "Query API",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "(Required) Unique RequestId",
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}"
+									},
+									{
+										"description": "(Required) Tenant id",
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}"
+									},
+									{
+										"description": "(Required) Access Token",
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}"
+									},
+									{
+										"description": "User Info",
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/dlqs/search/{{domain}}/{{type}}",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"dlqs",
+										"search",
+										"{{domain}}",
+										"{{type}}"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "50",
+											"description": "Number of items to return.",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "0",
+											"description": "Number of items to skip from start.",
+											"disabled": true
+										},
+										{
+											"key": "select",
+											"value": "<string>",
+											"description": "Specifies list of attributes to be included in response (id is always included in response). If not specified, all attributes are included in response.",
+											"disabled": true
+										},
+										{
+											"key": "sortKey",
+											"value": "<string>",
+											"description": "key to be used for sorting data",
+											"disabled": true
+										},
+										{
+											"key": "sortBy",
+											"value": "asc",
+											"description": "fetching data in ascending(asc) or descending(desc) order.",
+											"disabled": true
+										},
+										{
+											"key": "query",
+											"value": "{}",
+											"description": "query to perform on elastic search",
+											"disabled": true
+										}
+									]
+								},
+								"description": "**API for searching/querying for a type**\n"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "index",
+					"item": [
+						{
+							"name": "Create index for a type",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) Unique RequestId",
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}"
+									},
+									{
+										"description": "(Required) Tenant id",
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}"
+									},
+									{
+										"description": "(Required) Access Token",
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}"
+									},
+									{
+										"description": "User Info",
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"primaryKey\": [\n    \"id\"\n  ],\n  \"type\": \"{{$randomNoun}}\",\n  \"domain\": \"{{$randomNoun}}\",\n  \"indexName\": \"{{$randomNoun}}\",\n  \"mapping\": {\n    \"properties\": {}\n  },\n  \"shards\": 1,\n  \"replicas\": 1\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/dlqs/index",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"dlqs",
+										"index"
+									]
+								},
+								"description": "**API for configuring index for a type**\n"
+							},
+							"response": []
+						},
+						{
+							"name": "Update a specific type's mapping",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "(Required) Unique RequestId",
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}"
+									},
+									{
+										"description": "(Required) Tenant id",
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}"
+									},
+									{
+										"description": "(Required) Access Token",
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}"
+									},
+									{
+										"description": "User Info",
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"mapping\": {\n    \"properties\": {}\n  }\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/dlqs/index/{{domain}}/{{type}}",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"dlqs",
+										"index",
+										"{{domain}}",
+										"{{type}}"
+									],
+									"query": [
+										{
+											"key": "indexName",
+											"value": "{{indexName}}",
+											"description": "index name",
+											"disabled": true
+										}
+									]
+								},
+								"description": "**API for updating a type's index mapping**\n"
+							},
+							"response": []
+						},
+						{
+							"name": "Get index mapping for a type",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "(Required) Unique RequestId",
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}"
+									},
+									{
+										"description": "(Required) Tenant id",
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}"
+									},
+									{
+										"description": "(Required) Access Token",
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}"
+									},
+									{
+										"description": "User Info",
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/dlqs/index/{{domain}}/{{type}}",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"dlqs",
+										"index",
+										"{{domain}}",
+										"{{type}}"
+									]
+								},
+								"description": "**API for retrieving an mappings for an index**\n"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a specific type's mapping",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "(Required) Unique RequestId",
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{requestId}}"
+									},
+									{
+										"description": "(Required) Tenant id",
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}"
+									},
+									{
+										"description": "(Required) Access Token",
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}"
+									},
+									{
+										"description": "User Info",
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/dlqs/index/{{domain}}/{{type}}",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"dlqs",
+										"index",
+										"{{domain}}",
+										"{{type}}"
+									]
+								},
+								"description": "**API for deleting a type's index mapping**\n"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Orchestrator Service",
+			"item": [
+				{
+					"name": "Plugins APIs",
+					"item": [
+						{
+							"name": "Create a new plugin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"var pluginId = jsonData.data.id;",
+											"",
+											"pm.environment.set(\"pluginId\", pluginId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text",
+										"description": "(Required) Tenant id"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text",
+										"description": "(Required) Unique RequestId"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text",
+										"description": "(Required) Access Token"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"newJobPlugin\",\n  \"httpUrl\": {{PluginUrl}},\n   \"httpMethod\": \"POST\",\n   \"httpHeaders\": {\n       \"plugin\": \"jobManager\"\n   },\n   \"httpRequestBodyTemplate\": [\n       {\n           \"outputJsonPath\": {\n               \"tenantId\": \"$.tenantId\",\n               \"pickupLocation\": \"$.workOrders[0].pickupDetails.location\",\n               \"deliverLocation\": \"$.dropDetails.location\",\n               \"deliverContact\": \"$.dropDetails.contact\",\n               \"orderId\": \"$.orderId\",\n               \"workOrderId\": \"$.workOrders[0].id\",\n               \"trackingDetails\": \"$.fetchData.trackingDetails\"\n           }\n       },\n       {\n           \"entity\": \"container\",\n           \"input\": {\n               \"tenant_id\": \"$.tenantId\",\n               \"id\": \"$.workOrders[0].containers[0]\"\n           },\n           \"outputJsonPath\": {\n               \"trackingDetails\": \"$.trackingDetails\"\n           }\n       }\n   ],\n   \"dlqOnFailure\": true,\n   \"requestTimeout\": 5,\n   \"callbackTimeout\": 5,\n   \"responseType\": \"ASYNC\",\n   \"secretKey\": \"SECRET_KEY\",\n   \"protocol\": \"HTTP\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/plugins/",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"plugins",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"mvkTeWt7yqE6lCE6N\",\n  \"httpUrl\": \"http://@_:o4eoH:l6eue9unnk9NwlP%-5djlsg4qA7:ghAWs95bh%IO8AKt:CBS:Lnce9YUGcMnO@bB:J8_n+BQC002BPDcHYa9Xl1kSYa1Huz3PC1.PkW4F_eLCpBZklCAcD@Gy4qyQ-os5bAXiT6yvGUr@6K.Eu08W)BnTU7=GNT\",\n  \"httpMethod\": \"POST\",\n  \"httpRequestBodyTemplate\": [\n    {\n      \"outputJsonPath\": {},\n      \"entity\": \"order\",\n      \"input\": {}\n    }\n  ],\n  \"secretKey\": \"<string>\",\n  \"responseType\": \"ASYNC\",\n  \"description\": \"<string>\",\n  \"httpHeaders\": {\n    \"culpa_6\": \"<string>\",\n    \"id5\": \"<string>\"\n  },\n  \"dlqOnFailure\": \"<boolean>\",\n  \"requestTimeout\": 5,\n  \"callbackTimeout\": 5,\n  \"protocol\": \"HTTP\",\n  \"maxConcurrentCalls\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"mvkTeWt7yqE6lCE6N\",\n  \"httpUrl\": \"http://@_:o4eoH:l6eue9unnk9NwlP%-5djlsg4qA7:ghAWs95bh%IO8AKt:CBS:Lnce9YUGcMnO@bB:J8_n+BQC002BPDcHYa9Xl1kSYa1Huz3PC1.PkW4F_eLCpBZklCAcD@Gy4qyQ-os5bAXiT6yvGUr@6K.Eu08W)BnTU7=GNT\",\n  \"httpMethod\": \"POST\",\n  \"httpRequestBodyTemplate\": [\n    {\n      \"outputJsonPath\": {},\n      \"entity\": \"order\",\n      \"input\": {}\n    }\n  ],\n  \"secretKey\": \"<string>\",\n  \"responseType\": \"ASYNC\",\n  \"description\": \"<string>\",\n  \"httpHeaders\": {\n    \"culpa_6\": \"<string>\",\n    \"id5\": \"<string>\"\n  },\n  \"dlqOnFailure\": \"<boolean>\",\n  \"requestTimeout\": 5,\n  \"callbackTimeout\": 5,\n  \"protocol\": \"HTTP\",\n  \"maxConcurrentCalls\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"mvkTeWt7yqE6lCE6N\",\n  \"httpUrl\": \"http://@_:o4eoH:l6eue9unnk9NwlP%-5djlsg4qA7:ghAWs95bh%IO8AKt:CBS:Lnce9YUGcMnO@bB:J8_n+BQC002BPDcHYa9Xl1kSYa1Huz3PC1.PkW4F_eLCpBZklCAcD@Gy4qyQ-os5bAXiT6yvGUr@6K.Eu08W)BnTU7=GNT\",\n  \"httpMethod\": \"POST\",\n  \"httpRequestBodyTemplate\": [\n    {\n      \"outputJsonPath\": {},\n      \"entity\": \"order\",\n      \"input\": {}\n    }\n  ],\n  \"secretKey\": \"<string>\",\n  \"responseType\": \"ASYNC\",\n  \"description\": \"<string>\",\n  \"httpHeaders\": {\n    \"culpa_6\": \"<string>\",\n    \"id5\": \"<string>\"\n  },\n  \"dlqOnFailure\": \"<boolean>\",\n  \"requestTimeout\": 5,\n  \"callbackTimeout\": 5,\n  \"protocol\": \"HTTP\",\n  \"maxConcurrentCalls\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get a plugin",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text",
+										"description": "(Required) Unique RequestId"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text",
+										"description": "(Required) Tenant id"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text",
+										"description": "(Required) user info"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text",
+										"description": "(Required) Access Token"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/plugins/{{pluginId}}",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"plugins",
+										"{{pluginId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/plugins/:pluginId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												":pluginId"
+											],
+											"variable": [
+												{
+													"key": "pluginId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"data\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"httpUrl\": \"http://www..tW7Vdth8zfdAQJGsIAoo9rjmPd=0e9xZwdf6cq0b1#LW%@~UchvR1PoB~#K@._@X=QYXv.~qb6hrSOX57gaTo-TmhK3IJu+YUATIbIWI1zAnpU5hIHw9Bu#.CP2k+6Sx#Rfe.JlTzCOVbPt@zoh6p#ESHx9vxELhhBuMEdnYA+mZ2CZ_RH.8l0\",\n    \"httpMethod\": \"POST\",\n    \"httpHeaders\": {},\n    \"httpRequestBodyTemplate\": [\n      {\n        \"outputJsonPath\": {},\n        \"entity\": \"job\",\n        \"input\": {}\n      }\n    ],\n    \"requestTimeout\": 5,\n    \"callbackTimeout\": 5,\n    \"isActive\": \"<boolean>\",\n    \"responseType\": \"<string>\",\n    \"secretKey\": \"<string>\",\n    \"protocol\": \"<string>\",\n    \"maxConcurrentCalls\": \"<integer>\"\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/plugins/:pluginId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												":pluginId"
+											],
+											"variable": [
+												{
+													"key": "pluginId"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/plugins/:pluginId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												":pluginId"
+											],
+											"variable": [
+												{
+													"key": "pluginId"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/plugins/:pluginId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												":pluginId"
+											],
+											"variable": [
+												{
+													"key": "pluginId"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "Update a plugin",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text",
+										"description": "(Required) Tenant id"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text",
+										"description": "(Required) Unique RequestId"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text",
+										"description": "(Required) Access Token"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text",
+										"description": "(Required) user info"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"httpUrl\": {{PluginUrl}},\n  \"httpMethod\": \"POST\",\n  \"description\": {{$randomLoremSentence}},\n  \"httpHeaders\": {\n    \"labore__2\": \"string\",\n    \"pariatur4a\": \"string\"\n  },\n  \"httpRequestBodyTemplate\": [\n    {\n      \"outputJsonPath\": {},\n      \"entity\": \"dispatch\",\n      \"input\": {}\n    }\n  ],\n  \"dlqOnFailure\": \"boolean\",\n  \"requestTimeout\": 5,\n  \"callbackTimeout\": 5,\n  \"responseType\": \"ASYNC\",\n  \"secretKey\": \"string\",\n  \"protocol\": \"HTTP\",\n  \"maxConcurrentCalls\": \"integer\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURI}}/plugins/{{pluginId}}",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"plugins",
+										"{{pluginId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"httpUrl\": \"http://-=PhXipQ5focPy24c#hlBIzT~6RUQJNfaYnfA86g~oP7u7Wi@=vuBC@D5:TeuIAwfHmAxPk~Us08i~7k_KAvSpgDcCb54c9@YwKjNSm.pV8Jv2zJ.pc64@aDlD8XT4m%_Sp9Js~uEfE=p%BZOtScW%%K8i5.aN_G#5HyAOmo1s_Pw5HTwDnh9rGXkF~9Z6AqLPzP47G@q+t0=.VNGl@L.YXkpj4vx=W(\",\n  \"httpMethod\": \"POST\",\n  \"description\": \"<string>\",\n  \"httpHeaders\": {\n    \"labore__2\": \"<string>\",\n    \"pariatur4a\": \"<string>\"\n  },\n  \"httpRequestBodyTemplate\": [\n    {\n      \"outputJsonPath\": {},\n      \"entity\": \"dispatch\",\n      \"input\": {}\n    }\n  ],\n  \"dlqOnFailure\": \"<boolean>\",\n  \"requestTimeout\": 5,\n  \"callbackTimeout\": 5,\n  \"responseType\": \"ASYNC\",\n  \"secretKey\": \"<string>\",\n  \"protocol\": \"HTTP\",\n  \"maxConcurrentCalls\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins/:pluginId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												":pluginId"
+											],
+											"variable": [
+												{
+													"key": "pluginId"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"httpUrl\": \"http://-=PhXipQ5focPy24c#hlBIzT~6RUQJNfaYnfA86g~oP7u7Wi@=vuBC@D5:TeuIAwfHmAxPk~Us08i~7k_KAvSpgDcCb54c9@YwKjNSm.pV8Jv2zJ.pc64@aDlD8XT4m%_Sp9Js~uEfE=p%BZOtScW%%K8i5.aN_G#5HyAOmo1s_Pw5HTwDnh9rGXkF~9Z6AqLPzP47G@q+t0=.VNGl@L.YXkpj4vx=W(\",\n  \"httpMethod\": \"POST\",\n  \"description\": \"<string>\",\n  \"httpHeaders\": {\n    \"labore__2\": \"<string>\",\n    \"pariatur4a\": \"<string>\"\n  },\n  \"httpRequestBodyTemplate\": [\n    {\n      \"outputJsonPath\": {},\n      \"entity\": \"dispatch\",\n      \"input\": {}\n    }\n  ],\n  \"dlqOnFailure\": \"<boolean>\",\n  \"requestTimeout\": 5,\n  \"callbackTimeout\": 5,\n  \"responseType\": \"ASYNC\",\n  \"secretKey\": \"<string>\",\n  \"protocol\": \"HTTP\",\n  \"maxConcurrentCalls\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins/:pluginId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												":pluginId"
+											],
+											"variable": [
+												{
+													"key": "pluginId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"httpUrl\": \"http://-=PhXipQ5focPy24c#hlBIzT~6RUQJNfaYnfA86g~oP7u7Wi@=vuBC@D5:TeuIAwfHmAxPk~Us08i~7k_KAvSpgDcCb54c9@YwKjNSm.pV8Jv2zJ.pc64@aDlD8XT4m%_Sp9Js~uEfE=p%BZOtScW%%K8i5.aN_G#5HyAOmo1s_Pw5HTwDnh9rGXkF~9Z6AqLPzP47G@q+t0=.VNGl@L.YXkpj4vx=W(\",\n  \"httpMethod\": \"POST\",\n  \"description\": \"<string>\",\n  \"httpHeaders\": {\n    \"labore__2\": \"<string>\",\n    \"pariatur4a\": \"<string>\"\n  },\n  \"httpRequestBodyTemplate\": [\n    {\n      \"outputJsonPath\": {},\n      \"entity\": \"dispatch\",\n      \"input\": {}\n    }\n  ],\n  \"dlqOnFailure\": \"<boolean>\",\n  \"requestTimeout\": 5,\n  \"callbackTimeout\": 5,\n  \"responseType\": \"ASYNC\",\n  \"secretKey\": \"<string>\",\n  \"protocol\": \"HTTP\",\n  \"maxConcurrentCalls\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins/:pluginId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												":pluginId"
+											],
+											"variable": [
+												{
+													"key": "pluginId"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "PluginWorkflow",
+					"item": [
+						{
+							"name": "create a new plugin workflow",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"var pluginWorkflowId = jsonData.data.id;",
+											"",
+											"pm.environment.set(\"pluginWorkflowId\", pluginWorkflowId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text",
+										"description": "(Required) Unique RequestId"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text",
+										"description": "(Required) Tenant id"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text",
+										"description": "(Required) Access Token"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text",
+										"description": "(Required) user info"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"RuleTranslatorPluginWorkflow\",\n    \"description\": \"workflow to update container and workOrder\",\n    \"tag\": [\n        {\n            \"name\": \"RuleTranslatorPluginWorkflow\",\n            \"value\": \"workflow\"\n        }\n    ],\n    \"pre\": {\n        \"plugins\": [\n            \"fetchData\"\n        ]\n    },\n    \"main\": {\n        \"plugins\": [\n            \"ContainerRuleTranslatorPlugin\",\n            \"WorkOrderRuleTranslatorPlugin\"\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/plugins/plugin-workflows",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"plugins",
+										"plugin-workflows"
+									]
+								},
+								"description": "create a new plugin workflow"
+							},
+							"response": [
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"WUGfIr\",\n  \"description\": \"<string>\",\n  \"main\": {\n    \"plugins\": [\n      \"BUyqopuwk3\",\n      \"JXV0cV6Mw\"\n    ]\n  },\n  \"tag\": [\n    {\n      \"name\": \"V48Fo\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"GoF3pDrF\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"pre\": {\n    \"plugins\": [\n      \"9egsIo\",\n      \"LcS\"\n    ]\n  }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins/plugin-workflows",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												"plugin-workflows"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"WUGfIr\",\n  \"description\": \"<string>\",\n  \"main\": {\n    \"plugins\": [\n      \"BUyqopuwk3\",\n      \"JXV0cV6Mw\"\n    ]\n  },\n  \"tag\": [\n    {\n      \"name\": \"V48Fo\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"GoF3pDrF\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"pre\": {\n    \"plugins\": [\n      \"9egsIo\",\n      \"LcS\"\n    ]\n  }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins/plugin-workflows",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												"plugin-workflows"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"WUGfIr\",\n  \"description\": \"<string>\",\n  \"main\": {\n    \"plugins\": [\n      \"BUyqopuwk3\",\n      \"JXV0cV6Mw\"\n    ]\n  },\n  \"tag\": [\n    {\n      \"name\": \"V48Fo\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"GoF3pDrF\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"pre\": {\n    \"plugins\": [\n      \"9egsIo\",\n      \"LcS\"\n    ]\n  }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins/plugin-workflows",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												"plugin-workflows"
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"WUGfIr\",\n  \"description\": \"<string>\",\n  \"main\": {\n    \"plugins\": [\n      \"BUyqopuwk3\",\n      \"JXV0cV6Mw\"\n    ]\n  },\n  \"tag\": [\n    {\n      \"name\": \"V48Fo\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"GoF3pDrF\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"pre\": {\n    \"plugins\": [\n      \"9egsIo\",\n      \"LcS\"\n    ]\n  }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins/plugin-workflows",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												"plugin-workflows"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "update a plugin workflow",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text",
+										"description": "(Required) Unique RequestId"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text",
+										"description": "(Required) Tenant id"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text",
+										"description": "(Required) Access Token"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text",
+										"description": "(Required) user info"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"pre\": {\n    \"plugins\": [\n      \"SKYKXL\",\n      \"uk0ss\"\n    ]\n  },\n  \"main\": {\n    \"plugins\": [\n      \"3DKgzXa\",\n      \"Cr5Qid\"\n    ]\n  }\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/plugins/plugin-workflows/{{pluginWorkflowId}}",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"plugins",
+										"plugin-workflows",
+										"{{pluginWorkflowId}}"
+									]
+								},
+								"description": "update a plugin workflow"
+							},
+							"response": [
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"pre\": {\n    \"plugins\": [\n      \"SKYKXL\",\n      \"uk0ss\"\n    ]\n  },\n  \"main\": {\n    \"plugins\": [\n      \"3DKgzXa\",\n      \"Cr5Qid\"\n    ]\n  }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins/plugin-workflows/:pluginWorkflowId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												"plugin-workflows",
+												":pluginWorkflowId"
+											],
+											"variable": [
+												{
+													"key": "pluginWorkflowId"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"pre\": {\n    \"plugins\": [\n      \"SKYKXL\",\n      \"uk0ss\"\n    ]\n  },\n  \"main\": {\n    \"plugins\": [\n      \"3DKgzXa\",\n      \"Cr5Qid\"\n    ]\n  }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins/plugin-workflows/:pluginWorkflowId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												"plugin-workflows",
+												":pluginWorkflowId"
+											],
+											"variable": [
+												{
+													"key": "pluginWorkflowId"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"pre\": {\n    \"plugins\": [\n      \"SKYKXL\",\n      \"uk0ss\"\n    ]\n  },\n  \"main\": {\n    \"plugins\": [\n      \"3DKgzXa\",\n      \"Cr5Qid\"\n    ]\n  }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins/plugin-workflows/:pluginWorkflowId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												"plugin-workflows",
+												":pluginWorkflowId"
+											],
+											"variable": [
+												{
+													"key": "pluginWorkflowId"
+												}
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"pre\": {\n    \"plugins\": [\n      \"SKYKXL\",\n      \"uk0ss\"\n    ]\n  },\n  \"main\": {\n    \"plugins\": [\n      \"3DKgzXa\",\n      \"Cr5Qid\"\n    ]\n  }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/plugins/plugin-workflows/:pluginWorkflowId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												"plugin-workflows",
+												":pluginWorkflowId"
+											],
+											"variable": [
+												{
+													"key": "pluginWorkflowId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "fetch a plugin workflow details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text",
+										"description": "(Required) Unique RequestId"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text",
+										"description": "(Required) Tenant id"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text",
+										"description": "(Required) Access Token"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text",
+										"description": "(Required) user info"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/plugins/plugin-workflows/{{pluginWorkflowId}}?version=<string>",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"plugins",
+										"plugin-workflows",
+										"{{pluginWorkflowId}}"
+									],
+									"query": [
+										{
+											"key": "version",
+											"value": "<string>",
+											"description": "version"
+										}
+									]
+								},
+								"description": "fetch a plugin workflow"
+							},
+							"response": [
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/plugins/plugin-workflows/:pluginWorkflowId?version=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												"plugin-workflows",
+												":pluginWorkflowId"
+											],
+											"query": [
+												{
+													"key": "version",
+													"value": "<string>",
+													"description": "version"
+												}
+											],
+											"variable": [
+												{
+													"key": "pluginWorkflowId"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/plugins/plugin-workflows/:pluginWorkflowId?version=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												"plugin-workflows",
+												":pluginWorkflowId"
+											],
+											"query": [
+												{
+													"key": "version",
+													"value": "<string>",
+													"description": "version"
+												}
+											],
+											"variable": [
+												{
+													"key": "pluginWorkflowId"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/plugins/plugin-workflows/:pluginWorkflowId?version=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												"plugin-workflows",
+												":pluginWorkflowId"
+											],
+											"query": [
+												{
+													"key": "version",
+													"value": "<string>",
+													"description": "version"
+												}
+											],
+											"variable": [
+												{
+													"key": "pluginWorkflowId"
+												}
+											]
+										}
+									},
+									"status": "Service Unavailable",
+									"code": 503,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/plugins/plugin-workflows/:pluginWorkflowId?version=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"plugins",
+												"plugin-workflows",
+												":pluginWorkflowId"
+											],
+											"query": [
+												{
+													"key": "version",
+													"value": "<string>",
+													"description": "version"
+												}
+											],
+											"variable": [
+												{
+													"key": "pluginWorkflowId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"data\": {\n    \"name\": \"<string>\",\n    \"pluginWorkflowId\": \"<string>\",\n    \"workflow\": {},\n    \"pluginHttpRequestBodyTemplate\": [\n      {\n        \"outputJsonPath\": {},\n        \"pluginId\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"input\": \"<string>\"\n      },\n      {\n        \"outputJsonPath\": {},\n        \"pluginId\": \"<string>\",\n        \"entity\": \"<string>\",\n        \"input\": \"<string>\"\n      }\n    ],\n    \"version\": \"<number>\",\n    \"createdAt\": \"<number>\",\n    \"createdBy\": {},\n    \"updatedAt\": \"<number>\",\n    \"updatedBy\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Rules",
+					"item": [
+						{
+							"name": "Create a new execution rule",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"var ruleId = jsonData.data.id;",
+											"",
+											"pm.environment.set(\"ruleId\", ruleId);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "(Required) Tenant id",
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}"
+									},
+									{
+										"description": "(Required) Unique RequestId",
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}"
+									},
+									{
+										"description": "(Required) Access Token",
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}"
+									},
+									{
+										"description": "(Required) user info",
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"WorkflowInstanceCompletedEventRule\",\n    \"event\": {{eventName}},\n    \"pluginWorkflowId\": {{pluginWorkflowId}},\n    \"serviceName\": \"orchestrator\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/rule-engine/rules",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"rule-engine",
+										"rules"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"gOsHTyUauLTFdDtRWgwFnllYrIQdibFwSZru\",\n  \"event\": \"CyYJBQxgPJIVpJgnILRUyjnRAfotGozSDW\",\n  \"pluginWorkflowId\": \"APhv4g735YEp7Lf\",\n  \"serviceName\": \"OdlPHwedDbWMcmBEQu\",\n  \"logic\": {\n    \"Excepteure\": [\n      \"<number>\",\n      \"<number>\"\n    ]\n  },\n  \"workflowVersion\": \"<number>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"gOsHTyUauLTFdDtRWgwFnllYrIQdibFwSZru\",\n  \"event\": \"CyYJBQxgPJIVpJgnILRUyjnRAfotGozSDW\",\n  \"pluginWorkflowId\": \"APhv4g735YEp7Lf\",\n  \"serviceName\": \"OdlPHwedDbWMcmBEQu\",\n  \"logic\": {\n    \"Excepteure\": [\n      \"<number>\",\n      \"<number>\"\n    ]\n  },\n  \"workflowVersion\": \"<number>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"ruleId\": \"<string>\"\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"gOsHTyUauLTFdDtRWgwFnllYrIQdibFwSZru\",\n  \"event\": \"CyYJBQxgPJIVpJgnILRUyjnRAfotGozSDW\",\n  \"pluginWorkflowId\": \"APhv4g735YEp7Lf\",\n  \"serviceName\": \"OdlPHwedDbWMcmBEQu\",\n  \"logic\": {\n    \"Excepteure\": [\n      \"<number>\",\n      \"<number>\"\n    ]\n  },\n  \"workflowVersion\": \"<number>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "Update an execution rule",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"var eventName = jsonData.data.id;",
+											"",
+											"pm.environment.set(\"eventName\", eventName);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "(Required) Tenant id",
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}"
+									},
+									{
+										"description": "(Required) Unique RequestId",
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}"
+									},
+									{
+										"description": "(Required) Access Token",
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}"
+									},
+									{
+										"description": "(Required) user info",
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"logic\": {\n    \"additionalProp1\": [\n      0,\n      \"string\",\n      true\n    ],\n    \"additionalProp2\": [\n      0,\n      \"string\",\n      true\n    ],\n    \"additionalProp3\": [\n      0,\n      \"string\",\n      true\n    ]\n  },\n  \"isActive\": true,\n  \"workflowVersion\": 2\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/rule-engine/rules/{{ruleId}}",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"rule-engine",
+										"rules",
+										"{{ruleId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"logic\": {\n    \"sunt_2b\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"fugiat6_2\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"sed_b\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"incididunt2\": [\n      \"<number>\",\n      \"<number>\"\n    ]\n  },\n  \"isActive\": \"<boolean>\",\n  \"workflowVersion\": \"<number>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules/:ruleId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules",
+												":ruleId"
+											],
+											"variable": [
+												{
+													"key": "ruleId"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								},
+								{
+									"name": "Error Occurred",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"logic\": {\n    \"sunt_2b\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"fugiat6_2\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"sed_b\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"incididunt2\": [\n      \"<number>\",\n      \"<number>\"\n    ]\n  },\n  \"isActive\": \"<boolean>\",\n  \"workflowVersion\": \"<number>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules/:ruleId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules",
+												":ruleId"
+											],
+											"variable": [
+												{
+													"key": "ruleId"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"logic\": {\n    \"sunt_2b\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"fugiat6_2\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"sed_b\": [\n      \"<number>\",\n      \"<number>\"\n    ],\n    \"incididunt2\": [\n      \"<number>\",\n      \"<number>\"\n    ]\n  },\n  \"isActive\": \"<boolean>\",\n  \"workflowVersion\": \"<number>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules/:ruleId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules",
+												":ruleId"
+											],
+											"variable": [
+												{
+													"key": "ruleId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"eventName\": \"<string>\",\n    \"pluginWorkflowId\": \"<string>\"\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get an execution rule for a plugin-workflow",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text",
+										"description": "(Required) Unique RequestId"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text",
+										"description": "(Required) Tenant id"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text",
+										"description": "(Required) Access Token"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text",
+										"description": "(Required) user info"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURI}}/core/api/v1/rule-engine/rules/{{ruleId}}",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"core",
+										"api",
+										"v1",
+										"rule-engine",
+										"rules",
+										"{{ruleId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules/:ruleId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules",
+												":ruleId"
+											],
+											"variable": [
+												{
+													"key": "ruleId"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"eventName\": \"<string>\",\n    \"pluginWorkflowId\": \"<string>\"\n  }\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules/:ruleId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules",
+												":ruleId"
+											],
+											"variable": [
+												{
+													"key": "ruleId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"data\": {\n    \"name\": \"KAhsNeoLplbKluCkTGgvZurJLk\",\n    \"event\": \"yzOHcX\",\n    \"version\": \"<number>\",\n    \"ruleId\": \"rule:ze9so2lmrbnumkrrv7m\",\n    \"pluginWorkflowId\": \"KUm3MKI3jIOLvLZjdpSI7\",\n    \"workflow\": {},\n    \"logic\": {\n      \"sint_4c\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    \"workflowVersion\": \"<number>\",\n    \"isActive\": \"<boolean>\",\n    \"serviceName\": \"GRBAAGTPthHusoPnSWBmv\",\n    \"createdAt\": \"<number>\",\n    \"createdBy\": {},\n    \"updatedAt\": \"<number>\",\n    \"updatedBy\": {}\n  }\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules/:ruleId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules",
+												":ruleId"
+											],
+											"variable": [
+												{
+													"key": "ruleId"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"eventName\": \"<string>\",\n    \"pluginWorkflowId\": \"<string>\"\n  }\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules/:ruleId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules",
+												":ruleId"
+											],
+											"variable": [
+												{
+													"key": "ruleId"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"eventName\": \"<string>\",\n    \"pluginWorkflowId\": \"<string>\"\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get all execution rules for an event",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-COREOS-TID",
+										"value": "{{tenant_id}}",
+										"type": "text",
+										"description": "(Required) Unique RequestId"
+									},
+									{
+										"key": "X-COREOS-REQUEST-ID",
+										"value": "{{request_id}}",
+										"type": "text",
+										"description": "(Required) Tenant id"
+									},
+									{
+										"key": "X-COREOS-ACCESS",
+										"value": "{{token}}",
+										"type": "text",
+										"description": "(Required) Access Token"
+									},
+									{
+										"key": "X-COREOS-USERINFO",
+										"value": "{{user_info}}",
+										"type": "text",
+										"description": "(Required) user info"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURI}}/rule-engine/rules/events/{{eventName}}",
+									"host": [
+										"{{baseURI}}"
+									],
+									"path": [
+										"rule-engine",
+										"rules",
+										"events",
+										"{{eventName}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules/events/:eventName",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules",
+												"events",
+												":eventName"
+											],
+											"variable": [
+												{
+													"key": "eventName"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"eventName\": \"<string>\"\n  }\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules/events/:eventName",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules",
+												"events",
+												":eventName"
+											],
+											"variable": [
+												{
+													"key": "eventName"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"data\": [\n    {\n      \"name\": \"cEiaBoqpLAjaNNRBPtiEELvQoj\",\n      \"event\": \"SKwjBBVcYBbSvRvVGwhS\",\n      \"version\": \"<number>\",\n      \"ruleId\": \"rule:be2-2lx8d3ky3l2uyu8e3owk8pz5iqbtriwp6aainu8dezjjad04wfqd3xo4h\",\n      \"pluginWorkflowId\": \"ugz6mg7hXQ8a8syIL5NEdigVGPt1OR_uW\",\n      \"workflow\": {},\n      \"logic\": {\n        \"dolor32f\": [\n          \"<number>\",\n          \"<number>\"\n        ],\n        \"elitff0\": [\n          \"<number>\",\n          \"<number>\"\n        ],\n        \"ut7\": [\n          \"<number>\",\n          \"<number>\"\n        ]\n      },\n      \"workflowVersion\": \"<number>\",\n      \"isActive\": \"<boolean>\",\n      \"serviceName\": \"qeHmnwUxniLkHB\",\n      \"createdAt\": \"<number>\",\n      \"createdBy\": {},\n      \"updatedAt\": \"<number>\",\n      \"updatedBy\": {}\n    },\n    {\n      \"name\": \"XxaSFqPnhmHXv\",\n      \"event\": \"ZCpWydbaqmZizJWQgtrQJNoJDjiaMBTeD\",\n      \"version\": \"<number>\",\n      \"ruleId\": \"rule:a415dv-h3ocwmxrzxz1-xe25q3ut6475p\",\n      \"pluginWorkflowId\": \"U5L20og:6tEmqF_DExzVqTBeA8oiHcDzgIh9fNzj9ylIR\",\n      \"workflow\": {},\n      \"logic\": {\n        \"aliquipf9\": [\n          \"<number>\",\n          \"<number>\"\n        ],\n        \"occaecat_a9\": [\n          \"<number>\",\n          \"<number>\"\n        ],\n        \"sunt8_\": [\n          \"<number>\",\n          \"<number>\"\n        ]\n      },\n      \"workflowVersion\": \"<number>\",\n      \"isActive\": \"<boolean>\",\n      \"serviceName\": \"scHXGUwx\",\n      \"createdAt\": \"<number>\",\n      \"createdBy\": {},\n      \"updatedAt\": \"<number>\",\n      \"updatedBy\": {}\n    }\n  ]\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules/events/:eventName",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules",
+												"events",
+												":eventName"
+											],
+											"variable": [
+												{
+													"key": "eventName"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"eventName\": \"<string>\"\n  }\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Access Token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) user info",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/rule-engine/rules/events/:eventName",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rule-engine",
+												"rules",
+												"events",
+												":eventName"
+											],
+											"variable": [
+												{
+													"key": "eventName"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-COREOS-REQUEST-ID",
+											"value": "<string>",
+											"description": {
+												"content": "Unique request id that was passed as header parameter in the request.",
+												"type": "text/plain"
+											}
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  },\n  \"data\": {\n    \"eventName\": \"<string>\"\n  }\n}"
+								}
+							]
+						}
+					]
 				}
 			]
 		}
