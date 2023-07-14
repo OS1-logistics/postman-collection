@@ -1,6 +1,6 @@
 {
-	"id": "32983998-eede-4cda-a0c8-86348944955c",
-	"name": "OS1 APIs",
+	"id": "25da9aaf-d27f-4cd5-aff7-077adc03af2b",
+	"name": "OS1 Env Variable",
 	"values": [
 		{
 			"key": "token",
@@ -24,7 +24,7 @@
 		},
 		{
 			"key": "user_info",
-			"value": "{\"id\":\"id\",\"name\": \"name\",\"appId\": \"app:1d6ebc25-32df-4dfc-b93b-4af5750dff37\" }",
+			"value": "",
 			"enabled": true
 		},
 		{
@@ -54,11 +54,6 @@
 		},
 		{
 			"key": "categoryName",
-			"value": "",
-			"enabled": true
-		},
-		{
-			"key": "subCategoryName",
 			"value": "",
 			"enabled": true
 		},
@@ -138,11 +133,6 @@
 			"enabled": true
 		},
 		{
-			"key": "countryName",
-			"value": "",
-			"enabled": true
-		},
-		{
 			"key": "deviceId",
 			"value": "",
 			"enabled": true
@@ -159,7 +149,7 @@
 		},
 		{
 			"key": "signature",
-			"value": "rGkU6cYHozlleLg0+0JECd7oHT2q3VI0bfDFamgw2AxOzK6qf7MtwKwBBjUeXqOyYkwm3Obz9YTIGNttPr6U27ploWuoUq3WTUjSeDv5wuPV9HYTWbFdBz7acS2+kcnV3HJYItQ6WgLBh8HdTu9KYjdrZ5hh+APpNXO5mppxUoP42yZDVkc0mcVm0C1VK52fwsWen6CycJb9JY+K5UILkAps1GiEZDX59Moh7roe4Jn1As3FDvkAne5TiyN+YP3lKV2mJxo/ibXTz1pEy6fcqOABd70KgZcB62CDoJPtX+6+kexX/SNKQcY/mXG6YUUQXZ2n+UWjajSCyzQHD2hIUA==.dGVzdGFwcDE=",
+			"value": "",
 			"enabled": true
 		},
 		{
@@ -169,7 +159,7 @@
 		},
 		{
 			"key": "appId",
-			"value": "app:7505f4ba-a143-4163-8852-df8d44208416",
+			"value": "",
 			"enabled": true
 		},
 		{
@@ -179,12 +169,12 @@
 		},
 		{
 			"key": "publicKey",
-			"value": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0eemZ2SXFSPQArpuR+ZgNQXBAP6ZFt7SF+PYqFkQzNUMNgGd5pXJ901t92RVowD35i6/DySn5U5tekNOscxaJ8mZClFFwjz01C60jXABpBOzfXOre+hk197bll9CEQYhC9L4Arv65Zr/Uf2ULt7DC/dSlG6gvqZt7hgk+lDuqf+r3LdSGcLsaV4BRz5azyLRdNwmNLmtCeuM7riokctGdjYbl/Y8S2a9z7WZIjALSCWP0XKImezD+oWUM25L//RtW9KPUbVyvaQ6np/0+zYOYEQ5tyNJsfLSoNJZL5kDNH18De2xfX7vwpjXXZuTbvOHegh5LLKI52LTMU+g3D7l3wIDAQAB",
+			"value": "",
 			"enabled": true
 		},
 		{
 			"key": "appName",
-			"value": "testapp1",
+			"value": "",
 			"enabled": true
 		},
 		{
@@ -359,7 +349,7 @@
 		},
 		{
 			"key": "app_id",
-			"value": "app:7505f4ba-a143-4163-8852-df8d44208416",
+			"value": "",
 			"enabled": true
 		},
 		{
@@ -615,7 +605,7 @@
 		{
 			"key": "participantTypePluralName",
 			"value": "",
-			"enabled": true
+			"enabled": false
 		},
 		{
 			"key": "countryName",
@@ -654,7 +644,7 @@
 		},
 		{
 			"key": "callbackMeta",
-			"value": "{ \"url\": \"https://delhivery.requestcatcher.com\",\"meta\":{}}",
+			"value": "",
 			"enabled": true
 		},
 		{
@@ -677,20 +667,76 @@
 		{
 			"key": "groupId",
 			"value": "",
+			"type": "default",
 			"enabled": true
 		},
 		{
-			"key": "customCodeId",
-			"value": "",
+			"key": "baseUrl",
+			"value": "https://delhivery.preprod.fxtrt.io/app/api/v2",
 			"enabled": true
 		},
 		{
-			"key": "customCodeUrl",
+			"key": "ruleId",
 			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "eventName",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "JsonBatchId",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "FileBatchId",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "otterClientId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "otterClientSecret",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "accessToken",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "onboardingid",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "",
+			"value": "",
+			"type": "default",
+			"enabled": false
+		},
+		{
+			"key": "onboardingsecret",
+			"value": "",
+			"type": "default",
 			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2023-03-24T11:29:28.885Z",
-	"_postman_exported_using": "Postman/8.12.5"
+	"_postman_exported_at": "2023-07-14T17:24:49.654Z",
+	"_postman_exported_using": "Postman/10.16.0"
 }
