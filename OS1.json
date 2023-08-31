@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5207b55b-d6b4-4f47-bfdf-3a7980bb5140",
+		"_postman_id": "124bd1d8-1a92-485c-a056-7ec3864d3d57",
 		"name": "OS1 Postman Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25690782"
@@ -2370,14 +2370,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatch-types",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatch-types",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatch-types"
 											]
@@ -2412,14 +2412,14 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatch-types",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatch-types",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatch-types"
 											]
@@ -2466,14 +2466,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatch-types/{{dispatchTypeId}}",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatch-types/{{dispatchTypeId}}",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatch-types",
 												"{{dispatchTypeId}}"
@@ -2534,14 +2534,14 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatch-types/{{dispatchTypeId}}/config/attributes",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatch-types/{{dispatchTypeId}}/config/attributes",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatch-types",
 												"{{dispatchTypeId}}",
@@ -2588,14 +2588,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatch-types/{{dispatchTypeId}}/config/attributes",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatch-types/{{dispatchTypeId}}/config/attributes",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatch-types",
 												"{{dispatchTypeId}}",
@@ -2617,13 +2617,13 @@
 										{
 											"listen": "test",
 											"script": {
-												"type": "text/javascript",
 												"exec": [
 													"var jsonData = pm.response.json();",
 													"var dispatchId = jsonData.data.id;",
 													"",
 													"pm.environment.set(\"dispatchId\", dispatchId);"
-												]
+												],
+												"type": "text/javascript"
 											}
 										}
 									],
@@ -2673,14 +2673,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches"
 											]
@@ -2744,14 +2744,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches/{{dispatchId}}",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches",
 												"{{dispatchId}}"
@@ -2813,14 +2813,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches/{{dispatchId}}",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches",
 												"{{dispatchId}}"
@@ -2882,14 +2882,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches/{{dispatchId}}",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches",
 												"{{dispatchId}}"
@@ -2951,14 +2951,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches/{{dispatchId}}/status",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/status",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches",
 												"{{dispatchId}}",
@@ -3021,14 +3021,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches/{{dispatchId}}/sub-status",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/sub-status",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches",
 												"{{dispatchId}}",
@@ -3091,14 +3091,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches/{{dispatchId}}/jobs",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/jobs",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches",
 												"{{dispatchId}}",
@@ -3161,14 +3161,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches/{{dispatchId}}/multiple-jobs",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/multiple-jobs",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches",
 												"{{dispatchId}}",
@@ -3231,14 +3231,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches/{{dispatchId}}/jobs/{{jobId}}",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/jobs/{{jobId}}",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches",
 												"{{dispatchId}}",
@@ -3302,14 +3302,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches/{{dispatchId}}/multiple-jobs",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/multiple-jobs",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches",
 												"{{dispatchId}}",
@@ -3372,14 +3372,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches/{{dispatchId}}/participants",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/participants",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches",
 												"{{dispatchId}}",
@@ -3442,14 +3442,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches/{{dispatchId}}/multiple-participants",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/multiple-participants",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches",
 												"{{dispatchId}}",
@@ -3512,14 +3512,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/dispatches/{{dispatchId}}/participants/{{participantIdForDispatch}}",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/participants/{{participantIdForDispatch}}",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"dispatches",
 												"{{dispatchId}}",
@@ -3585,14 +3585,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/job-types",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-types",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"job-types"
 											]
@@ -3650,14 +3650,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/job-types",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-types",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"job-types"
 											]
@@ -3715,14 +3715,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/job-types/{{jobTypeId}}",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-types/{{jobTypeId}}",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"job-types",
 												"{{jobTypeId}}"
@@ -3786,14 +3786,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/job-types/{{jobTypeId}}/config/attributes",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-types/{{jobTypeId}}/config/attributes",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"job-types",
 												"{{jobTypeId}}",
@@ -3851,14 +3851,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/job-types/{{jobTypeId}}/config/attributes",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-types/{{jobTypeId}}/config/attributes",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"job-types",
 												"{{jobTypeId}}",
@@ -3924,14 +3924,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/jobs/",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/jobs/",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"jobs",
 												""
@@ -3987,14 +3987,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/jobs/",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/jobs/",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"jobs",
 												""
@@ -4053,14 +4053,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/jobs/{{jobId}}",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/jobs/{{jobId}}",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"jobs",
 												"{{jobId}}"
@@ -4116,14 +4116,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/jobs/{{jobId}}/status",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/jobs/{{jobId}}/status",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"jobs",
 												"{{jobId}}",
@@ -4180,14 +4180,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/jobs/{{jobId}}/sub-status",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/jobs/{{jobId}}/sub-status",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"jobs",
 												"{{jobId}}",
@@ -4252,14 +4252,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/job-workflows",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-workflows",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"job-workflows"
 											]
@@ -4317,14 +4317,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/job-workflows/{{jobWorkflowId}}",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-workflows/{{jobWorkflowId}}",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"job-workflows",
 												"{{jobWorkflowId}}"
@@ -4374,14 +4374,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/ledgers/custody-in",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/ledgers/custody-in",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"ledgers",
 												"custody-in"
@@ -4426,14 +4426,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/ledgers/custody-out",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/ledgers/custody-out",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"ledgers",
 												"custody-out"
@@ -4478,14 +4478,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/ledgers/custody-in/batch",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/ledgers/custody-in/batch",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"ledgers",
 												"custody-in",
@@ -4531,14 +4531,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/ledgers/custody-out/batch",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/ledgers/custody-out/batch",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"ledgers",
 												"custody-out",
@@ -4559,13 +4559,13 @@
 										{
 											"listen": "test",
 											"script": {
-												"type": "text/javascript",
 												"exec": [
 													"var jsonData = pm.response.json();",
 													"var workflowInstanceIdForDispatch = jsonData.data.id;",
 													"",
 													"pm.environment.set(\"workflowInstanceIdForDispatch\", workflowInstanceIdForDispatch);"
-												]
+												],
+												"type": "text/javascript"
 											}
 										}
 									],
@@ -4603,14 +4603,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/workflows/{{workflowInstanceIdForDispatch}}",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/workflows/{{workflowInstanceIdForDispatch}}",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"workflows",
 												"{{workflowInstanceIdForDispatch}}"
@@ -4625,13 +4625,13 @@
 										{
 											"listen": "test",
 											"script": {
-												"type": "text/javascript",
 												"exec": [
 													"var jsonData = pm.response.json();",
 													"var taskIdForDispatch = jsonData.data.id;",
 													"",
 													"pm.environment.set(\"taskIdForDispatch\", taskIdForDispatch);"
-												]
+												],
+												"type": "text/javascript"
 											}
 										}
 									],
@@ -4669,14 +4669,14 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dispatch-service/workflows/{{workflowInstanceIdForDispatch}}/tasks/{{taskIdForDispatch}}",
+											"raw": "{{baseURI}}/core/api/v2/dispatch-service/workflows/{{workflowInstanceIdForDispatch}}/tasks/{{taskIdForDispatch}}",
 											"host": [
 												"{{baseURI}}"
 											],
 											"path": [
 												"core",
 												"api",
-												"v1",
+												"v2",
 												"dispatch-service",
 												"workflows",
 												"{{workflowInstanceIdForDispatch}}",
