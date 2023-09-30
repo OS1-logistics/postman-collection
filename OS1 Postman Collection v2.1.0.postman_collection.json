@@ -24197,6 +24197,1859 @@
 							]
 						},
 						{
+							"name": "Search",
+							"item": [
+								{
+									"name": "Get Data By City Query",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "core-os user info token",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) core-os access token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/search/cities?query=<string>",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"core",
+												"api",
+												"v1",
+												"locations",
+												"countries",
+												"{{countryCode}}",
+												"search",
+												"cities"
+											],
+											"query": [
+												{
+													"key": "query",
+													"value": "<string>",
+													"description": "(Required) query to search for city with minimum 2 character"
+												},
+												{
+													"key": "state",
+													"value": "<string>",
+													"description": "State Name",
+													"disabled": true
+												},
+												{
+													"key": "county",
+													"value": "<string>",
+													"description": "District Or County Name",
+													"disabled": true
+												},
+												{
+													"key": "limit",
+													"value": "<integer>",
+													"description": "Number of items to return by default 20. Value should be between 1 to 50.",
+													"disabled": true
+												}
+											]
+										},
+										"description": "Search the Data By City . Search results are restricted by pagination. Max limit is 50."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/cities?query=<string>&state=<string>&county=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"cities"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) query to search for city with minimum 2 character"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "county",
+															"value": "<string>",
+															"description": "District Or County Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"data\": {\n    \"meta\": {\n      \"totalCount\": \"<number>\"\n    },\n    \"data\": [\n      {\n        \"city\": \"<string>\",\n        \"cityCode\": \"<string>\",\n        \"county\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      {\n        \"city\": \"<string>\",\n        \"cityCode\": \"<string>\",\n        \"county\": \"<string>\",\n        \"state\": \"<string>\"\n      }\n    ]\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/cities?query=<string>&state=<string>&county=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"cities"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) query to search for city with minimum 2 character"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "county",
+															"value": "<string>",
+															"description": "District Or County Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/cities?query=<string>&state=<string>&county=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"cities"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) query to search for city with minimum 2 character"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "county",
+															"value": "<string>",
+															"description": "District Or County Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/cities?query=<string>&state=<string>&county=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"cities"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) query to search for city with minimum 2 character"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "county",
+															"value": "<string>",
+															"description": "District Or County Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/cities?query=<string>&state=<string>&county=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"cities"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) query to search for city with minimum 2 character"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "county",
+															"value": "<string>",
+															"description": "District Or County Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/cities?query=<string>&state=<string>&county=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"cities"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) query to search for city with minimum 2 character"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "county",
+															"value": "<string>",
+															"description": "District Or County Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Service Unavailable",
+											"code": 503,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										}
+									]
+								},
+								{
+									"name": "Get Data By ZipCode Query",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "core-os user info token",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) core-os access token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/search/zipCodes?query=<string>",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"core",
+												"api",
+												"v1",
+												"locations",
+												"countries",
+												"{{countryCode}}",
+												"search",
+												"zipCodes"
+											],
+											"query": [
+												{
+													"key": "query",
+													"value": "<string>",
+													"description": "(Required) zipCode"
+												},
+												{
+													"key": "city",
+													"value": "<string>",
+													"description": "City Name",
+													"disabled": true
+												},
+												{
+													"key": "county",
+													"value": "<string>",
+													"description": "District Or County Name",
+													"disabled": true
+												},
+												{
+													"key": "state",
+													"value": "<string>",
+													"description": "State Name",
+													"disabled": true
+												},
+												{
+													"key": "limit",
+													"value": "<integer>",
+													"description": "Number of items to return by default 20. Value should be between 1 to 50.",
+													"disabled": true
+												}
+											]
+										},
+										"description": "Search the Data By ZipCode . Search results are restricted by pagination. Max limit is 50."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/zipCodes?query=<string>&city=<string>&county=<string>&state=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"zipCodes"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) zipCode"
+														},
+														{
+															"key": "city",
+															"value": "<string>",
+															"description": "City Name"
+														},
+														{
+															"key": "county",
+															"value": "<string>",
+															"description": "District Or County Name"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"data\": {\n    \"meta\": {\n      \"totalCount\": \"<number>\"\n    },\n    \"data\": [\n      {\n        \"city\": \"<string>\",\n        \"cityCode\": \"<string>\",\n        \"county\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zipCode\": \"<string>\",\n        \"geoCodeCity\": {\n          \"long\": \"<string>\",\n          \"lat\": \"<string>\"\n        },\n        \"geoCodeZip\": {\n          \"long\": \"<string>\",\n          \"lat\": \"<string>\"\n        },\n        \"alias\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"city\": \"<string>\",\n        \"cityCode\": \"<string>\",\n        \"county\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zipCode\": \"<string>\",\n        \"geoCodeCity\": {\n          \"long\": \"<string>\",\n          \"lat\": \"<string>\"\n        },\n        \"geoCodeZip\": {\n          \"long\": \"<string>\",\n          \"lat\": \"<string>\"\n        },\n        \"alias\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"PUT\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/zipCodes?query=<string>&city=<string>&county=<string>&state=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"zipCodes"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) zipCode"
+														},
+														{
+															"key": "city",
+															"value": "<string>",
+															"description": "City Name"
+														},
+														{
+															"key": "county",
+															"value": "<string>",
+															"description": "District Or County Name"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/zipCodes?query=<string>&city=<string>&county=<string>&state=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"zipCodes"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) zipCode"
+														},
+														{
+															"key": "city",
+															"value": "<string>",
+															"description": "City Name"
+														},
+														{
+															"key": "county",
+															"value": "<string>",
+															"description": "District Or County Name"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/zipCodes?query=<string>&city=<string>&county=<string>&state=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"zipCodes"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) zipCode"
+														},
+														{
+															"key": "city",
+															"value": "<string>",
+															"description": "City Name"
+														},
+														{
+															"key": "county",
+															"value": "<string>",
+															"description": "District Or County Name"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/zipCodes?query=<string>&city=<string>&county=<string>&state=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"zipCodes"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) zipCode"
+														},
+														{
+															"key": "city",
+															"value": "<string>",
+															"description": "City Name"
+														},
+														{
+															"key": "county",
+															"value": "<string>",
+															"description": "District Or County Name"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/zipCodes?query=<string>&city=<string>&county=<string>&state=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"zipCodes"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) zipCode"
+														},
+														{
+															"key": "city",
+															"value": "<string>",
+															"description": "City Name"
+														},
+														{
+															"key": "county",
+															"value": "<string>",
+															"description": "District Or County Name"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Service Unavailable",
+											"code": 503,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										}
+									]
+								},
+								{
+									"name": "Get Data By County Query",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "(Required) Unique RequestId",
+												"key": "X-COREOS-REQUEST-ID",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) Tenant id",
+												"key": "X-COREOS-TID",
+												"value": "<string>"
+											},
+											{
+												"description": "core-os user info token",
+												"key": "X-COREOS-USERINFO",
+												"value": "<string>"
+											},
+											{
+												"description": "(Required) core-os access token",
+												"key": "X-COREOS-ACCESS",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/search/counties?query=<string>",
+											"host": [
+												"{{baseURI}}"
+											],
+											"path": [
+												"core",
+												"api",
+												"v1",
+												"locations",
+												"countries",
+												"{{countryCode}}",
+												"search",
+												"counties"
+											],
+											"query": [
+												{
+													"key": "query",
+													"value": "<string>",
+													"description": "(Required) query to search for county with minimum 2 character"
+												},
+												{
+													"key": "state",
+													"value": "<string>",
+													"description": "State Name",
+													"disabled": true
+												},
+												{
+													"key": "limit",
+													"value": "<integer>",
+													"description": "Number of items to return by default 20. Value should be between 1 to 50.",
+													"disabled": true
+												}
+											]
+										},
+										"description": "Search the Data By County Search results are restricted by pagination. Max limit is 50."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/counties?query=<string>&state=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"counties"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) query to search for county with minimum 2 character"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"data\": {\n    \"meta\": {\n      \"totalCount\": \"<number>\"\n    },\n    \"data\": [\n      {\n        \"county\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      {\n        \"county\": \"<string>\",\n        \"state\": \"<string>\"\n      }\n    ]\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/counties?query=<string>&state=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"counties"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) query to search for county with minimum 2 character"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/counties?query=<string>&state=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"counties"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) query to search for county with minimum 2 character"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/counties?query=<string>&state=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"counties"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) query to search for county with minimum 2 character"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/counties?query=<string>&state=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"counties"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) query to search for county with minimum 2 character"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										},
+										{
+											"name": "Error Occurred",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"description": "(Required) Unique RequestId",
+														"key": "X-COREOS-REQUEST-ID",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) Tenant id",
+														"key": "X-COREOS-TID",
+														"value": "<string>"
+													},
+													{
+														"description": "core-os user info token",
+														"key": "X-COREOS-USERINFO",
+														"value": "<string>"
+													},
+													{
+														"description": "(Required) core-os access token",
+														"key": "X-COREOS-ACCESS",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/countries/:countryCode/search/counties?query=<string>&state=<string>&limit=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"countries",
+														":countryCode",
+														"search",
+														"counties"
+													],
+													"query": [
+														{
+															"key": "query",
+															"value": "<string>",
+															"description": "(Required) query to search for county with minimum 2 character"
+														},
+														{
+															"key": "state",
+															"value": "<string>",
+															"description": "State Name"
+														},
+														{
+															"key": "limit",
+															"value": "<integer>",
+															"description": "Number of items to return by default 20. Value should be between 1 to 50."
+														}
+													],
+													"variable": [
+														{
+															"key": "countryCode"
+														}
+													]
+												}
+											},
+											"status": "Service Unavailable",
+											"code": 503,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "X-COREOS-REQUEST-ID",
+													"value": "<string>",
+													"description": {
+														"content": "Unique request id that was passed as header parameter in the request.",
+														"type": "text/plain"
+													}
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
+										}
+									]
+								}
+							]
+						},
+						{
 							"name": "Location Config",
 							"item": [
 								{
