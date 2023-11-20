@@ -1,10 +1,11 @@
 {
 	"info": {
-		"_postman_id": "dfb45d04-0f34-4465-8f64-e887e8439dec",
+		"_postman_id": "275ff3e8-a908-42f0-acdd-765b9d605a6e",
 		"name": "OS1 Postman Collection v2.3.0",
+		"description": "# Postman Troubleshooting Guide\n\n## Resolving Unresolved Variables\n\nIf you have variables in your Postman requests that are showing as unresolved, follow these steps:\n\n1. Make sure the variable is defined in the OS1 APIs environment.\n2. Check that the variable name matches exactly, including case, to where it is used.\n3. Verify the variable is not overwritten or masked by a variable of the same name in a higher scope.\n4. Try referencing the variable in other places to test if it is defined properly.\n5. Re-create the variable if needed to resolve the issue.\n    \n\n## Incorrect BaseURLs\n\nIf requests are failing due to incorrect BaseUrls:\n\n1. Double check that the current environment selected matches the API you are trying to hit.\n2. Edit the BaseUrl value in the environment and replace it with the correct API endpoint base path.\n3. Resend the request using the updated environment.\n4. Update the BaseUrl inside at the environment level if neccessary.\n    \n\n## Populating the OS1 Environment File\n\nTo populate the OS1 environment file with variables for API calls:\n\n1. Set the **OS1 APIs** environment as active.\n2. Define variables specific to the OS1 API like username, password, client ID, etc.\n3. Add the {{BaseUrl}} variable with the OS1 API endpoint.\n4. Use {{variables}} in the URLs and headers of OS1 requests.\n5. Refer to the Postman documentation for more tips on effectively using variables.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25995643",
-		"_collection_link": "https://dark-satellite-592830.postman.co/workspace/877911b8-d08d-49e8-88ab-901b2b383645/collection/25995643-dfb45d04-0f34-4465-8f64-e887e8439dec?action=share&source=collection_link&creator=25995643"
+		"_collection_link": "https://dark-satellite-592830.postman.co/workspace/877911b8-d08d-49e8-88ab-901b2b383645/collection/25995643-275ff3e8-a908-42f0-acdd-765b9d605a6e?action=share&source=collection_link&creator=25995643"
 	},
 	"item": [
 		{
@@ -53,9 +54,9 @@
 									"raw": "{\n  \"clientId\":\"{{client_id}}\",\n    \"clientSecret\":\"{{client_secret}}\",\n  \"audience\": \"platform:app:coreos\"\n}"
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/aaa/auth/client-credentials",
+									"raw": "{{baseUrl}}/core/api/v1/aaa/auth/client-credentials",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -78,7 +79,7 @@
 							"name": "Groups",
 							"item": [
 								{
-									"name": "Create group of users and roles",
+									"name": "Create a Group of Users and Roles",
 									"event": [
 										{
 											"listen": "test",
@@ -2371,9 +2372,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatch-types",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatch-types",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -2413,9 +2414,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatch-types",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatch-types",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -2467,9 +2468,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatch-types/{{dispatchTypeId}}",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatch-types/{{dispatchTypeId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -2535,9 +2536,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatch-types/{{dispatchTypeId}}/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatch-types/{{dispatchTypeId}}/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -2589,9 +2590,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatch-types/{{dispatchTypeId}}/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatch-types/{{dispatchTypeId}}/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -2674,9 +2675,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -2745,9 +2746,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -2814,9 +2815,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -2883,9 +2884,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -2952,9 +2953,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/status",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/status",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3022,9 +3023,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/sub-status",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/sub-status",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3092,9 +3093,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/jobs",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/jobs",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3162,9 +3163,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/multiple-jobs",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/multiple-jobs",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3232,9 +3233,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/jobs/{{jobId}}",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/jobs/{{jobId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3303,9 +3304,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/multiple-jobs",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/multiple-jobs",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3373,9 +3374,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/participants",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/participants",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3443,9 +3444,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/multiple-participants",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/multiple-participants",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3513,9 +3514,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/participants/{{participantIdForDispatch}}",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/dispatches/{{dispatchId}}/participants/{{participantIdForDispatch}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3586,9 +3587,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-types",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/job-types",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3651,9 +3652,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-types",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/job-types",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3716,9 +3717,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-types/{{jobTypeId}}",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/job-types/{{jobTypeId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3787,9 +3788,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-types/{{jobTypeId}}/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/job-types/{{jobTypeId}}/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3852,9 +3853,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-types/{{jobTypeId}}/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/job-types/{{jobTypeId}}/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3925,9 +3926,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/jobs/",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/jobs/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -3988,9 +3989,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/jobs/",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/jobs/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4054,9 +4055,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/jobs/{{jobId}}",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/jobs/{{jobId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4117,9 +4118,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/jobs/{{jobId}}/status",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/jobs/{{jobId}}/status",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4181,9 +4182,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/jobs/{{jobId}}/sub-status",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/jobs/{{jobId}}/sub-status",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4253,9 +4254,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-workflows",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/job-workflows",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4318,9 +4319,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/job-workflows/{{jobWorkflowId}}",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/job-workflows/{{jobWorkflowId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4375,9 +4376,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/ledgers/custody-in",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/ledgers/custody-in",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4427,9 +4428,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/ledgers/custody-out",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/ledgers/custody-out",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4479,9 +4480,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/ledgers/custody-in/batch",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/ledgers/custody-in/batch",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4532,9 +4533,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/ledgers/custody-out/batch",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/ledgers/custody-out/batch",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4604,9 +4605,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/workflows/{{workflowInstanceIdForDispatch}}",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/workflows/{{workflowInstanceIdForDispatch}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4670,9 +4671,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/dispatch-service/workflows/{{workflowInstanceIdForDispatch}}/tasks/{{taskIdForDispatch}}",
+											"raw": "{{baseUrl}}/core/api/v2/dispatch-service/workflows/{{workflowInstanceIdForDispatch}}/tasks/{{taskIdForDispatch}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4761,9 +4762,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4817,9 +4818,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4874,9 +4875,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -4917,9 +4918,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5015,9 +5016,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5072,9 +5073,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5143,9 +5144,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/state-machine",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/state-machine",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5188,9 +5189,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/state-machine",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/state-machine",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5242,9 +5243,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/config/state-machine/entities/{{entityCode}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/config/state-machine/entities/{{entityCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5310,9 +5311,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/config/state-machine/events",
+											"raw": "{{baseUrl}}/core/api/v2/participants/config/state-machine/events",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5363,9 +5364,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/config/state-machine/events/{{eventCode}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/config/state-machine/events/{{eventCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5408,9 +5409,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/config/state-machine/events/{{eventCode}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/config/state-machine/events/{{eventCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5453,9 +5454,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/config/state-machine/events",
+											"raw": "{{baseUrl}}/core/api/v2/participants/config/state-machine/events",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5509,9 +5510,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/config/state-machine/events/orphan",
+											"raw": "{{baseUrl}}/core/api/v2/participants/config/state-machine/events/orphan",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5577,9 +5578,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/config/state-machine/reasons",
+											"raw": "{{baseUrl}}/core/api/v2/participants/config/state-machine/reasons",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5630,9 +5631,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/config/state-machine/reasons/{{reasonCode}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/config/state-machine/reasons/{{reasonCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5675,9 +5676,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/config/state-machine/reasons/{{reasonCode}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/config/state-machine/reasons/{{reasonCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5720,9 +5721,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/config/state-machine/reasons",
+											"raw": "{{baseUrl}}/core/api/v2/participants/config/state-machine/reasons",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5764,9 +5765,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/config/state-machine/reason/orphan",
+											"raw": "{{baseUrl}}/core/api/v2/participants/config/state-machine/reason/orphan",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5847,9 +5848,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/{{participantTypePluralName}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/{{participantTypePluralName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5908,9 +5909,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/{{participantsTypePluralName}}/{{participantId}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/{{participantsTypePluralName}}/{{participantId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5951,9 +5952,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/{{participantTypePluralName}}/{{participantId}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/{{participantTypePluralName}}/{{participantId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -5994,9 +5995,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/{{participantTypePluralName}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/{{participantTypePluralName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6068,9 +6069,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/{{participantTypePluralName}}/{{participantId}}/state",
+											"raw": "{{baseUrl}}/core/api/v2/participants/{{participantTypePluralName}}/{{participantId}}/state",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6121,9 +6122,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/{{participantTypePluralName}}/{{participantId}}/state/event",
+											"raw": "{{baseUrl}}/core/api/v2/participants/{{participantTypePluralName}}/{{participantId}}/state/event",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6199,9 +6200,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/categories/{{categoryName}}/templates",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/categories/{{categoryName}}/templates",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6259,9 +6260,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/categories/{{categoryName}}/templates/{{templateId}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/categories/{{categoryName}}/templates/{{templateId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6306,9 +6307,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/categories/{{categoryName}}/templates/{{templateId}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/categories/{{categoryName}}/templates/{{templateId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6365,9 +6366,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/categories/{{categoryName}}/templates",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/categories/{{categoryName}}/templates",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6425,9 +6426,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/categories/{{categoryName}}/sub-categories/{{{subCategoryName}}}/templates",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/categories/{{categoryName}}/sub-categories/{{{subCategoryName}}}/templates",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6478,9 +6479,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/categories/{{categoryName}}/sub-categories/{{subCategoryName}}/templates",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/categories/{{categoryName}}/sub-categories/{{subCategoryName}}/templates",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6564,9 +6565,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/{{participantTypePluralName}}/batch",
+											"raw": "{{baseUrl}}/core/api/v2/participants/{{participantTypePluralName}}/batch",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6607,9 +6608,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/{{participantTypePluralName}}/batch/status?batchId={{JsonBatchId}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/{{participantTypePluralName}}/batch/status?batchId={{JsonBatchId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6676,9 +6677,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/{{participantTypePluralName}}/batch",
+											"raw": "{{baseUrl}}/core/api/v2/participants/{{participantTypePluralName}}/batch",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6766,9 +6767,9 @@
 											]
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/{{participantTypePluralName}}/upload",
+											"raw": "{{baseUrl}}/core/api/v2/participants/{{participantTypePluralName}}/upload",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6835,9 +6836,9 @@
 											]
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/{{participantTypePluralName}}/upload",
+											"raw": "{{baseUrl}}/core/api/v2/participants/{{participantTypePluralName}}/upload",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6885,9 +6886,9 @@
 											"formdata": []
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/{{participantTypePluralName}}/upload/status?batchId={{FileBatchId}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/{{participantTypePluralName}}/upload/status?batchId={{FileBatchId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6944,9 +6945,9 @@
 											"raw": "{\n    \"url\": \"{{$randomUrl}}\",\n    \"requestBody\": {},\n    \"requestHeader\": {\n        \"X-COREOS-ACCESS\": \"{{token}}\",\n        \"X-COREOS-REQUEST-ID\": \"{{request_id}}\",\n        \"X-COREOS-TID\": \"{{tenant_id}}\",\n        \"X-COREOS-USERINFO\": {\n            \"id\": \"{{$randomWord}}\",\n            \"name\": \"{{$randomWord}}\"\n        }\n    },\n    \"method\": \"GET\",\n    \"wait\": true,\n    \"methodName\": \"apply_event:onRequest\"\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/handlers",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/handlers",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -6993,9 +6994,9 @@
 											"raw": "{\n    \"url\": \"{{$randomUrl}}\",\n    \"requestHeader\": {\n        \"X-COREOS-ACCESS\": \"{{token}}\",\n        \"X-COREOS-REQUEST-ID\": \"{{request_id}}\",\n        \"X-COREOS-TID\": \"{{tenant_id}}\",\n        \"X-COREOS-USERINFO\": {\n            \"id\": \"{{$randomWord}}\",\n            \"name\": \"{{$randomWord}}\"\n        }\n    },\n    \"method\": \"GET\",\n    \"wait\": true,\n    \"acceptableStatusCodes\": [\n        0\n    ],\n    \"raiseErrorOnStatusMismatch\": true,\n    \"enabled\": true\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/handlers/{{customCodeId}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/handlers/{{customCodeId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7039,9 +7040,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/handlers/{{customCodeId}}",
+											"raw": "{{baseUrl}}/core/api/v2/participants/participant-types/{{participantTypePluralName}}/config/handlers/{{customCodeId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7120,9 +7121,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/tenants",
+											"raw": "{{baseUrl}}/core/api/v2/participants/tenants",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7222,9 +7223,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/tenants/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v2/participants/tenants/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7266,9 +7267,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/participants/tenants/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v2/participants/tenants/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7358,9 +7359,9 @@
 											"raw": "{\n  \"name\": {\n    \"plural\": \"vehicles\",\n    \"singular\": \"vehicle\"\n  },\n  \"category\": [\n    {\n      \"name\": \"vehicle\",\n      \"description\": \"string\",\n      \"subCategory\": [\n        \"string\"\n      ]\n    }\n  ],\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"isReadPublic\": false,\n      \"tag\": [\n        \"string\"\n      ],\n      \"dataType\": \"string\",\n      \"indexed\": false,\n      \"defaultValue\": 0,\n      \"validation\": {\n        \"range\": {\n          \"min\": 0,\n          \"max\": 0\n        },\n        \"regex\": \"string\",\n        \"valueOneOf\": [\n          0,\n          \"string\",\n          [\n            \"string\"\n          ],\n          true,\n          {}\n        ],\n        \"required\": false\n      }\n    }\n  ],\n  \"callback\": {\n    \"url\": \"string\",\n    \"meta\": {\n      \"additionalProp1\": {}\n    }\n  },\n  \"isStateMachineEnabled\": false,\n  \"events\": [\n    \"string\"\n  ],\n  \"entityCode\": \"string\"\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/entity-type/",
+											"raw": "{{baseUrl}}/core/api/v2/entity/entity-type/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7426,9 +7427,9 @@
 											"raw": "{\n    \"category\": [\n        {\n            \"name\": {{entity_type_category_name}},\n            \"description\": {{$randomLoremSentence}},\n            \"subCategory\": [\n                {{entity_type_sub_category_name}}\n            ]\n        }\n    ],\n    \"attributes\": [\n        {\n            \"name\": {{$randomNoun}},\n            \"dataType\": \"string\",\n            \"indexed\": false,\n            \"validation\": {\n                \"regex\": \"^[a-z]+$\",\n                \"required\": true\n            }\n        }\n    ],\n    \"events\": [\n        {{eventCode}}\n    ],\n    \"callback\": {\n        \"url\": \"{{callback_url}}\",\n        \"meta\": {}\n    }\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}",
+											"raw": "{{baseUrl}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7486,9 +7487,9 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}",
+											"raw": "{{baseUrl}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7546,9 +7547,9 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/entity-type",
+											"raw": "{{baseUrl}}/core/api/v2/entity/entity-type",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7629,9 +7630,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/config/state-machine",
+											"raw": "{{baseUrl}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/config/state-machine",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7693,9 +7694,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/config/state-machine",
+											"raw": "{{baseUrl}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/config/state-machine",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7755,9 +7756,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/config/state-machine",
+											"raw": "{{baseUrl}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/config/state-machine",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7840,9 +7841,9 @@
 											"raw": "{\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"tag\": [\n        \"string\"\n      ],\n      \"dataType\": \"string\",\n      \"indexed\": false,\n      \"defaultValue\": 0,\n      \"validation\": {\n        \"range\": {\n          \"min\": 0,\n          \"max\": 0\n        },\n        \"regex\": \"string\",\n        \"valueOneOf\": [\n          0,\n          \"string\",\n          [\n            \"string\"\n          ],\n          true,\n          {}\n        ],\n        \"required\": false\n      }\n    }\n  ],\n  \"callback\": {\n    \"url\": \"string\",\n    \"meta\": {\n      \"additionalProp1\": {}\n    }\n  }\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/categories/{{categoryName}}/templates",
+											"raw": "{{baseUrl}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/categories/{{categoryName}}/templates",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7921,9 +7922,9 @@
 											"raw": "{\n    \"attributes\": [ {\n                        \"name\": {{$randomNoun}},\n                        \"description\": {{$randomLoremSentence}},\n                        \"dataType\": \"number\",\n                        \"indexed\": true,\n                        \"defaultValue\": 2,\n                        \"validation\": {\n                            \"required\": false\n                        }\n                    }],\n    \"callback\": {\n        \"url\": \"{{callback_url}}\",\n        \"meta\": {}\n    }\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/categories/{{entityTypeCategoryName}}/templates/{{entityTemplateId}}",
+											"raw": "{{baseUrl}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/categories/{{entityTypeCategoryName}}/templates/{{entityTemplateId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -7980,9 +7981,9 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/categories/{{entityTypeCategoryName}}/templates/{{entityTemplateId}}",
+											"raw": "{{baseUrl}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/categories/{{entityTypeCategoryName}}/templates/{{entityTemplateId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8039,9 +8040,9 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/categories/{{entityTypeCategoryName}}/templates",
+											"raw": "{{baseUrl}}/core/api/v2/entity/entity-type/{{entityTypePluralName}}/categories/{{entityTypeCategoryName}}/templates",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8145,9 +8146,9 @@
 											"raw": "{\n  \"uniqueCode\": \"string\",\n  \"name\": \"string\",\n  \"owner\": \"string\",\n  \"category\": \"string\",\n  \"subCategory\": \"string\",\n  \"properties\": {},\n  \"templateId\": \"string\",\n  \"state\": \"string\",\n  \"callback\": {\n    \"url\": \"string\",\n    \"meta\": {\n      \"additionalProp1\": {}\n    }\n  },\n  \"onRequest\": {\n    \"url\": \"string\",\n    \"requestHeader\": {},\n    \"requestBody\": {},\n    \"method\": \"POST\",\n    \"onResponse\": {\n      \"wait\": true,\n      \"acceptableStatusCodes\": [\n        0\n      ],\n      \"raiseErrorOnStatusMismatch\": true\n    }\n  },\n  \"onError\": {\n    \"url\": \"string\",\n    \"requestHeader\": {},\n    \"requestBody\": {},\n    \"method\": \"POST\",\n    \"onResponse\": {\n      \"wait\": true,\n      \"acceptableStatusCodes\": [\n        0\n      ],\n      \"raiseErrorOnStatusMismatch\": true\n    }\n  }\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}/",
+											"raw": "{{baseUrl}}/core/api/v2/entity/{{entityTypePluralName}}/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8212,9 +8213,9 @@
 											"raw": "{\n    \"properties\": {\n        \"color\": {{$randomColor}}\n    },\n    \"callback\": {\n        \"url\": \"{{callback_url}}\",\n        \"meta\": {}\n    }\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}/{{entityInstanceId}}",
+											"raw": "{{baseUrl}}/core/api/v2/entity/{{entityTypePluralName}}/{{entityInstanceId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8267,9 +8268,9 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}/{{entityInstanceId}}",
+											"raw": "{{baseUrl}}/core/api/v2/entity/{{entityTypePluralName}}/{{entityInstanceId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8322,9 +8323,9 @@
 											"raw": "{\n        \"id\": \"vehiclestest124:5b1a2e34-51da-527a-aad5-b886f2cde88d\",\n        \"uniqueCode\": \"code2\",\n        \"name\": \"vehicle dwh test\",\n        \"entityId\": \"entity:da330646-6193-5753-a38b-d5d6e91f52ea\",\n        \"entityName\": \"vehiclestest124\",\n        \"owner\": \"delhivery\",\n        \"tenantId\": \"tenant1\",\n        \"appId\": \"testappm\",\n        \"category\": \"four\",\n        \"subCategory\": \"truck\",\n        \"templateId\": null,\n        \"properties\": {\n            \"state\": 4\n        },\n        \"callback\": \"https://callback.com\",\n        \"isActive\": true,\n        \"state\": null,\n        \"createdAt\": 1645423507945,\n        \"createdBy\": {\n            \"id\": \"testid\",\n            \"name\": \"test\"\n        },\n        \"updatedAt\": 1645423507945,\n        \"updatedBy\": {\n            \"id\": \"testid\",\n            \"name\": \"test\"\n        }\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}",
+											"raw": "{{baseUrl}}/core/api/v2/entity/{{entityTypePluralName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8424,9 +8425,9 @@
 											"raw": "{\n    \"payload\": [\n        {\n            \"uniqueCode\": \"162\",\n            \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        },\n        {\n            \"uniqueCode\": \"158\",\n            \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        },\n        {\n            \"uniqueCode\": \"102\",\n            \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            },\n            \"templateId\": \"template:c776bc4c-eb72-51b7-bcf2-d550986b7e1f\"\n        },\n        {\n            \"uniqueCode\": \"103\",\n            \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        },\n        {\n            \"uniqueCode\": \"104\",\n           \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        },\n        {\n            \"uniqueCode\": \"105\",\n            \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        },\n        {\n            \"uniqueCode\": \"106\",\n            \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        },\n        {\n            \"uniqueCode\": \"107\",\n            \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        },\n        {\n            \"uniqueCode\": \"108\",\n           \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        },\n        {\n            \"uniqueCode\": \"109\",\n            \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        },\n        {\n            \"uniqueCode\": \"110\",\n            \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        },\n        {\n            \"uniqueCode\": \"112\",\n            \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        },\n        {\n            \"uniqueCode\": \"113\",\n            \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        },\n        {\n            \"uniqueCode\": \"114\",\n            \"name\": {{$randomFullName}},\n            \"owner\": {{$randomFirstName}},\n            \"category\": {{$randomNoun}},\n            \"subCategory\": \"truck\",\n            \"properties\": {\n                \"mode\": \"4\"\n            }\n        }\n    ],\n    \"callback\": {\n        \"url\": \"{{callback_url}}\",\n        \"meta\": {}\n    }\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}/batch",
+											"raw": "{{baseUrl}}/core/api/v2/entity/{{entityTypePluralName}}/batch",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8496,9 +8497,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}/batch",
+											"raw": "{{baseUrl}}/core/api/v2/entity/{{entityTypePluralName}}/batch",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8544,9 +8545,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}/batch/status?batchId={{entityBatchID}}",
+											"raw": "{{baseUrl}}/core/api/v2/entity/{{entityTypePluralName}}/batch/status?batchId={{entityBatchID}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8629,9 +8630,9 @@
 											]
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}/upload",
+											"raw": "{{baseUrl}}/core/api/v2/entity/{{entityTypePluralName}}/upload",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8707,9 +8708,9 @@
 											]
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}/upload",
+											"raw": "{{baseUrl}}/core/api/v2/entity/{{entityTypePluralName}}/upload",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8765,9 +8766,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/{{entityTypePluralName}}/upload/status?batchId={{batch_id}}",
+											"raw": "{{baseUrl}}/core/api/v2/entity/{{entityTypePluralName}}/upload/status?batchId={{batch_id}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8839,9 +8840,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/{{entityTypePluralName}}/{{entityInstanceId}}/event",
+											"raw": "{{baseUrl}}/core/api/v2/entity/apps/{{app_id}}/{{entityTypePluralName}}/{{entityInstanceId}}/event",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8897,9 +8898,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/{{entityTypePluralName}}/{{entityInstanceId}}/state",
+											"raw": "{{baseUrl}}/core/api/v2/entity/apps/{{app_id}}/{{entityTypePluralName}}/{{entityInstanceId}}/state",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -8976,9 +8977,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/entity-type/{{entityTypePluralName}}/config/handlers/",
+											"raw": "{{baseUrl}}/core/api/v2/entity/apps/{{app_id}}/entity-type/{{entityTypePluralName}}/config/handlers/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9038,9 +9039,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/entity-type/{{entityTypePluralName}}/config/handlers/{{customCodeId}}",
+											"raw": "{{baseUrl}}/core/api/v2/entity/apps/{{app_id}}/entity-type/{{entityTypePluralName}}/config/handlers/{{customCodeId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9103,9 +9104,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/entity/apps/{{app_id}}/entity-type/{{entityTypePluralName}}/config/handlers/{{customCodeId}}",
+											"raw": "{{baseUrl}}/core/api/v2/entity/apps/{{app_id}}/entity-type/{{entityTypePluralName}}/config/handlers/{{customCodeId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9175,9 +9176,9 @@
 											"raw": "{\n    \"name\": \"{{container_type_plural_name}}\",\n    \"isLeaf\": true,\n    \"callback\": {\n        \"url\": \"{{callback_url}}\",\n        \"meta\": {\n            \"string\":\"string\"\n        }\n    }\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/container-types",
+											"raw": "{{baseUrl}}/core/api/v2/containers/container-types",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9227,9 +9228,9 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/container-types",
+											"raw": "{{baseUrl}}/core/api/v2/containers/container-types",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9281,9 +9282,9 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/container-types/{{container_type_plural_name}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/container-types/{{container_type_plural_name}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9370,9 +9371,9 @@
 											"raw": "{\n  \"allowedParent\": {\n      \"oneOf\": [\n          \"box\"\n        ],\n       \"not\": [\n            \"largeBox\"\n        ]\n  },\n  \"callback\": {\n    \"url\": \"{{callback_url}}\"\n  }\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/container-types/{{container_type_plural_name}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/container-types/{{container_type_plural_name}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9437,9 +9438,9 @@
 											"raw": "{\n    \"attributes\": [\n        {\n            \"name\": \"weight\",\n            \"dataType\": \"number\",\n            \"description\": \"weight\",\n            \"indexed\": true,\n            \"defaultValue\": 30,\n            \"validation\": {\n                \"required\": true\n            }\n        }\n    ]\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/container-types/{{container_type_plural_name}}/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v2/containers/container-types/{{container_type_plural_name}}/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9492,9 +9493,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/container-types/{{container_type_plural_name}}/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v2/containers/container-types/{{container_type_plural_name}}/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9542,9 +9543,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/container-types/{{container_type_plural_name}}/config/state-machine",
+											"raw": "{{baseUrl}}/core/api/v2/containers/container-types/{{container_type_plural_name}}/config/state-machine",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9596,9 +9597,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/container-types/{{container_type_plural_name}}/config/state-machine",
+											"raw": "{{baseUrl}}/core/api/v2/containers/container-types/{{container_type_plural_name}}/config/state-machine",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9650,9 +9651,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/config/state-machine/entities/{{entityCode}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/config/state-machine/entities/{{entityCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9695,9 +9696,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/config/state-machine/events/",
+											"raw": "{{baseUrl}}/core/api/v2/containers/config/state-machine/events/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9744,9 +9745,9 @@
 											"raw": "{\n    \"description\": \"string\",\n    \"eventType\": \"TRANSITIONAL\",\n    \"containerTypeNames\": [\n        {{container_type_plural_name}}\n    ],\n    \"isEnabled\": true,\n    \"dataValidations\": [\n        {\n            \"name\": \"Validation\",\n            \"description\": \"string\",\n            \"type\": \"number\",\n            \"validation\": {\n                \"range\": {\n                    \"min\": 1,\n                    \"max\": 5\n                },\n                \"required\": false,\n                \"blocking\": true\n            }\n        }\n    ]\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/config/state-machine/events",
+											"raw": "{{baseUrl}}/core/api/v2/containers/config/state-machine/events",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9792,9 +9793,9 @@
 											"raw": "{\n    \"description\": \"string\",\n    \"eventType\": \"TRANSITIONAL\",\n    \"reasonCodes\": [\n        \"R-nnnn\"\n    ],\n    \"containerTypeNames\": [\n        \"string\"\n    ],\n    \"isEnabled\": true,\n    \"dataValidations\": [\n        {\n            \"name\": \"string\",\n            \"type\": \"string\",\n            \"validation\": {\n                \"range\": {\n                    \"min\": 0,\n                    \"max\": 0\n                },\n                \"regex\": \"string\",\n                \"valueOneOf\": [\n                  \"string\"\n                ],\n                \"required\": false,\n                \"blocking\": true\n            }\n        }\n    ]\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/config/state-machine/events/{{eventCode}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/config/state-machine/events/{{eventCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9837,9 +9838,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/config/state-machine/events/{{eventCode}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/config/state-machine/events/{{eventCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9886,9 +9887,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/config/state-machine/events/orphan",
+											"raw": "{{baseUrl}}/core/api/v2/containers/config/state-machine/events/orphan",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9949,9 +9950,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/config/state-machine/reasons",
+											"raw": "{{baseUrl}}/core/api/v2/containers/config/state-machine/reasons",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -9998,9 +9999,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/config/state-machine/reasons",
+											"raw": "{{baseUrl}}/core/api/v2/containers/config/state-machine/reasons",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10074,9 +10075,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/config/state-machine/reason/{{reasonCode}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/config/state-machine/reason/{{reasonCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10124,9 +10125,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/config/state-machine/reasons/{{reasonCode}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/config/state-machine/reasons/{{reasonCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10194,9 +10195,9 @@
 											"raw": "{\n    \"trackingDetails\": [\n        {\n            \"operator\": \"flipkartdummy\",\n            \"trackingId\": \"8578947589457\",\n            \"isPrimary\": false\n        },\n        {\n            \"operator\": \"amazon\",\n            \"trackingId\": \"284747834\",\n            \"isPrimary\": false\n        }\n    ],\n    \"attributes\": {\n        \"weight\": 30\n    },\n    \"isHazmat\": false,\n    \"isContainerizable\": true,\n    \"isReusable\": true\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{container_type_plural_name}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10248,9 +10249,9 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{containeinstanceId}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{containeinstanceId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10302,9 +10303,9 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/filter?select={{container_select}}&limit={{container_limit}}&offset={{container_offset}}&query={{container_query}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{container_type_plural_name}}/filter?select={{container_select}}&limit={{container_limit}}&offset={{container_offset}}&query={{container_query}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10377,9 +10378,9 @@
 											"raw": "{\n    \"trackingDetails\": [\n        {\n            \"operator\": \"temp\",\n            \"trackingId\": \"111111111111\",\n            \"isPrimary\": false\n        }\n    ],\n    \"items\": [\n        {\n            \"name\": \"pant///p/shirt\",\n            \"code\": \"string\",\n            \"cost\": {\n                \"unit\": {\n                    \"amount\": 0,\n                    \"currency\": \"INR\"\n                },\n                \"total\": {\n                    \"amount\": 0,\n                    \"currency\": \"INR\"\n                }\n            },\n            \"quantity\": {\n                \"value\": 0,\n                \"unit\": \"cm\"\n            }\n        }\n    ],\n    \"isHazmat\": false,\n    \"isContainerizable\": true,\n    \"isReusable\": false\n\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{containeinstanceId}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{containeinstanceId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10431,9 +10432,9 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/tracking/{{tracking_id}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/tracking/{{tracking_id}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10488,9 +10489,9 @@
 											"raw": "{\n  \"parentId\": {{containeinstanceParantId}},\n  \"callback\": {{callback_url}},\n  \"action\": \"CONTAINERIZE\"\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{containeinstanceId}}/child",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{containeinstanceId}}/child",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10555,9 +10556,9 @@
 											"raw": "{\n  \"parentId\": \"box:9c9b1138-7cdd-11eb-9439-0242ac130002\",\n  \"childContainerType\": \"box\",\n  \"childIds\": [\n   {{containerInstanceIds}}\n  ],\n  \"subState\": \"closed\",\n  \"action\": \"CONTAINERIZE\",\n \"callback\": {{callbackMeta}}\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/shubhangthree/containerise",
+											"raw": "{{baseUrl}}/core/api/v2/containers/shubhangthree/containerise",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10603,9 +10604,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{containeinstanceId}}/state",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{containeinstanceId}}/state",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10660,9 +10661,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{containeinstanceId}}/state/event",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{containeinstanceId}}/state/event",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10728,9 +10729,9 @@
 											"raw": "{\n    \"payload\": [\n        {\n            \"refID\": \"123\",\n            \"trackingDetails\": [\n                {\n                    \"operator\": \"amazon\",\n                    \"trackingId\": \"132121232423232\",\n                    \"isPrimary\": false\n                }\n            ],\n            \"attributes\": {\n                \"weight\": 30\n            }\n        },\n        {\n            \"refID\": \"456\",\n            \"trackingDetails\": [\n                {\n                    \"operator\": \"myntra\",\n                    \"trackingId\": \"99\",\n                    \"isPrimary\": false\n                }\n            ],\n            \"attributes\": {\n                \"weight\": 30\n            }\n        }\n    ]\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/batch",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{container_type_plural_name}}/batch",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10790,9 +10791,9 @@
 											"raw": "{\n    \"payload\": [\n        {\n            \"containerId\": {{containeinstanceId}},\n            \"data\": {\n                \"trackingDetails\": [\n                    {\n                        \"operator\": \"mumbai\",\n                        \"trackingId\": \"1321212324232327\",\n                        \"isPrimary\": false\n                    }\n                ],\n                \"attributes\": {\n                },\n                \"isHazmat\": false,\n                \"isContainerizable\": true\n            }\n        }\n    ]\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/batch",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{container_type_plural_name}}/batch",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10838,9 +10839,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/batch/status?batchId={{batch_id}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{container_type_plural_name}}/batch/status?batchId={{batch_id}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10918,9 +10919,9 @@
 											]
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/batch/upload",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{container_type_plural_name}}/batch/upload",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -10976,9 +10977,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/batch/upload/status?batchId={{batch_id}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{container_type_plural_name}}/batch/upload/status?batchId={{batch_id}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11052,9 +11053,9 @@
 											]
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/batch/upload",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{container_type_plural_name}}/batch/upload",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11122,9 +11123,9 @@
 											"raw": "{\n    \"groupId\": \"test\",\n    \"containerIds\": [\n     {{containerInstanceIds}}\n    ],\n    \"containerType\":{{container_type_plural_name}},\n    \"callback\": {{callbackMeta}}\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/container-group/group",
+											"raw": "{{baseUrl}}/core/api/v2/containers/container-group/group",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11170,9 +11171,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containerservice/container-group/group/{{groupId}}",
+											"raw": "{{baseUrl}}/core/api/v2/containerservice/container-group/group/{{groupId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11228,9 +11229,9 @@
 											"raw": "{\n    \"removeAll\":true,\n     \"containerIds\": [\n    {{containerInstanceIds}}\n    ],\n    \"containerType\":{{container_type_plural_name}},\n    \"callback\": {{callbackMeta}}\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containerservice/container-group/group/{{groupId}}",
+											"raw": "{{baseUrl}}/core/api/v2/containerservice/container-group/group/{{groupId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11286,9 +11287,9 @@
 											"raw": "{\n    \"payload\": {\n        \"eventCode\": \"E-025\",\n        \"reasonCode\": \"R-0001\"\n    },\n    \"callback\": {{callbackMeta}}\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/container-group/state/{{groupId}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/container-group/state/{{groupId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11349,9 +11350,9 @@
 											"raw": "{\n    \"payload\": [\n        {\n            \"instanceId\": \"groupingtestsev:32e00363-2caa-57b3-a0d9-998e7a1859bf\",\n            \"attributes\": {\n                \"mynewEntity\":2738\n            }\n        },\n        {\n            \"instanceId\": \"groupingtestsev:729d942f-5d51-5f5f-83a3-4ad6eebd5885\",\n            \"attributes\": {\n                \"mynewEntity\":728\n            }\n        }\n    ],\n    \"callback\": {{callbackMeta}}\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containerservice/container-group/attribute",
+											"raw": "{{baseUrl}}/core/api/v2/containerservice/container-group/attribute",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11425,9 +11426,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/config/handlers/",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{container_type_plural_name}}/config/handlers/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11484,9 +11485,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/config/handlers/{{customCodeId}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{container_type_plural_name}}/config/handlers/{{customCodeId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11546,9 +11547,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v2/containers/{{container_type_plural_name}}/config/handlers/{{customCodeId}}",
+											"raw": "{{baseUrl}}/core/api/v2/containers/{{container_type_plural_name}}/config/handlers/{{customCodeId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11624,9 +11625,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/tasks",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/tasks",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11689,9 +11690,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/tasks/{{taskId}}",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/tasks/{{taskId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11752,9 +11753,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/tasks/{{taskId}}",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/tasks/{{taskId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11815,9 +11816,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/tasks/{{taskId}}/expire",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/tasks/{{taskId}}/expire",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11887,9 +11888,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/macros",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/macros",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -11952,9 +11953,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/macros/{{macroId}}",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/macros/{{macroId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -12015,9 +12016,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/macros/{{macroId}}",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/macros/{{macroId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -12078,9 +12079,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/macros/{{macroId}}/expire",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/macros/{{macroId}}/expire",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -12150,9 +12151,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/workflows",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/workflows",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -12215,9 +12216,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/workflows/{{workflowId}}",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/workflows/{{workflowId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -12278,9 +12279,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/workflows/{{workflowId}}",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/workflows/{{workflowId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -12349,9 +12350,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/workflow-instances",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/workflow-instances",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -12414,9 +12415,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/workflow-instances/{{workflowInstanceId}}",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/workflow-instances/{{workflowInstanceId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -12480,9 +12481,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/workflow-instances/{{workflowInstanceId}}",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/workflow-instances/{{workflowInstanceId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -12546,9 +12547,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/workflow-instances/{{workflowInstanceId}}/task-instances/{{taskId}}",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/workflow-instances/{{workflowInstanceId}}/task-instances/{{taskId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -12619,9 +12620,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/workflow-service/workflow-drafts",
+											"raw": "{{baseUrl}}/core/api/v1/workflow-service/workflow-drafts",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -12708,9 +12709,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/plugins/",
+											"raw": "{{baseUrl}}/core/api/v1/plugins/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -12987,9 +12988,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/plugins/{{pluginId}}",
+											"raw": "{{baseUrl}}/core/api/v1/plugins/{{pluginId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -13318,9 +13319,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/plugins/{{pluginId}}",
+											"raw": "{{baseUrl}}/plugins/{{pluginId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"plugins",
@@ -13641,9 +13642,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/plugins/plugin-workflows",
+											"raw": "{{baseUrl}}/core/api/v1/plugins/plugin-workflows",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -14009,9 +14010,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/plugins/plugin-workflows/{{pluginWorkflowId}}",
+											"raw": "{{baseUrl}}/core/api/v1/plugins/plugin-workflows/{{pluginWorkflowId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -14392,9 +14393,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/plugins/plugin-workflows/{{pluginWorkflowId}}?version=<string>",
+											"raw": "{{baseUrl}}/core/api/v1/plugins/plugin-workflows/{{pluginWorkflowId}}?version=<string>",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -14778,9 +14779,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/rule-engine/rules",
+											"raw": "{{baseUrl}}/core/api/v1/rule-engine/rules",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -15078,9 +15079,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/rule-engine/rules/{{ruleId}}",
+											"raw": "{{baseUrl}}/core/api/v1/rule-engine/rules/{{ruleId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -15379,9 +15380,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/rule-engine/rules/{{ruleId}}",
+											"raw": "{{baseUrl}}/core/api/v1/rule-engine/rules/{{ruleId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -15705,9 +15706,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/rule-engine/rules/events/{{eventName}}",
+											"raw": "{{baseUrl}}/rule-engine/rules/events/{{eventName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"rule-engine",
@@ -16033,9 +16034,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dlqs/search/:domain/:type",
+											"raw": "{{baseUrl}}/core/api/v1/dlqs/search/:domain/:type",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -16610,9 +16611,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dlqs/aggregate/:domain/:type",
+											"raw": "{{baseUrl}}/core/api/v1/dlqs/aggregate/:domain/:type",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17122,9 +17123,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dlqs/index",
+											"raw": "{{baseUrl}}/core/api/v1/dlqs/index",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17183,9 +17184,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dlqs/index/{{domain}}/{{type}}",
+											"raw": "{{baseUrl}}/core/api/v1/dlqs/index/{{domain}}/{{type}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17245,9 +17246,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dlqs/index/{{domain}}/{{type}}",
+											"raw": "{{baseUrl}}/core/api/v1/dlqs/index/{{domain}}/{{type}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17294,9 +17295,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/dlqs/index/{{domain}}/{{type}}",
+											"raw": "{{baseUrl}}/core/api/v1/dlqs/index/{{domain}}/{{type}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17367,9 +17368,9 @@
 											"raw": "{\n  \"name\": {{$randomNoun}},\n  \"defaultURLExpiry\": 3,\n  \"description\": {{$randomLoremSentence}},\n  \"callback\":{{$randomUrl}}\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/file-manager/folders",
+											"raw": "{{baseUrl}}/core/api/v1/file-manager/folders",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17433,9 +17434,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/file-manager/folders/{{folderId}}",
+											"raw": "{{baseUrl}}/core/api/v1/file-manager/folders/{{folderId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17486,9 +17487,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/file-manager/folders/{{folderId}}",
+											"raw": "{{baseUrl}}/core/api/v1/file-manager/folders/{{folderId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17525,9 +17526,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/file-manager/folders?limit={{limit}}&offset={{offset}}",
+											"raw": "{{baseUrl}}/core/api/v1/file-manager/folders?limit={{limit}}&offset={{offset}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17596,9 +17597,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/file-manager/folders/{{folder_name}}/files/id-generator",
+											"raw": "{{baseUrl}}/core/api/v1/file-manager/folders/{{folder_name}}/files/id-generator",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17679,9 +17680,9 @@
 											]
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/file-manager/folders/{{folder_name}}/files",
+											"raw": "{{baseUrl}}/core/api/v1/file-manager/folders/{{folder_name}}/files",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17747,9 +17748,9 @@
 											"raw": "{\n  \"file\": {\n    \"type\": \"FILE\",\n    \"data\": \"base64string\"\n  },\n  \"description\": {{$randomLoremSentence}},\n  \"tags\": [\n    {\n      \"key\": \"key-1\",\n      \"value\": \"file-1\"\n    }\n  ],\n  \"fileName\": {{$randomFileName}}\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/file-manager/folders/{{folder_name}}/files",
+											"raw": "{{baseUrl}}/core/api/v1/file-manager/folders/{{folder_name}}/files",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17826,9 +17827,9 @@
 											]
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/file-manager/folders/{{folder_name}}/files/{{fileId}}",
+											"raw": "{{baseUrl}}/core/api/v1/file-manager/folders/{{folder_name}}/files/{{fileId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17881,9 +17882,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/file-manager/folders/{{folder_name}}/files/{{fileId}}",
+											"raw": "{{baseUrl}}/core/api/v1/file-manager/folders/{{folder_name}}/files/{{fileId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17922,9 +17923,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/file-manager/folders/{{folder_name}}/files?type=FILE&tags=yaml=bbc&limit={{limit}}&offset={{offset}}",
+											"raw": "{{baseUrl}}/core/api/v1/file-manager/folders/{{folder_name}}/files?type=FILE&tags=yaml=bbc&limit={{limit}}&offset={{offset}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -17998,9 +17999,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -18420,9 +18421,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -18838,9 +18839,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -19302,9 +19303,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/states",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}/states",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -19757,9 +19758,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/states",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}/states",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -20325,9 +20326,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/states/{{stateCode}}",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}/states/{{stateCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -20801,9 +20802,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/states/{{stateCode}}",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}/states/{{stateCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -21297,9 +21298,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/states/{{stateCode}}/cities",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}/states/{{stateCode}}/cities",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -21865,9 +21866,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/states/{{stateCode}}/cities/{{cityCode}}?limit=<integer>&offset=0",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}/states/{{stateCode}}/cities/{{cityCode}}?limit=<integer>&offset=0",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -22472,9 +22473,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/states/{{countryCode}}/cities/{{cityCode}}",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}/states/{{countryCode}}/cities/{{cityCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -23065,9 +23066,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/states/{{stateCode}}/cities/{{cityCode}}",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}/states/{{stateCode}}/cities/{{cityCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -23588,9 +23589,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/states/{{stateCode}}/cities/{{cityCode}}/zipCode",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}/states/{{stateCode}}/cities/{{cityCode}}/zipCode",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -24209,9 +24210,9 @@
 											]
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/cities/upload",
+											"raw": "{{baseUrl}}/core/api/v1/locations/cities/upload",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -24750,9 +24751,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/cities/upload/{{fileId}}/status",
+											"raw": "{{baseUrl}}/core/api/v1/locations/cities/upload/{{fileId}}/status",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -25214,9 +25215,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/search/cities?query=<string>",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}/search/cities?query=<string>",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -25830,9 +25831,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/search/zipCodes?query=<string>",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}/search/zipCodes?query=<string>",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -26482,9 +26483,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/countries/{{countryCode}}/search/counties?query=<string>",
+											"raw": "{{baseUrl}}/core/api/v1/locations/countries/{{countryCode}}/search/counties?query=<string>",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27081,9 +27082,9 @@
 											"raw": "{\n    \"tags\": {\n        \"name\": {{$randomNoun}},\n        \"landmark\": {{$randomNoun}},\n        \"sector\": {{$randomAlphaNumeric}}\n    },\n    \"address\": {\n        \"buildingNumber\": {{$randomAlphaNumeric}},\n        \"addressLine1\": {{$randomStreetAddress}},\n        \"addressLine2\": {{$randomStreetAddress}},\n        \"addressLine3\": {{$randomStreetAddress}},\n        \"city\": {{$randomCity}},\n        \"state\": {{$randomNoun}},\n        \"country\": {\n            \"code\": {{$randomCountryCode}},\n            \"name\": {{$randomCountry}}\n        },\n        \"zipCode\": 12345\n    },\n    \"geolocation\": {\n        \"lat\": {{$randomLatitude}},\n        \"long\": {{$randomLongitude}}\n    }\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/",
+											"raw": "{{baseUrl}}/core/api/v1/locations/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27123,9 +27124,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/{{locationId}}",
+											"raw": "{{baseUrl}}/core/api/v1/locations/{{locationId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27169,9 +27170,9 @@
 											"raw": "{\n    \"tags\": {\n        \"name\": {{$randomNoun}},\n        \"landmark\": {{$randomNoun}},\n        \"sector\": {{$randomAlphaNumeric}}\n    },\n    \"address\": {\n        \"buildingNumber\": {{$randomAlphaNumeric}},\n        \"addressLine1\": {{$randomStreetAddress}},\n        \"addressLine2\": {{$randomStreetAddress}},\n        \"addressLine3\": {{$randomStreetAddress}},\n        \"city\": {{$randomCity}},\n        \"state\": {{$randomNoun}},\n        \"country\": {\n            \"code\": {{$randomCountryCode}},\n            \"name\": {{$randomCountry}}\n        },\n        \"zipCode\": 1234\n    },\n    \"geolocation\": {\n        \"lat\": {{$randomLatitude}},\n        \"long\": {{$randomLongitude}}\n    }\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/locations/{{locationId}}",
+											"raw": "{{baseUrl}}/core/api/v1/locations/{{locationId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27247,9 +27248,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/sds/apps",
+											"raw": "{{baseUrl}}/core/api/v1/sds/apps",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27300,9 +27301,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/sds/apps/{{appId}}",
+											"raw": "{{baseUrl}}/core/api/v1/sds/apps/{{appId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27357,9 +27358,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/sds/apps/{{appId}}",
+											"raw": "{{baseUrl}}/core/api/v1/sds/apps/{{appId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27414,9 +27415,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/sds/vaults",
+											"raw": "{{baseUrl}}/core/api/v1/sds/vaults",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27465,9 +27466,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/sds/vaults/{{vaultName}}",
+											"raw": "{{baseUrl}}/core/api/v1/sds/vaults/{{vaultName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27508,9 +27509,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/sds/vaults/{{vaultName}}",
+											"raw": "{{baseUrl}}/core/api/v1/sds/vaults/{{vaultName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27579,9 +27580,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/sds/data",
+											"raw": "{{baseUrl}}/core/api/v1/sds/data",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27630,9 +27631,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/sds/data/{{dataId}}",
+											"raw": "{{baseUrl}}/core/api/v1/sds/data/{{dataId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27673,9 +27674,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/sds/data/{{dataId}}",
+											"raw": "{{baseUrl}}/core/api/v1/sds/data/{{dataId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27716,9 +27717,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/sds/data?vaultName={{vaultName}}&id={{dataId}}",
+											"raw": "{{baseUrl}}/core/api/v1/sds/data?vaultName={{vaultName}}&id={{dataId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -27772,9 +27773,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/sds/data/{{dataId}}",
+											"raw": "{{baseUrl}}/core/api/v1/sds/data/{{dataId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -28228,9 +28229,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts/devices/{{deviceId}}/onboard",
+											"raw": "{{baseUrl}}/core/api/v1/mts/devices/{{deviceId}}/onboard",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -28281,9 +28282,9 @@
 											"raw": "[\n    {\n        \"tis\": 1636108615000,\n        \"kafkaArrivalTis\": 1628088415000,\n        \"lat\": 11.456,\n        \"lon\": 72.456,\n        \"seq\": 2,\n        \"id\": [\n            \"dispatch-1\",\n            \"dispatch-2\"\n        ],\n        \"speed\": 0.06\n    },\n    {\n        \"tis\": 1636108616000,\n        \"kafkaArrivalTis\": 1628088425000,\n        \"lat\": 11.456,\n        \"lon\": 72.456,\n        \"seq\": 2,\n        \"accuracy\": 20,\n        \"evt\": {\n            \"name\": \"string\",\n            \"data\": {}\n        },\n        \"id\": [\n            \"dispatch-1\",\n            \"dispatch-2\"\n        ],\n        \"speed\": 0.06\n    }\n]"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts/devices/{{deviceId}}/apps/{{appId}}/trace",
+											"raw": "{{baseUrl}}/core/api/v1/mts/devices/{{deviceId}}/apps/{{appId}}/trace",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -28332,9 +28333,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts/devices/{{deviceId}}/apps/{{appId}}/trace?duration=10h",
+											"raw": "{{baseUrl}}/core/api/v1/mts/devices/{{deviceId}}/apps/{{appId}}/trace?duration=10h",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -28389,9 +28390,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts/devices/{{deviceId}}/apps/{{appId}}/missing-sequence?minSequenceNumber=1&maxSequenceNumber=100",
+											"raw": "{{baseUrl}}/core/api/v1/mts/devices/{{deviceId}}/apps/{{appId}}/missing-sequence?minSequenceNumber=1&maxSequenceNumber=100",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -28450,9 +28451,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts/devices",
+											"raw": "{{baseUrl}}/core/api/v1/mts/devices",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -28501,9 +28502,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts/devices/{{deviceId}}/apps/{{appId}}/snapped-distance?start=<long>&duration=1h&id=<string>&callback=<string>&snapTrace=<boolean>",
+											"raw": "{{baseUrl}}/core/api/v1/mts/devices/{{deviceId}}/apps/{{appId}}/snapped-distance?start=<long>&duration=1h&id=<string>&callback=<string>&snapTrace=<boolean>",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -29167,9 +29168,9 @@
 											"raw": "{\n    \"isActive\": false\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts/devices/{{deviceId}}",
+											"raw": "{{baseUrl}}/core/api/v1/mts/devices/{{deviceId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -29248,9 +29249,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts-geofences/",
+											"raw": "{{baseUrl}}/core/api/v1/mts-geofences/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -29295,9 +29296,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts-geofences/{{geofenceId}}/devices",
+											"raw": "{{baseUrl}}/core/api/v1/mts-geofences/{{geofenceId}}/devices",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -29357,9 +29358,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts-geofences/{{geofenceId}}/devices",
+											"raw": "{{baseUrl}}/core/api/v1/mts-geofences/{{geofenceId}}/devices",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -29419,9 +29420,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts-geofences/{{geofenceId}}",
+											"raw": "{{baseUrl}}/core/api/v1/mts-geofences/{{geofenceId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -29466,9 +29467,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/mts-geofences/{{geofenceId}}/devices/{{deviceId}}",
+											"raw": "{{baseUrl}}/mts-geofences/{{geofenceId}}/devices/{{deviceId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"mts-geofences",
@@ -29512,9 +29513,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts-geofences/{{geofenceId}}/devices?nextPage=<string>",
+											"raw": "{{baseUrl}}/core/api/v1/mts-geofences/{{geofenceId}}/devices?nextPage=<string>",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -29567,9 +29568,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/mts-geofences{{geofenceId}}/devices/{{deviceId}}/unsubscribe",
+											"raw": "{{baseUrl}}/mts-geofences{{geofenceId}}/devices/{{deviceId}}/unsubscribe",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"mts-geofences{{geofenceId}}",
@@ -29613,9 +29614,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts-geofences/{{geofenceId}}",
+											"raw": "{{baseUrl}}/core/api/v1/mts-geofences/{{geofenceId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -29684,9 +29685,9 @@
 											"raw": "{\n    \"timeInterval\": 30,\n    \"topicExpiry\": \"590m\"\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts-pubsub/devices/{{deviceId}}/subscription",
+											"raw": "{{baseUrl}}/core/api/v1/mts-pubsub/devices/{{deviceId}}/subscription",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -29733,9 +29734,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts-pubsub/devices/{{deviceId}}/subscription/{{subscriptionId}}/deactivate",
+											"raw": "{{baseUrl}}/core/api/v1/mts-pubsub/devices/{{deviceId}}/subscription/{{subscriptionId}}/deactivate",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -29784,9 +29785,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/mts-pubsub/devices/{{deviceId}}/subscription/{{subscriptionId}}",
+											"raw": "{{baseUrl}}/core/api/v1/mts-pubsub/devices/{{deviceId}}/subscription/{{subscriptionId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -29836,9 +29837,9 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/tenantService/",
+									"raw": "{{baseUrl}}/core/api/v1/tenantService/",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -29893,9 +29894,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/tenantService/",
+									"raw": "{{baseUrl}}/core/api/v1/tenantService/",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -29944,9 +29945,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/tenantService/tenantType",
+									"raw": "{{baseUrl}}/core/api/v1/tenantService/tenantType",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -29995,9 +29996,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/tenantService/subscription",
+									"raw": "{{baseUrl}}/core/api/v1/tenantService/subscription",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -30037,9 +30038,9 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/tenantService/attributes/config/",
+									"raw": "{{baseUrl}}/core/api/v1/tenantService/attributes/config/",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -30090,9 +30091,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/tenantService/attributes/config/",
+									"raw": "{{baseUrl}}/core/api/v1/tenantService/attributes/config/",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -30151,9 +30152,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/notification-service/apps/{{appId}}/notification",
+											"raw": "{{baseUrl}}/core/api/v1/notification-service/apps/{{appId}}/notification",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30204,9 +30205,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/notification-service/apps/{{appId}}/notification",
+											"raw": "{{baseUrl}}/core/api/v1/notification-service/apps/{{appId}}/notification",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30248,9 +30249,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/notification-service/apps/{{appId}}/notification",
+											"raw": "{{baseUrl}}/core/api/v1/notification-service/apps/{{appId}}/notification",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30320,9 +30321,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/notification-service/filters",
+											"raw": "{{baseUrl}}/core/api/v1/notification-service/filters",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30371,9 +30372,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/notification-service/filters/{{filterId}}",
+											"raw": "{{baseUrl}}/core/api/v1/notification-service/filters/{{filterId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30414,9 +30415,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/notification-service/filters/{{filterId}}",
+											"raw": "{{baseUrl}}/core/api/v1/notification-service/filters/{{filterId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30457,9 +30458,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/notification-service/filters",
+											"raw": "{{baseUrl}}/core/api/v1/notification-service/filters",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30513,9 +30514,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/notification-service/event",
+											"raw": "{{baseUrl}}/core/api/v1/notification-service/event",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30560,9 +30561,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/notification-service/apps/{{notificationAppId}}/change-log?from=1663243135769&limit=0&offset=0",
+											"raw": "{{baseUrl}}/core/api/v1/notification-service/apps/{{notificationAppId}}/change-log?from=1663243135769&limit=0&offset=0",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30618,9 +30619,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/notification-service/filters/{{filterId}}/change-log?from=1643618794631&limit=0&offset=0",
+											"raw": "{{baseUrl}}/core/api/v1/notification-service/filters/{{filterId}}/change-log?from=1643618794631&limit=0&offset=0",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30690,9 +30691,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v1/orders/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30737,9 +30738,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v1/orders/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30779,9 +30780,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v1/orders/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30831,9 +30832,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/work-order/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v1/orders/work-order/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30879,9 +30880,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/work-order/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v1/orders/work-order/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30922,9 +30923,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/work-order/config/attributes",
+											"raw": "{{baseUrl}}/core/api/v1/orders/work-order/config/attributes",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -30999,9 +31000,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/",
+											"raw": "{{baseUrl}}/core/api/v1/orders/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31041,9 +31042,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/{{orderId}}",
+											"raw": "{{baseUrl}}/core/api/v1/orders/{{orderId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31083,9 +31084,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/{{clientId}}/{{clientOrderId}}/details",
+											"raw": "{{baseUrl}}/core/api/v1/orders/{{clientId}}/{{clientOrderId}}/details",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31135,9 +31136,9 @@
 											"raw": "{\n    \"attributes\": {\n        \"stringValidations\": \"string111\",\n        \"intValidations\": 3\n    }\n}"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/{{orderId}}",
+											"raw": "{{baseUrl}}/core/api/v1/orders/{{orderId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31192,9 +31193,9 @@
 											"raw": "[\n    {\n        \"amountToCollectOnDelivery\": {\n            \"currencyCode\": \"INR\",\n            \"amount\": 1000\n        },\n        \"pickupQualityChecks\": {},\n        \"collectAmountOnPickup\": true,\n        \"description\": \"Testing first workorder\",\n        \"type\": \"MOVE_CONTAINERS\",\n        \"pickupAddress\": \"location:653163f0-cb49-4451-aecb-491303c56ea4\",\n        \"attributes\": {\n            \"stringValidations\": \"string111\",\n            \"intValidations\": 1\n        },\n        \"containers\": [\n            \"container:001\",\n            \"container:002\"\n        ]\n    }\n]"
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/{{orderId}}/work-order",
+											"raw": "{{baseUrl}}/core/api/v1/orders/{{orderId}}/work-order",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31243,9 +31244,9 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/{{orderId}}/cancel",
+											"raw": "{{baseUrl}}/core/api/v1/orders/{{orderId}}/cancel",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31290,9 +31291,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/state-machine/config",
+											"raw": "{{baseUrl}}/core/api/v1/orders/state-machine/config",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31337,9 +31338,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/state-machine/config",
+											"raw": "{{baseUrl}}/core/api/v1/orders/state-machine/config",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31394,9 +31395,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/plugins",
+											"raw": "{{baseUrl}}/core/api/v1/orders/plugins",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31445,9 +31446,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/plugins/{{pluginId}}",
+											"raw": "{{baseUrl}}/core/api/v1/orders/plugins/{{pluginId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31488,9 +31489,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/plugins/{{pluginId}}",
+											"raw": "{{baseUrl}}/core/api/v1/orders/plugins/{{pluginId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31545,9 +31546,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/plugins-workflow",
+											"raw": "{{baseUrl}}/core/api/v1/orders/plugins-workflow",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31596,9 +31597,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/plugins-workflow/{{pluginWorkflowId}}",
+											"raw": "{{baseUrl}}/core/api/v1/orders/plugins-workflow/{{pluginWorkflowId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31639,9 +31640,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/orders/plugins-workflow/{{pluginWorkflowId}}",
+											"raw": "{{baseUrl}}/core/api/v1/orders/plugins-workflow/{{pluginWorkflowId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31701,9 +31702,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/address/{{countryName}}",
+											"raw": "{{baseUrl}}/core/api/v1/address/{{countryName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31752,9 +31753,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/address/{{countryName}}/{{payloadId}}",
+											"raw": "{{baseUrl}}/core/api/v1/address/{{countryName}}/{{payloadId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31795,9 +31796,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/address/{{countryName}}/{{payloadId}}",
+											"raw": "{{baseUrl}}/core/api/v1/address/{{countryName}}/{{payloadId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31838,9 +31839,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/address/{{countryName}}/",
+											"raw": "{{baseUrl}}/core/api/v1/address/{{countryName}}/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31917,9 +31918,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/address/config/{{countryName}}",
+											"raw": "{{baseUrl}}/core/api/v1/address/config/{{countryName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -31972,9 +31973,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/address/config/{{countryName}}",
+											"raw": "{{baseUrl}}/core/api/v1/address/config/{{countryName}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -32021,9 +32022,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/address/config/",
+											"raw": "{{baseUrl}}/core/api/v1/address/config/",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -32114,9 +32115,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/entities",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/entities",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -32165,9 +32166,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/entities/{{entityCode}}",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/entities/{{entityCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -32220,9 +32221,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/entities/{{entityCode}}",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/entities/{{entityCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -32594,9 +32595,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/events",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/events",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -32645,9 +32646,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/events/{{eventCode}}",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/events/{{eventCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -32688,9 +32689,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/events/{{eventCode}}",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/events/{{eventCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -32743,9 +32744,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/events?limit={{limit}}&offset={{offset}}",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/events?limit={{limit}}&offset={{offset}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -32854,9 +32855,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/config/{{entityCode}}",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/config/{{entityCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -32911,9 +32912,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/config/{{entityCode}}",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/config/{{entityCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -32959,9 +32960,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/config/{{entityCode}}",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/config/{{entityCode}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -33035,9 +33036,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/{{entityCode}}/instance",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/{{entityCode}}/instance",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -33087,9 +33088,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/{{entityCode}}/instance/{{instanceId}}/event",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/{{entityCode}}/instance/{{instanceId}}/event",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -33141,9 +33142,9 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/{{entityCode}}/instance/{{instanceId}}/state",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/{{entityCode}}/instance/{{instanceId}}/state",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -33186,9 +33187,9 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseURI}}/core/api/v1/state-machine/{{entityCode}}/instance/{{instanceId}}",
+											"raw": "{{baseUrl}}/core/api/v1/state-machine/{{entityCode}}/instance/{{instanceId}}",
 											"host": [
-												"{{baseURI}}"
+												"{{baseUrl}}"
 											],
 											"path": [
 												"core",
@@ -33264,9 +33265,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/scheduler/schedules",
+									"raw": "{{baseUrl}}/core/api/v1/scheduler/schedules",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -33315,9 +33316,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/scheduler/schedules/{{scheduleId}}",
+									"raw": "{{baseUrl}}/core/api/v1/scheduler/schedules/{{scheduleId}}",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -33370,9 +33371,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/scheduler/schedules/{{scheduleId}}",
+									"raw": "{{baseUrl}}/core/api/v1/scheduler/schedules/{{scheduleId}}",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -33425,9 +33426,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/scheduler/schedules/{{scheduleId}}",
+									"raw": "{{baseUrl}}/core/api/v1/scheduler/schedules/{{scheduleId}}",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -33480,9 +33481,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/scheduler/schedules",
+									"raw": "{{baseUrl}}/core/api/v1/scheduler/schedules",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -33539,9 +33540,9 @@
 									"raw": "{\n  \"clientId\":\"{{onboardingid}}\",\n  \"clientSecret\":\"{{onboardingsecret}}\",\n  \"audience\": \"platform:app:coreos\"\n}"
 								},
 								"url": {
-									"raw": "{{baseURI}}/core/api/v1/aaa/auth/client-credentials",
+									"raw": "{{baseUrl}}/core/api/v1/aaa/auth/client-credentials",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
@@ -34358,9 +34359,9 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseURI}}/app/api/v2/vehicles/users",
+									"raw": "{{baseUrl}}/app/api/v2/vehicles/users",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"app",
@@ -34674,9 +34675,9 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseURI}}/app/api/v2/vehicles",
+									"raw": "{{baseUrl}}/app/api/v2/vehicles",
 									"host": [
-										"{{baseURI}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"app",
