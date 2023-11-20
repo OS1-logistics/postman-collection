@@ -33563,6 +33563,20 @@
 					"item": [
 						{
 							"name": "Create a Facility.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"var facilityId = jsonData.data.id;",
+											"",
+											"pm.environment.set(\"facilityId\", facilityId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [
@@ -33605,11 +33619,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/facilities",
+									"raw": "{{baseUrl}}/app/api/v2/facilities",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"app",
+										"api",
+										"v2",
 										"facilities"
 									]
 								}
@@ -33641,11 +33658,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/facilities",
+									"raw": "{{baseUrl}}/app/api/v2/facilities",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"app",
+										"api",
+										"v2",
 										"facilities"
 									]
 								}
@@ -33677,11 +33697,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/facilities/{{facilityId}}",
+									"raw": "{{baseUrl}}/app/api/v2/facilities/{{facilityId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"app",
+										"api",
+										"v2",
 										"facilities",
 										"{{facilityId}}"
 									]
@@ -33733,19 +33756,16 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/facilities/:facilityId",
+									"raw": "{{baseUrl}}/app/api/v2/facilities/{{facilityId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"app",
+										"api",
+										"v2",
 										"facilities",
-										":facilityId"
-									],
-									"variable": [
-										{
-											"key": "facilityId",
-											"value": "<string>"
-										}
+										"{{facilityId}}"
 									]
 								}
 							},
@@ -33776,20 +33796,17 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/facilities/:facilityId/state",
+									"raw": "{{baseUrl}}/app/api/v2/facilities/{{facilityId}}/state",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"app",
+										"api",
+										"v2",
 										"facilities",
-										":facilityId",
+										"{{facilityId}}",
 										"state"
-									],
-									"variable": [
-										{
-											"key": "facilityId",
-											"value": "<string>"
-										}
 									]
 								},
 								"description": "| **Possible States** |\n| ------ |\n| `onboarding:onboarding` |\n| `active:active` |\n| `active:pause` |\n| `active:deboard` |\n| `inactive:inactive` |\n| `inactive:terminal` |\n"
@@ -33840,20 +33857,17 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/facilities/:facilityId/transition",
+									"raw": "{{baseUrl}}/app/api/v2/facilities/{{facilityId}}/transition",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"app",
+										"api",
+										"v2",
 										"facilities",
-										":facilityId",
+										"{{facilityId}}",
 										"transition"
-									],
-									"variable": [
-										{
-											"key": "facilityId",
-											"value": "<string>"
-										}
 									]
 								},
 								"description": "**State Transitions Allowed**\n\n| from_state | -> | to_state |\n| ------ | ------|------|\n|`onboarding:onboarding`| **->** | `active:active` |\n|`active:active`| **->** | `inactive:inactive` `active:deboard` `active:pause` |\n|`active:pause`| **->** | `active:active` |\n|`active:deboard`| **->** | `active:active` `inactive:inactive` |\n|`inactive:inactive`| **->** | `active:active` |\n|`inactive:terminal`| **->** |  |\n"
@@ -33870,6 +33884,20 @@
 							"item": [
 								{
 									"name": "Create a new order",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"var orderId = jsonData.data.id;",
+													"",
+													"pm.environment.set(\"orderId\", orderId);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"request": {
 										"method": "POST",
 										"header": [
@@ -33913,11 +33941,15 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseUrl}}/orders",
+											"raw": "{{baseUrl}}/app/logisticsorders/v1/api/orders",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
+												"app",
+												"logisticsorders",
+												"v1",
+												"api",
 												"orders"
 											]
 										},
@@ -33956,19 +33988,17 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/orders/:orderId",
+											"raw": "{{baseUrl}}/app/logisticsorders/v1/api/orders/{{orderId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
+												"app",
+												"logisticsorders",
+												"v1",
+												"api",
 												"orders",
-												":orderId"
-											],
-											"variable": [
-												{
-													"key": "orderId",
-													"value": "eX2HPhgsd"
-												}
+												"{{orderId}}"
 											]
 										},
 										"description": "Get Order Details"
@@ -34020,19 +34050,17 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseUrl}}/orders/:orderId",
+											"raw": "{{baseUrl}}/app/logisticsorders/v1/api/orders/{{orderId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
+												"app",
+												"logisticsorders",
+												"v1",
+												"api",
 												"orders",
-												":orderId"
-											],
-											"variable": [
-												{
-													"key": "orderId",
-													"value": "eX2HPhgsd"
-												}
+												"{{orderId}}"
 											]
 										},
 										"description": "Update Order core & custom attributes"
@@ -34070,20 +34098,18 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/orders/:orderId/cancel",
+											"raw": "{{baseUrl}}/app/logisticsorders/v1/api/orders/{{orderId}}/cancel",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
+												"app",
+												"logisticsorders",
+												"v1",
+												"api",
 												"orders",
-												":orderId",
+												"{{orderId}}",
 												"cancel"
-											],
-											"variable": [
-												{
-													"key": "orderId",
-													"value": "eX2HPhgsd"
-												}
 											]
 										},
 										"description": "Order cancellation request"
@@ -34126,25 +34152,19 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/clients/:clientId/orders/:clientOrderId",
+											"raw": "{{baseUrl}}/app/logisticsorders/v1/api/clients/{{clientId}}/orders/{{clientOrderId}}",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
+												"app",
+												"logisticsorders",
+												"v1",
+												"api",
 												"clients",
-												":clientId",
+												"{{clientId}}",
 												"orders",
-												":clientOrderId"
-											],
-											"variable": [
-												{
-													"key": "clientId",
-													"value": "eX2HPhgsd"
-												},
-												{
-													"key": "clientOrderId",
-													"value": "eX2HPhgsd"
-												}
+												"{{clientOrderId}}"
 											]
 										},
 										"description": "Get Order Details by using client id and clientOrder Id"
@@ -34182,26 +34202,20 @@
 											}
 										],
 										"url": {
-											"raw": "{{baseUrl}}/clients/:clientId/orders/:clientOrderId/cancel",
+											"raw": "{{baseUrl}}/app/logisticsorders/v1/api/clients/{{clientId}}/orders/{{clientOrderId}}/cancel",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
+												"app",
+												"logisticsorders",
+												"v1",
+												"api",
 												"clients",
-												":clientId",
+												"{{clientId}}",
 												"orders",
-												":clientOrderId",
+												"{{clientOrderId}}",
 												"cancel"
-											],
-											"variable": [
-												{
-													"key": "clientId",
-													"value": "eX2HPhgsd"
-												},
-												{
-													"key": "clientOrderId",
-													"value": "eX2HPhgsd"
-												}
 											]
 										},
 										"description": "Order cancellation request by using client id and clientOrder id"
@@ -34258,11 +34272,15 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseUrl}}/orders/batch",
+											"raw": "{{baseUrl}}/app/logisticsorders/v1/api/orders/batch",
 											"host": [
 												"{{baseUrl}}"
 											],
 											"path": [
+												"app",
+												"logisticsorders",
+												"v1",
+												"api",
 												"orders",
 												"batch"
 											]
@@ -34280,6 +34298,20 @@
 					"item": [
 						{
 							"name": "Create a User.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"var userId = jsonData.data.id;",
+											"",
+											"pm.environment.set(\"userId\", userId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [
@@ -34322,11 +34354,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/users",
+									"raw": "{{baseUrl}}/app/api/v2/users",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"app",
+										"api",
+										"v2",
 										"users"
 									]
 								},
@@ -34359,7 +34394,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/app/api/v2/vehicles/users",
+									"raw": "{{baseUrl}}/app/api/v2/users",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -34367,7 +34402,6 @@
 										"app",
 										"api",
 										"v2",
-										"vehicles",
 										"users"
 									]
 								}
@@ -34399,19 +34433,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/users/:userId",
+									"raw": "{{baseUrl}}/app/api/v2/{{userId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"users",
-										":userId"
-									],
-									"variable": [
-										{
-											"key": "userId",
-											"value": "<string>"
-										}
+										"app",
+										"api",
+										"v2",
+										"{{userId}}"
 									]
 								},
 								"description": "**To use this api, You may pass** \n- aaaId in userId, or\n- userCode/uniqueCode with prefix 'ref::'\n"
@@ -34462,19 +34492,15 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/users/:userId",
+									"raw": "{{baseUrl}}/app/api/v2/{{userId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"users",
-										":userId"
-									],
-									"variable": [
-										{
-											"key": "userId",
-											"value": "<string>"
-										}
+										"app",
+										"api",
+										"v2",
+										"{{userId}}"
 									]
 								},
 								"description": "**Note:** \n- Do not use groups with Single Leg designations ['Business Owner', 'Team Manager', 'Field Executive']\n"
@@ -34506,20 +34532,16 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/users/:userId/state",
+									"raw": "{{baseUrl}}/app/api/v2/{{userId}}/state",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"users",
-										":userId",
+										"app",
+										"api",
+										"v2",
+										"{{userId}}",
 										"state"
-									],
-									"variable": [
-										{
-											"key": "userId",
-											"value": "<string>"
-										}
 									]
 								},
 								"description": "| **Possible States** |\n| ------ |\n| `onboarding:onboarding` |\n| `active:available` |\n| `active:busy` |\n| `active:unavailable` |\n| `active:allocated` |\n| `active:deboarding` |\n| `inactive:inactive` |\n| `inactive:terminal` |\n"
@@ -34570,20 +34592,16 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/users/:userId/transition",
+									"raw": "{{baseUrl}}/app/api/v2/{{userId}}/transition",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"users",
-										":userId",
+										"app",
+										"api",
+										"v2",
+										"{{userId}}",
 										"transition"
-									],
-									"variable": [
-										{
-											"key": "userId",
-											"value": "<string>"
-										}
 									]
 								},
 								"description": "**State Transitions Allowed**\n\n| from_state | -> | to_state |\n| ------ | ------|------|\n|`onboarding:onboarding`| **->** | `active:available` |\n|`active:available`| **->** | `active:busy` `active:unavailable` `inactive:inactive` `active:allocated` `active:deboarding` |\n|`active:busy`| **->** | `active:available` |\n|`active:unavailable`| **->** | `active:available` `inactive:inactive` |\n|`active:allocated`| **->** | `active:available` |\n|`active:deboarding`| **->** | `inactive:inactive` |\n|`inactive:inactive`| **->** | `active:available` |\n|`inactive:terminal`| **->** |  |\n"
@@ -34597,6 +34615,20 @@
 					"item": [
 						{
 							"name": "Create a Vehicle.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"var vehicleId = jsonData.data.id;",
+											"",
+											"pm.environment.set(\"vehicleId\", vehicleId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [
@@ -34639,11 +34671,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/vehicles",
+									"raw": "{{baseUrl}}/app/api/v2/vehicles",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"app",
+										"api",
+										"v2",
 										"vehicles"
 									]
 								}
@@ -34714,19 +34749,16 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/vehicles/:vehicleId",
+									"raw": "{{baseUrl}}/app/api/v2/vehicles/{{vehicleId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"app",
+										"api",
+										"v2",
 										"vehicles",
-										":vehicleId"
-									],
-									"variable": [
-										{
-											"key": "vehicleId",
-											"value": "<string>"
-										}
+										"{{vehicleId}}"
 									]
 								}
 							},
@@ -34776,19 +34808,16 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/vehicles/:vehicleId",
+									"raw": "{{baseUrl}}/app/api/v2/vehicles/{{vehicleId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"app",
+										"api",
+										"v2",
 										"vehicles",
-										":vehicleId"
-									],
-									"variable": [
-										{
-											"key": "vehicleId",
-											"value": "<string>"
-										}
+										"{{vehicleId}}"
 									]
 								}
 							},
@@ -34819,20 +34848,17 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/vehicles/:vehicleId/state",
+									"raw": "{{baseUrl}}/app/api/v2/vehicles/{{vehicleId}}/state",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"app",
+										"api",
+										"v2",
 										"vehicles",
-										":vehicleId",
+										"{{vehicleId}}",
 										"state"
-									],
-									"variable": [
-										{
-											"key": "vehicleId",
-											"value": "<string>"
-										}
 									]
 								},
 								"description": "| **Possible States** |\n| ------ |\n| `onboarding:onboarding` |\n| `active:available` |\n| `active:inuse` |\n| `active:unavailable` |\n| `inactive:inactive` |\n| `inactive:terminal` |\n"
@@ -34883,20 +34909,17 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/vehicles/:vehicleId/transition",
+									"raw": "{{baseUrl}}/app/api/v2/vehicles/{{vehicleId}}/transition",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
+										"app",
+										"api",
+										"v2",
 										"vehicles",
-										":vehicleId",
+										"{{vehicleId}}",
 										"transition"
-									],
-									"variable": [
-										{
-											"key": "vehicleId",
-											"value": "<string>"
-										}
 									]
 								},
 								"description": "**State Transitions Allowed**\n\n| from_state | -> | to_state |\n| ------ | ------|------|\n|`onboarding:onboarding`| **->** | `active:available` |\n|`active:available`| **->** | `active:inuse` `active:unavailable` `inactive:inactive` |\n|`active:inuse`| **->** | `active:available` |\n|`active:unavailable`| **->** | `active:available` `inactive:inactive` |\n|`inactive:inactive`| **->** | `active:available` |\n|`inactive:terminal`| **->** |  |\n"
