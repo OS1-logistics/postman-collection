@@ -54,9 +54,9 @@
 									"raw": "{\n  \"clientId\":\"{{client_id}}\",\n    \"clientSecret\":\"{{client_secret}}\",\n  \"audience\": \"platform:app:coreos\"\n}"
 								},
 								"url": {
-									"raw": "{{baseUrl}}}/core/api/v1/aaa/auth/client-credentials",
+									"raw": "{{baseUrl}}/core/api/v1/aaa/auth/client-credentials",
 									"host": [
-										"{{baseUrl}}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"core",
