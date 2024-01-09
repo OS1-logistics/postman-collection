@@ -31,7 +31,7 @@
 						"header": [
 							{
 								"key": "X-COREOS-REQUEST-ID",
-								"value": "{{request_id}}",
+								"value": "{{$guid}}",
 								"type": "text"
 							},
 							{
@@ -74,7 +74,7 @@
 							{
 								"description": "(Required) Unique requestId",
 								"key": "X-COREOS-REQUEST-ID",
-								"value": "{{request_id}}"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) Tenant id",
@@ -94,7 +94,7 @@
 							{
 								"description": "core-os user info",
 								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
+								"value": "{{$guid}}"
 							},
 							{
 								"key": "Content-Type",
@@ -107,7 +107,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"new-order-sent\",\n  \"mode\": \"sms\",\n  \"data\": {\n    \"body\": \"Your Login OTP is {{otp}}\",\n    \"externalRef\": \"1107900000188600009\"\n  },\n  \"isActive\": true\n}\n\n",
+							"raw": "{\n  \"name\": \"order-sent\",\n  \"mode\": \"sms\",\n  \"data\": {\n    \"body\": \"Your Login OTP is {{otp}}\",\n    \"externalRef\": \"1107900000188600009\"\n  },\n  \"isActive\": true\n}\n",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -116,7 +116,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/core/api/v1/messaging-service/templates",
+							"raw": "{{baseUrl}}/core/api/v1/messaging-service/templates/",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -125,401 +125,15 @@
 								"api",
 								"v1",
 								"messaging-service",
-								"templates"
+								"templates",
+								""
 							]
 						},
 						"description": "Create templates for sending messages."
 					},
 					"response": [
 						{
-							"name": "Successful operation",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"name\": \"mHejb_Arfp9mKQMbZ_zSsgV_aEKy\",\n  \"isActive\": \"<boolean>\",\n  \"mode\": \"sms\",\n  \"data\": {\n    \"body\": \"<string>\",\n    \"senderId\": \"<string>\",\n    \"externalRef\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/templates",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"templates"
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"data\": {\n    \"name\": \"<string>\"\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"name\": \"mHejb_Arfp9mKQMbZ_zSsgV_aEKy\",\n  \"isActive\": \"<boolean>\",\n  \"mode\": \"sms\",\n  \"data\": {\n    \"body\": \"<string>\",\n    \"senderId\": \"<string>\",\n    \"externalRef\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/templates",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"templates"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"name\": \"mHejb_Arfp9mKQMbZ_zSsgV_aEKy\",\n  \"isActive\": \"<boolean>\",\n  \"mode\": \"sms\",\n  \"data\": {\n    \"body\": \"<string>\",\n    \"senderId\": \"<string>\",\n    \"externalRef\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/templates",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"templates"
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Not found - The server can not find the requested resource.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"name\": \"mHejb_Arfp9mKQMbZ_zSsgV_aEKy\",\n  \"isActive\": \"<boolean>\",\n  \"mode\": \"sms\",\n  \"data\": {\n    \"body\": \"<string>\",\n    \"senderId\": \"<string>\",\n    \"externalRef\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/templates",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"templates"
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"name\": \"mHejb_Arfp9mKQMbZ_zSsgV_aEKy\",\n  \"isActive\": \"<boolean>\",\n  \"mode\": \"sms\",\n  \"data\": {\n    \"body\": \"<string>\",\n    \"senderId\": \"<string>\",\n    \"externalRef\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/templates",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"templates"
-									]
-								}
-							},
-							"status": "Service Unavailable",
-							"code": 503,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Create templates",
+							"name": "Create SMS templates",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -622,7 +236,7 @@
 							"body": "{\n    \"data\": {\n        \"name\": \"order-sent\"\n    },\n    \"request\": {\n        \"uri\": \"/core/api/v1/messaging-service/templates\",\n        \"method\": \"POST\",\n        \"queryString\": \"\"\n    }\n}"
 						},
 						{
-							"name": "Create templates",
+							"name": "Create email templates",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -734,7 +348,7 @@
 							{
 								"description": "(Required) Unique requestId",
 								"key": "X-COREOS-REQUEST-ID",
-								"value": "{{request_id}}"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) Tenant id",
@@ -754,7 +368,7 @@
 							{
 								"description": "core-os user info",
 								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
+								"value": "{{$guid}}"
 							},
 							{
 								"key": "Accept",
@@ -1204,7 +818,7 @@
 							{
 								"description": "(Required) Unique requestId",
 								"key": "X-COREOS-REQUEST-ID",
-								"value": "{{request_id}}"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) Tenant id",
@@ -1224,7 +838,7 @@
 							{
 								"description": "core-os user info",
 								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
+								"value": "{{$guid}}"
 							},
 							{
 								"key": "Accept",
@@ -1619,7 +1233,7 @@
 							{
 								"description": "(Required) Unique requestId",
 								"key": "X-COREOS-REQUEST-ID",
-								"value": "{{request_id}}"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) Tenant id",
@@ -1639,7 +1253,7 @@
 							{
 								"description": "core-os user info",
 								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "base 64 encoded secret key for HMAC Authentication",
@@ -1682,559 +1296,7 @@
 					},
 					"response": [
 						{
-							"name": "Accepted",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"description": "base 64 encoded secret key for HMAC Authentication",
-										"key": "X-COREOS-CALLBACK-SECRET",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"sms\": [\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+2\",\n          \"number\": \"{1}{1}\"\n        }\n      ],\n      \"senderId\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {}\n    },\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+6-6\",\n          \"number\": \"{3}{3}\"\n        }\n      ],\n      \"senderId\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {}\n    }\n  ],\n  \"email\": [\n    {\n      \"to\": [\n        \"KN_2U@IaAdh-F4.HG\",\n        \"tl@2J.VQfoO\"\n      ],\n      \"template\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"from\": \"0@jj.CDofC\",\n      \"replyTo\": \"pqxG8@2g-PnN.gXw\",\n      \"cc\": [\n        \"0F40@lLJGy.cQsL\",\n        \"AJTOOW@Cqh-.A.tJbv\"\n      ],\n      \"bcc\": [\n        \"2FRF@LfOvV.UhdQbz\",\n        \"SwDb@g-yRgTQNif.WNBKK\"\n      ],\n      \"data\": {},\n      \"attachments\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"to\": [\n        \"cy1jcvb@G.bCgstO\",\n        \"O5mOmhMA@Qocy.Slyy\"\n      ],\n      \"template\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"from\": \"DkXP6wLC@spstcBhs.qqQG\",\n      \"replyTo\": \"57x@UqoGl-DG.JMrOTF\",\n      \"cc\": [\n        \"l+NGc@D.FEP\",\n        \"PC8Gr@nhCpRlQiEAM.Pqu\"\n      ],\n      \"bcc\": [\n        \"4OtPn@DeS-6.tqlh\",\n        \"10CQ71nKWMq@U2.IBS\"\n      ],\n      \"data\": {},\n      \"attachments\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"whatsapp\": [\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+7-8\",\n          \"number\": \"{7}{7}\"\n        }\n      ],\n      \"from\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {},\n      \"media\": {\n        \"document\": {\n          \"url\": \"<string>\",\n          \"fileName\": \"<string>\"\n        },\n        \"image\": {\n          \"url\": \"<string>\"\n        }\n      },\n      \"buttons\": {\n        \"url\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+7-4\",\n          \"number\": \"{7}{7}\"\n        }\n      ],\n      \"from\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {},\n      \"media\": {\n        \"document\": {\n          \"url\": \"<string>\",\n          \"fileName\": \"<string>\"\n        },\n        \"image\": {\n          \"url\": \"<string>\"\n        }\n      },\n      \"buttons\": {\n        \"url\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"callback\": {\n    \"url\": \"<string>\",\n    \"meta\": {}\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/messages",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"messages"
-									]
-								}
-							},
-							"status": "Accepted",
-							"code": 202,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request id that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"data\": {\n    \"sms\": [\n      {\n        \"messageId\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"meta\": {\n          \"template\": \"<string>\",\n          \"to\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"failureReason\": \"<string>\",\n          \"status\": \"Failed\",\n          \"provider\": \"<string>\"\n        }\n      },\n      {\n        \"messageId\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"meta\": {\n          \"template\": \"<string>\",\n          \"to\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"failureReason\": \"<string>\",\n          \"status\": \"Accepted\",\n          \"provider\": \"<string>\"\n        }\n      }\n    ],\n    \"email\": [\n      {\n        \"messageId\": \"<string>\",\n        \"meta\": {\n          \"template\": \"<string>\",\n          \"to\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"failureReason\": \"<string>\",\n          \"status\": \"Failed\",\n          \"provider\": \"<string>\"\n        }\n      },\n      {\n        \"messageId\": \"<string>\",\n        \"meta\": {\n          \"template\": \"<string>\",\n          \"to\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"failureReason\": \"<string>\",\n          \"status\": \"Accepted\",\n          \"provider\": \"<string>\"\n        }\n      }\n    ],\n    \"whatsapp\": [\n      {\n        \"messageId\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"meta\": {\n          \"template\": \"<string>\",\n          \"to\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"failureReason\": \"<string>\",\n          \"status\": \"Accepted\",\n          \"provider\": \"<string>\"\n        }\n      },\n      {\n        \"messageId\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"meta\": {\n          \"template\": \"<string>\",\n          \"to\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"failureReason\": \"<string>\",\n          \"status\": \"Failed\",\n          \"provider\": \"<string>\"\n        }\n      }\n    ]\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"description": "base 64 encoded secret key for HMAC Authentication",
-										"key": "X-COREOS-CALLBACK-SECRET",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"sms\": [\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+2\",\n          \"number\": \"{1}{1}\"\n        }\n      ],\n      \"senderId\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {}\n    },\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+6-6\",\n          \"number\": \"{3}{3}\"\n        }\n      ],\n      \"senderId\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {}\n    }\n  ],\n  \"email\": [\n    {\n      \"to\": [\n        \"KN_2U@IaAdh-F4.HG\",\n        \"tl@2J.VQfoO\"\n      ],\n      \"template\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"from\": \"0@jj.CDofC\",\n      \"replyTo\": \"pqxG8@2g-PnN.gXw\",\n      \"cc\": [\n        \"0F40@lLJGy.cQsL\",\n        \"AJTOOW@Cqh-.A.tJbv\"\n      ],\n      \"bcc\": [\n        \"2FRF@LfOvV.UhdQbz\",\n        \"SwDb@g-yRgTQNif.WNBKK\"\n      ],\n      \"data\": {},\n      \"attachments\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"to\": [\n        \"cy1jcvb@G.bCgstO\",\n        \"O5mOmhMA@Qocy.Slyy\"\n      ],\n      \"template\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"from\": \"DkXP6wLC@spstcBhs.qqQG\",\n      \"replyTo\": \"57x@UqoGl-DG.JMrOTF\",\n      \"cc\": [\n        \"l+NGc@D.FEP\",\n        \"PC8Gr@nhCpRlQiEAM.Pqu\"\n      ],\n      \"bcc\": [\n        \"4OtPn@DeS-6.tqlh\",\n        \"10CQ71nKWMq@U2.IBS\"\n      ],\n      \"data\": {},\n      \"attachments\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"whatsapp\": [\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+7-8\",\n          \"number\": \"{7}{7}\"\n        }\n      ],\n      \"from\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {},\n      \"media\": {\n        \"document\": {\n          \"url\": \"<string>\",\n          \"fileName\": \"<string>\"\n        },\n        \"image\": {\n          \"url\": \"<string>\"\n        }\n      },\n      \"buttons\": {\n        \"url\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+7-4\",\n          \"number\": \"{7}{7}\"\n        }\n      ],\n      \"from\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {},\n      \"media\": {\n        \"document\": {\n          \"url\": \"<string>\",\n          \"fileName\": \"<string>\"\n        },\n        \"image\": {\n          \"url\": \"<string>\"\n        }\n      },\n      \"buttons\": {\n        \"url\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"callback\": {\n    \"url\": \"<string>\",\n    \"meta\": {}\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/messages",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"messages"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"description": "base 64 encoded secret key for HMAC Authentication",
-										"key": "X-COREOS-CALLBACK-SECRET",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"sms\": [\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+2\",\n          \"number\": \"{1}{1}\"\n        }\n      ],\n      \"senderId\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {}\n    },\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+6-6\",\n          \"number\": \"{3}{3}\"\n        }\n      ],\n      \"senderId\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {}\n    }\n  ],\n  \"email\": [\n    {\n      \"to\": [\n        \"KN_2U@IaAdh-F4.HG\",\n        \"tl@2J.VQfoO\"\n      ],\n      \"template\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"from\": \"0@jj.CDofC\",\n      \"replyTo\": \"pqxG8@2g-PnN.gXw\",\n      \"cc\": [\n        \"0F40@lLJGy.cQsL\",\n        \"AJTOOW@Cqh-.A.tJbv\"\n      ],\n      \"bcc\": [\n        \"2FRF@LfOvV.UhdQbz\",\n        \"SwDb@g-yRgTQNif.WNBKK\"\n      ],\n      \"data\": {},\n      \"attachments\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"to\": [\n        \"cy1jcvb@G.bCgstO\",\n        \"O5mOmhMA@Qocy.Slyy\"\n      ],\n      \"template\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"from\": \"DkXP6wLC@spstcBhs.qqQG\",\n      \"replyTo\": \"57x@UqoGl-DG.JMrOTF\",\n      \"cc\": [\n        \"l+NGc@D.FEP\",\n        \"PC8Gr@nhCpRlQiEAM.Pqu\"\n      ],\n      \"bcc\": [\n        \"4OtPn@DeS-6.tqlh\",\n        \"10CQ71nKWMq@U2.IBS\"\n      ],\n      \"data\": {},\n      \"attachments\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"whatsapp\": [\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+7-8\",\n          \"number\": \"{7}{7}\"\n        }\n      ],\n      \"from\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {},\n      \"media\": {\n        \"document\": {\n          \"url\": \"<string>\",\n          \"fileName\": \"<string>\"\n        },\n        \"image\": {\n          \"url\": \"<string>\"\n        }\n      },\n      \"buttons\": {\n        \"url\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+7-4\",\n          \"number\": \"{7}{7}\"\n        }\n      ],\n      \"from\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {},\n      \"media\": {\n        \"document\": {\n          \"url\": \"<string>\",\n          \"fileName\": \"<string>\"\n        },\n        \"image\": {\n          \"url\": \"<string>\"\n        }\n      },\n      \"buttons\": {\n        \"url\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"callback\": {\n    \"url\": \"<string>\",\n    \"meta\": {}\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/messages",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"messages"
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Not found - The server can not find the requested resource.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"description": "base 64 encoded secret key for HMAC Authentication",
-										"key": "X-COREOS-CALLBACK-SECRET",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"sms\": [\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+2\",\n          \"number\": \"{1}{1}\"\n        }\n      ],\n      \"senderId\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {}\n    },\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+6-6\",\n          \"number\": \"{3}{3}\"\n        }\n      ],\n      \"senderId\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {}\n    }\n  ],\n  \"email\": [\n    {\n      \"to\": [\n        \"KN_2U@IaAdh-F4.HG\",\n        \"tl@2J.VQfoO\"\n      ],\n      \"template\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"from\": \"0@jj.CDofC\",\n      \"replyTo\": \"pqxG8@2g-PnN.gXw\",\n      \"cc\": [\n        \"0F40@lLJGy.cQsL\",\n        \"AJTOOW@Cqh-.A.tJbv\"\n      ],\n      \"bcc\": [\n        \"2FRF@LfOvV.UhdQbz\",\n        \"SwDb@g-yRgTQNif.WNBKK\"\n      ],\n      \"data\": {},\n      \"attachments\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"to\": [\n        \"cy1jcvb@G.bCgstO\",\n        \"O5mOmhMA@Qocy.Slyy\"\n      ],\n      \"template\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"from\": \"DkXP6wLC@spstcBhs.qqQG\",\n      \"replyTo\": \"57x@UqoGl-DG.JMrOTF\",\n      \"cc\": [\n        \"l+NGc@D.FEP\",\n        \"PC8Gr@nhCpRlQiEAM.Pqu\"\n      ],\n      \"bcc\": [\n        \"4OtPn@DeS-6.tqlh\",\n        \"10CQ71nKWMq@U2.IBS\"\n      ],\n      \"data\": {},\n      \"attachments\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"whatsapp\": [\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+7-8\",\n          \"number\": \"{7}{7}\"\n        }\n      ],\n      \"from\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {},\n      \"media\": {\n        \"document\": {\n          \"url\": \"<string>\",\n          \"fileName\": \"<string>\"\n        },\n        \"image\": {\n          \"url\": \"<string>\"\n        }\n      },\n      \"buttons\": {\n        \"url\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"template\": \"<string>\",\n      \"to\": [\n        {\n          \"countryCode\": \"+7-4\",\n          \"number\": \"{7}{7}\"\n        }\n      ],\n      \"from\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"data\": {},\n      \"media\": {\n        \"document\": {\n          \"url\": \"<string>\",\n          \"fileName\": \"<string>\"\n        },\n        \"image\": {\n          \"url\": \"<string>\"\n        }\n      },\n      \"buttons\": {\n        \"url\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"callback\": {\n    \"url\": \"<string>\",\n    \"meta\": {}\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/messages",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"messages"
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Send messages",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "{{app_id}}"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"description": "base 64 encoded secret key for HMAC Authentication",
-										"key": "X-COREOS-CALLBACK-SECRET",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"sms\": [\n    {\n      \"senderId\": \"DLHVRY\",\n      \"template\": \"order-delivery-otp\",\n      \"provider\": \"aws-pinpoint\",\n      \"data\": {\n        \"otp\": \"342365\"\n      },\n      \"to\": [\n        {\n          \"countryCode\": \"91\",\n          \"number\": \"9812345600\"\n        }\n      ]\n    }\n  ],\n  \"email\": [\n    {\n      \"template\": \"order-status-template\",\n      \"provider\": \"aws-ses-default\",\n      \"from\": \"user@example.com\",\n      \"replyTo\": \"user@example.com\",\n      \"to\": [\n        \"user@example.com\"\n      ],\n      \"cc\": [\n        \"user@example.com\"\n      ],\n      \"bcc\": [\n        \"user@example.com\"\n      ],\n      \"data\": {\n        \"orderId\": \"orders:27e03289-9654-4e62-9457-32748e34efb9\",\n        \"awbNumber\": \"AWB123456789087\",\n        \"status\": \"delivered\"\n      },\n      \"attachments\": [\n        \"https://console.getos1.com/header/static/media/logo.0802580f6e1b1127d6e519f4a3cbea50.svg\"\n      ]\n    }\n  ],\n  \"whatsapp\": [\n    {\n      \"from\": \"123324242\",\n      \"template\": \"order-delivery-otp\",\n      \"provider\": \"infobip\",\n      \"data\": {\n        \"otp\": \"342365\"\n      },\n      \"media\": {\n        \"document\": {\n          \"url\": \"string\",\n          \"fileName\": \"string\"\n        },\n        \"image\": {\n          \"url\": \"string\"\n        }\n      },\n      \"buttons\": {\n        \"url\": [\n          \"string\"\n        ]\n      },\n      \"to\": [\n        {\n          \"countryCode\": \"91\",\n          \"number\": \"9812345600\"\n        }\n      ]\n    }\n  ],\n  \"callback\": {\n    \"url\": \"https://os1-test-msg-callback.requestcatcher.com/test\",\n    \"meta\": {}\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/core/api/v1/messaging-service/messages",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"core",
-										"api",
-										"v1",
-										"messaging-service",
-										"messages"
-									]
-								}
-							},
-							"status": "Accepted",
-							"code": 202,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Wed, 03 Jan 2024 04:42:57 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=UTF-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "817"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "vary",
-									"value": "Origin"
-								},
-								{
-									"key": "x-envoy-upstream-service-time",
-									"value": "55"
-								},
-								{
-									"key": "server",
-									"value": "istio-envoy"
-								},
-								{
-									"key": "strict-transport-security",
-									"value": "max-age=31536000; includeSubDomains"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"data\": {\n        \"sms\": [\n            {\n                \"messageId\": [\n                    \"message:0c20690c-3111-42b5-9f5e-279f7ac2a7e6\"\n                ],\n                \"meta\": {\n                    \"template\": \"order-delivery-otp\",\n                    \"to\": [\n                        \"9812***600\"\n                    ],\n                    \"failureReason\": \"Template order-delivery-otp not found\",\n                    \"status\": \"Failed\",\n                    \"provider\": \"aws-pinpoint\"\n                }\n            },\n            {\n                \"messageId\": [\n                    \"message:8e845077-e0c0-4ed3-9235-427dde542d14\"\n                ],\n                \"meta\": {\n                    \"template\": \"order-delivery-otp\",\n                    \"to\": [\n                        \"9812***600\"\n                    ],\n                    \"failureReason\": \"Template order-delivery-otp not found\",\n                    \"status\": \"Failed\",\n                    \"provider\": \"infobip\"\n                }\n            }\n        ],\n        \"email\": [\n            {\n                \"messageId\": [\n                    \"message:0af210b0-59c4-426a-aca2-16f05d0a983f\"\n                ],\n                \"meta\": {\n                    \"template\": \"order-status-template\",\n                    \"to\": [\n                        \"use****@example.com\"\n                    ],\n                    \"failureReason\": \"Template order-status-template not found\",\n                    \"status\": \"Failed\",\n                    \"provider\": \"aws-ses-default\"\n                }\n            }\n        ],\n        \"whatsapp\": []\n    },\n    \"request\": {\n        \"uri\": \"/core/api/v1/messaging-service/messages\",\n        \"method\": \"\",\n        \"queryString\": \"\"\n    }\n}"
-						},
-						{
-							"name": "Send messages",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "{{app_id}}"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"description": "base 64 encoded secret key for HMAC Authentication",
-										"key": "X-COREOS-CALLBACK-SECRET",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"sms\": [\n    {\n      \"senderId\": \"DLHVRY\",\n      \"template\": \"order-delivered\",\n      \"provider\": \"test-pinpoint-146\",\n      \"data\": {\n        \"otp\": \"342365\"\n      },\n      \"to\": [\n        {\n          \"countryCode\": \"91\",\n          \"number\": \"9873250476\"\n        }\n      ]\n    }\n  ],\n  \"callback\": {\n    \"url\": \"https://os1-test-msg-callback.requestcatcher.com/test\",\n    \"meta\": {}\n  }\n}\n",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/core/api/v1/messaging-service/messages",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"core",
-										"api",
-										"v1",
-										"messaging-service",
-										"messages"
-									]
-								}
-							},
-							"status": "Accepted",
-							"code": 202,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Wed, 03 Jan 2024 05:56:59 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=UTF-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "305"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "vary",
-									"value": "Origin"
-								},
-								{
-									"key": "x-envoy-upstream-service-time",
-									"value": "148"
-								},
-								{
-									"key": "server",
-									"value": "istio-envoy"
-								},
-								{
-									"key": "strict-transport-security",
-									"value": "max-age=31536000; includeSubDomains"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"data\": {\n        \"sms\": [\n            {\n                \"messageId\": [\n                    \"message:b5946f18-6d17-4228-b20e-1c6f7d6989fc\"\n                ],\n                \"meta\": {\n                    \"template\": \"order-delivered\",\n                    \"to\": [\n                        \"9873***476\"\n                    ],\n                    \"status\": \"Accepted\",\n                    \"provider\": \"test-pinpoint-146\"\n                }\n            }\n        ],\n        \"email\": [],\n        \"whatsapp\": []\n    },\n    \"request\": {\n        \"uri\": \"/core/api/v1/messaging-service/messages\",\n        \"method\": \"\",\n        \"queryString\": \"\"\n    }\n}"
-						},
-						{
-							"name": "Send messages",
+							"name": "Send SMS messages",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -2342,115 +1404,7 @@
 							"body": "{\n    \"data\": {\n        \"sms\": [\n            {\n                \"messageId\": [\n                    \"message:8ce3e3e0-a476-43ed-91b3-e648af2cbd58\"\n                ],\n                \"meta\": {\n                    \"template\": \"order-sent\",\n                    \"to\": [\n                        \"9873***476\"\n                    ],\n                    \"status\": \"Accepted\",\n                    \"provider\": \"pinpoint-default\"\n                }\n            }\n        ],\n        \"email\": [],\n        \"whatsapp\": []\n    },\n    \"request\": {\n        \"uri\": \"/core/api/v1/messaging-service/messages\",\n        \"method\": \"\",\n        \"queryString\": \"\"\n    }\n}"
 						},
 						{
-							"name": "Send messages",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "{{request_id}}"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "{{tenant_id}}"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "{{token}}"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "{{app_id}}"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"description": "base 64 encoded secret key for HMAC Authentication",
-										"key": "X-COREOS-CALLBACK-SECRET",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"email\": [\n    {\n      \"template\": \"order-processed\",\n      \"provider\": \"\",\n      \"from\": \"\",\n      \"to\": [\n        \"mansa.gills@delhivery.com\"\n      ],\n      \"data\": {\n        \"orderId\": \"orders:27e03289-9654-4e62-9457-32748e34efb9\",\n        \"companyName\": \"Delhivery\",\n        \"awbNumber\": \"AWB123456789087\"\n      }\n    }\n  ]\n}\n\n\n\n",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/core/api/v1/messaging-service/messages",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"core",
-										"api",
-										"v1",
-										"messaging-service",
-										"messages"
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Wed, 03 Jan 2024 16:12:26 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=UTF-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "252"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "vary",
-									"value": "Origin"
-								},
-								{
-									"key": "x-envoy-upstream-service-time",
-									"value": "6"
-								},
-								{
-									"key": "server",
-									"value": "istio-envoy"
-								},
-								{
-									"key": "strict-transport-security",
-									"value": "max-age=31536000; includeSubDomains"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"error\": {\n        \"code\": \"104060001011\",\n        \"description\": \"Something went wrong. Please try again.\",\n        \"additionalInfo\": \"invalid memory address or nil pointer dereference\"\n    },\n    \"request\": {\n        \"uri\": \"/core/api/v1/messaging-service/messages\",\n        \"method\": \"POST\",\n        \"queryString\": \"\"\n    }\n}"
-						},
-						{
-							"name": "Send messages",
+							"name": "Send email messages",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -2567,7 +1521,7 @@
 							{
 								"description": "(Required) Unique requestId",
 								"key": "X-COREOS-REQUEST-ID",
-								"value": "{{request_id}}"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) Tenant id",
@@ -2587,7 +1541,7 @@
 							{
 								"description": "core-os user info",
 								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
+								"value": "{{$guid}}"
 							},
 							{
 								"key": "Content-Type",
@@ -2630,425 +1584,7 @@
 						},
 						"description": "Update externalRef or sender details for a template or mark template as active/inactive"
 					},
-					"response": [
-						{
-							"name": "Successful operation",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"isActive\": \"<boolean>\",\n  \"data\": {\n    \"senderId\": \"<string>\",\n    \"externalRef\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/templates/:templateName",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"templates",
-										":templateName"
-									],
-									"variable": [
-										{
-											"key": "templateName"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"data\": {\n    \"name\": \"<string>\"\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"isActive\": \"<boolean>\",\n  \"data\": {\n    \"senderId\": \"<string>\",\n    \"externalRef\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/templates/:templateName",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"templates",
-										":templateName"
-									],
-									"variable": [
-										{
-											"key": "templateName"
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"isActive\": \"<boolean>\",\n  \"data\": {\n    \"senderId\": \"<string>\",\n    \"externalRef\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/templates/:templateName",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"templates",
-										":templateName"
-									],
-									"variable": [
-										{
-											"key": "templateName"
-										}
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Not found - The server can not find the requested resource.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"isActive\": \"<boolean>\",\n  \"data\": {\n    \"senderId\": \"<string>\",\n    \"externalRef\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/templates/:templateName",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"templates",
-										":templateName"
-									],
-									"variable": [
-										{
-											"key": "templateName"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						},
-						{
-							"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) App Id from app service",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"isActive\": \"<boolean>\",\n  \"data\": {\n    \"senderId\": \"<string>\",\n    \"externalRef\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/templates/:templateName",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"templates",
-										":templateName"
-									],
-									"variable": [
-										{
-											"key": "templateName"
-										}
-									]
-								}
-							},
-							"status": "Service Unavailable",
-							"code": 503,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"GET\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-						}
-					]
+					"response": []
 				}
 			]
 		},
@@ -3063,7 +1599,7 @@
 							{
 								"description": "(Required) Unique requestId",
 								"key": "X-COREOS-REQUEST-ID",
-								"value": "{{request_id}}"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) Tenant id",
@@ -3078,12 +1614,12 @@
 							{
 								"description": "core-os user info",
 								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) core-os app id",
 								"key": "X-COREOS-APP-ID",
-								"value": "<string>"
+								"value": "{{app_id}}"
 							},
 							{
 								"key": "Content-Type",
@@ -3096,7 +1632,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"callback\": {\n    \"url\": \"https://webhook.site/75a95d9c-01f5-4ea3-81f2-84202e47396a\",\n    \"meta\": {},\n    \"secret\": \"<string>\"\n  }\n}",
+							"raw": "{\n  \"callback\": {\n    \"url\": \"https://example.webhook.site\", // Add your webhook URL here\n    \"meta\": {}\n  }\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -3122,440 +1658,7 @@
 						},
 						"description": "App devs should call this api for requesting consent for a phone number"
 					},
-					"response": [
-						{
-							"name": "Successful operation",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) core-os app id",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"callback\": {\n    \"url\": \"https://e8Q5PHEw:UamJIZ._XIWH#5KDu4oLRiW=bpBKW+F7OaSihBytGcjMDvPA_-#_.vl6i:Z\",\n    \"meta\": {},\n    \"secret\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/mts/providers/sim/:msisdn/consent",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"mts",
-										"providers",
-										"sim",
-										":msisdn",
-										"consent"
-									],
-									"variable": [
-										{
-											"key": "msisdn"
-										}
-									]
-								}
-							},
-							"status": "Accepted",
-							"code": 202,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"data\": {\n    \"status\": \"EXPIRED\"\n  },\n  \"error\": {}\n}"
-						},
-						{
-							"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) core-os app id",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"callback\": {\n    \"url\": \"https://e8Q5PHEw:UamJIZ._XIWH#5KDu4oLRiW=bpBKW+F7OaSihBytGcjMDvPA_-#_.vl6i:Z\",\n    \"meta\": {},\n    \"secret\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/mts/providers/sim/:msisdn/consent",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"mts",
-										"providers",
-										"sim",
-										":msisdn",
-										"consent"
-									],
-									"variable": [
-										{
-											"key": "msisdn"
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"sin\"\n}"
-						},
-						{
-							"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) core-os app id",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"callback\": {\n    \"url\": \"https://e8Q5PHEw:UamJIZ._XIWH#5KDu4oLRiW=bpBKW+F7OaSihBytGcjMDvPA_-#_.vl6i:Z\",\n    \"meta\": {},\n    \"secret\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/mts/providers/sim/:msisdn/consent",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"mts",
-										"providers",
-										"sim",
-										":msisdn",
-										"consent"
-									],
-									"variable": [
-										{
-											"key": "msisdn"
-										}
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"sin\"\n}"
-						},
-						{
-							"name": "Not found - The server can not find the requested resource.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) core-os app id",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"callback\": {\n    \"url\": \"https://e8Q5PHEw:UamJIZ._XIWH#5KDu4oLRiW=bpBKW+F7OaSihBytGcjMDvPA_-#_.vl6i:Z\",\n    \"meta\": {},\n    \"secret\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/mts/providers/sim/:msisdn/consent",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"mts",
-										"providers",
-										"sim",
-										":msisdn",
-										"consent"
-									],
-									"variable": [
-										{
-											"key": "msisdn"
-										}
-									]
-								}
-							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"sin\"\n}"
-						},
-						{
-							"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"description": "(Required) Unique requestId",
-										"key": "X-COREOS-REQUEST-ID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Tenant id",
-										"key": "X-COREOS-TID",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) Unique core-os access token",
-										"key": "X-COREOS-ACCESS",
-										"value": "<string>"
-									},
-									{
-										"description": "core-os user info",
-										"key": "X-COREOS-USERINFO",
-										"value": "<string>"
-									},
-									{
-										"description": "(Required) core-os app id",
-										"key": "X-COREOS-APP-ID",
-										"value": "<string>"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"callback\": {\n    \"url\": \"https://e8Q5PHEw:UamJIZ._XIWH#5KDu4oLRiW=bpBKW+F7OaSihBytGcjMDvPA_-#_.vl6i:Z\",\n    \"meta\": {},\n    \"secret\": \"<string>\"\n  }\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/mts/providers/sim/:msisdn/consent",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"mts",
-										"providers",
-										"sim",
-										":msisdn",
-										"consent"
-									],
-									"variable": [
-										{
-											"key": "msisdn"
-										}
-									]
-								}
-							},
-							"status": "Service Unavailable",
-							"code": 503,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-COREOS-REQUEST-ID",
-									"value": "<string>",
-									"description": {
-										"content": "Unique request ID that was passed as header parameter in the request.",
-										"type": "text/plain"
-									}
-								}
-							],
-							"cookie": [],
-							"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"sin\"\n}"
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "Get Consent by phoneNumber",
@@ -3565,7 +1668,7 @@
 							{
 								"description": "(Required) Unique requestId",
 								"key": "X-COREOS-REQUEST-ID",
-								"value": "{{request_id}}"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) Tenant id",
@@ -3580,7 +1683,7 @@
 							{
 								"description": "core-os user info",
 								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
+								"value": "{{$guid}}"
 							},
 							{
 								"key": "Accept",
@@ -3588,7 +1691,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/core/api/v1/mts/providers/sim/919876543210/consent",
+							"raw": "{{baseUrl}}/core/api/v1/mts/providers/sim/:msisdn/consent",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -3599,8 +1702,14 @@
 								"mts",
 								"providers",
 								"sim",
-								"919876543210",
+								":msisdn",
 								"consent"
+							],
+							"variable": [
+								{
+									"key": "msisdn",
+									"value": ""
+								}
 							]
 						},
 						"description": "phoneNumber should be a 12 digit numeric starting with 91"
@@ -3967,7 +2076,7 @@
 							{
 								"description": "(Required) Unique requestId",
 								"key": "X-COREOS-REQUEST-ID",
-								"value": "{{request_id}}"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) Tenant id",
@@ -3982,12 +2091,12 @@
 							{
 								"description": "core-os user info",
 								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) core-os app id",
 								"key": "X-COREOS-APP-ID",
-								"value": "<string>"
+								"value": "{{app_id}}"
 							},
 							{
 								"key": "Content-Type",
@@ -4000,7 +2109,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"deviceId\": \"999999999\",\n  \"providerType\": \"SIM\",\n  \"externalRefId\": \"ref:f47ac10b-58cc-4372-a567-0e02b2c3d479\",\n  \"defaultStart\": true,\n  \"expiry\": \"2d4h3m\",\n  \"stopGracePeriod\": \"30m\",\n  \"callback\": {\n    \"url\": \"http://www.kgSqU@761cS1@Yx+L@bEXp0Lw._qgILxwiqjN1psKmOj~e-sgK7p00C7c~rTxD.t0a0rlwFvoRJNImVoNqokuUa5rzfn0SCx01EPX:sWHm9+_NvRMuFOo.qufyf%Tqf%iAn?\",\n    \"meta\": {},\n    \"secret\": \"<string>\"\n  }\n}",
+							"raw": "{\n  \"deviceId\": \"999999999\",\n  \"providerType\": \"SIM\",\n  \"externalRefId\": \"ref:f47ac10b-58cc-4372-a567-0e02b2c3d479\",\n  \"defaultStart\": true,\n  \"expiry\": \"2d4h3m\",\n  \"stopGracePeriod\": \"30m\",\n  \"callback\": {\n    \"url\": \"http://example.callback.site\", // Add your callback URL here.\n    \"meta\": {}\n  }\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -4609,22 +2718,22 @@
 							{
 								"description": "(Required) Unique requestId",
 								"key": "X-COREOS-REQUEST-ID",
-								"value": "<string>"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) Tenant id",
 								"key": "X-COREOS-TID",
-								"value": "<string>"
+								"value": "{{tenant_id}}"
 							},
 							{
 								"description": "(Required) Unique core-os access token",
 								"key": "X-COREOS-ACCESS",
-								"value": "<string>"
+								"value": "{{token}}"
 							},
 							{
 								"description": "core-os user info",
 								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
+								"value": "{{$guid}}"
 							},
 							{
 								"key": "Accept",
@@ -4998,7 +3107,7 @@
 							{
 								"description": "(Required) Unique requestId",
 								"key": "X-COREOS-REQUEST-ID",
-								"value": "{{request_id}}"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) Tenant id",
@@ -5013,7 +3122,7 @@
 							{
 								"description": "core-os user info",
 								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
+								"value": "{{$guid}}"
 							},
 							{
 								"key": "Accept",
@@ -5380,7 +3489,7 @@
 							{
 								"description": "(Required) Unique requestId",
 								"key": "X-COREOS-REQUEST-ID",
-								"value": "{{request_id}}"
+								"value": "{{$guid}}"
 							},
 							{
 								"description": "(Required) Tenant id",
@@ -5395,7 +3504,7 @@
 							{
 								"description": "core-os user info",
 								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
+								"value": "{{$guid}}"
 							},
 							{
 								"key": "Content-Type",
@@ -5408,7 +3517,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"operation\": \"START\",\n  \"callback\": {\n    \"url\": \"https://www.Zas7C8rPfGnID6Z9JsHIn1a_bWLW%hwdNzow~4jls6ctXP~N9Y#:Ojs@XFaD4Oq_%VR0kQF2UKA3vk-+z#fCWp#JfsUs8Yd-He-gNBQC2WUdB-bqgf%nMB7x6NK0GEWoRF:D+S6Tb7o_ETY_8ggXGz0O@RKZfKm6lwes07mR6~.Y2#Hpg-vHt7QfMXs#d1:-z_8VxBd1nstKQvwiHRk1VY6Y.vtsnZbog+3lgCP\",\n    \"meta\": {},\n    \"secret\": \"<string>\"\n  }\n}",
+							"raw": "{\n  \"operation\": \"START\",\n  \"callback\": {\n    \"url\": \"https://www.Zas7C8rPfGnID6Z9JsHIn1a_bWLW%hwdNzow~4jls6ctXP~N9Y#:Ojs@XFaD4Oq_%VR0kQF2UKA3vk-+z#fCWp#JfsUs8Yd-He-gNBQC2WUdB-bqgf%nMB7x6NK0GEWoRF:D+S6Tb7o_ETY_8ggXGz0O@RKZfKm6lwes07mR6~.Y2#Hpg-vHt7QfMXs#d1:-z_8VxBd1nstKQvwiHRk1VY6Y.vtsnZbog+3lgCP\",\n    \"meta\": {}\n  }\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -5837,6 +3946,63 @@
 							"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"sin\"\n}"
 						}
 					]
+				},
+				{
+					"name": "Fetch Trace Info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-ACCESS",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-TID",
+								"value": "{{tenant_id}}",
+								"type": "text"
+							},
+							{
+								"key": "X-COREOS-USERINFO",
+								"value": "{{$guid}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/core/api/v1/mts/devices/{{deviceId}}/apps/{{appId}}/trace?duration=10h",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"mts",
+								"devices",
+								"{{deviceId}}",
+								"apps",
+								"{{appId}}",
+								"trace"
+							],
+							"query": [
+								{
+									"key": "duration",
+									"value": "10h"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
