@@ -8,7 +8,1535 @@
 	},
 	"item": [
 		{
-			"name": "Get Map Tiles",
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var accessToken = jsonData.data.accessToken;",
+							"",
+							"pm.environment.set(\"token\", accessToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"clientId\":\"{{client_id}}\",\n    \"clientSecret\":\"{{client_secret}}\",\n  \"audience\": \"platform:app:coreos\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/aaa/auth/client-credentials",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"aaa",
+						"auth",
+						"client-credentials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get ETA Duration by Addrress",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"description": "(Required) Tenant ID.",
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}"
+					},
+					{
+						"description": "(Required) Core-os access token.",
+						"key": "X-COREOS-ACCESS",
+						"value": "{{token}}"
+					},
+					{
+						"description": "(Required) Unique RequestId.",
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}"
+					},
+					{
+						"description": "Core-os user info.",
+						"key": "X-COREOS-USERINFO",
+						"value": "<string>"
+					},
+					{
+						"description": "base64 encoded callback secret",
+						"key": "X-COREOS-CALLBACK-SECRET",
+						"value": "<string>"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/eta?source=ODX LM, 5, Sector 44, Gurugram&destination=Millennium City Centre Gurugram, Gurgaon - Delhi Expy, Sector 29, Gurugram, Haryana 122007&mode=driving&callback={\"url\":\"https://webhook.site/91b9aab4-46cf-49e0-822d-3d0c498e0a60\",\"headers\":{}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"mts",
+						"maps",
+						"eta"
+					],
+					"query": [
+						{
+							"key": "source",
+							"value": "ODX LM, 5, Sector 44, Gurugram",
+							"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+						},
+						{
+							"key": "destination",
+							"value": "Millennium City Centre Gurugram, Gurgaon - Delhi Expy, Sector 29, Gurugram, Haryana 122007",
+							"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+						},
+						{
+							"key": "departureTime",
+							"value": "<number>",
+							"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past",
+							"disabled": true
+						},
+						{
+							"key": "mode",
+							"value": "driving",
+							"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+						},
+						{
+							"key": "avoid",
+							"value": "<string>",
+							"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways",
+							"disabled": true
+						},
+						{
+							"key": "trafficModel",
+							"value": "<string>",
+							"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory",
+							"disabled": true
+						},
+						{
+							"key": "callback",
+							"value": "{\"url\":\"https://webhook.site/91b9aab4-46cf-49e0-822d-3d0c498e0a60\",\"headers\":{}}",
+							"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+						}
+					]
+				},
+				"description": "This endpoint returns the eta duration between 2 geolocations"
+			},
+			"response": [
+				{
+					"name": "OK - The request succeeded.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"additionalInfo\": {},\n    \"code\": \"<number>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+				},
+				{
+					"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Not found - The server can not find the requested resource.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "API to fetch ETA duration",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "{{tenant_id}}"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "{{token}}"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "{{request_id}}"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/core/api/v1/mts/maps/eta?source=1201 S Main St, Walnut Creek, CA 94596&destination=3070 Main St, Oakley, CA 94561&mode=driving&callback={\"url\":\"https://alexa1.requestcatcher.com/test\",\"headers\":{}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "1201 S Main St, Walnut Creek, CA 94596",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "3070 Main St, Oakley, CA 94561",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past",
+									"disabled": true
+								},
+								{
+									"key": "mode",
+									"value": "driving",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways",
+									"disabled": true
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory",
+									"disabled": true
+								},
+								{
+									"key": "callback",
+									"value": "{\"url\":\"https://alexa1.requestcatcher.com/test\",\"headers\":{}}",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 18 Jan 2024 07:34:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "53"
+						},
+						{
+							"key": "server",
+							"value": "istio-envoy"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {},\n    \"data\": {\n        \"id\": \"1234\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get ETA Duration by Coordinates",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"description": "(Required) Tenant ID.",
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}"
+					},
+					{
+						"description": "(Required) Core-os access token.",
+						"key": "X-COREOS-ACCESS",
+						"value": "{{token}}"
+					},
+					{
+						"description": "(Required) Unique RequestId.",
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}"
+					},
+					{
+						"description": "Core-os user info.",
+						"key": "X-COREOS-USERINFO",
+						"value": "<string>"
+					},
+					{
+						"description": "base64 encoded callback secret",
+						"key": "X-COREOS-CALLBACK-SECRET",
+						"value": "<string>"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/eta?source=28.673980543290554,77.08028318182417&destination=28.661782,77.083259&mode=driving&callback={\"url\":\"https://webhook.site/91b9aab4-46cf-49e0-822d-3d0c498e0a60\",\"headers\":{}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"mts",
+						"maps",
+						"eta"
+					],
+					"query": [
+						{
+							"key": "source",
+							"value": "28.673980543290554,77.08028318182417",
+							"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+						},
+						{
+							"key": "destination",
+							"value": "28.661782,77.083259",
+							"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+						},
+						{
+							"key": "departureTime",
+							"value": "<number>",
+							"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past",
+							"disabled": true
+						},
+						{
+							"key": "mode",
+							"value": "driving",
+							"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+						},
+						{
+							"key": "avoid",
+							"value": "<string>",
+							"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways",
+							"disabled": true
+						},
+						{
+							"key": "trafficModel",
+							"value": "<string>",
+							"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory",
+							"disabled": true
+						},
+						{
+							"key": "callback",
+							"value": "{\"url\":\"https://webhook.site/91b9aab4-46cf-49e0-822d-3d0c498e0a60\",\"headers\":{}}",
+							"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+						}
+					]
+				},
+				"description": "This endpoint returns the eta duration between 2 geolocations"
+			},
+			"response": [
+				{
+					"name": "OK - The request succeeded.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"additionalInfo\": {},\n    \"code\": \"<number>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+				},
+				{
+					"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Not found - The server can not find the requested resource.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "API to fetch ETA duration",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "{{tenant_id}}"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "{{token}}"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "{{request_id}}"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/core/api/v1/mts/maps/eta?source=1201 S Main St, Walnut Creek, CA 94596&destination=3070 Main St, Oakley, CA 94561&mode=driving&callback={\"url\":\"https://alexa1.requestcatcher.com/test\",\"headers\":{}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "1201 S Main St, Walnut Creek, CA 94596",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "3070 Main St, Oakley, CA 94561",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past",
+									"disabled": true
+								},
+								{
+									"key": "mode",
+									"value": "driving",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways",
+									"disabled": true
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory",
+									"disabled": true
+								},
+								{
+									"key": "callback",
+									"value": "{\"url\":\"https://alexa1.requestcatcher.com/test\",\"headers\":{}}",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 18 Jan 2024 07:34:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "53"
+						},
+						{
+							"key": "server",
+							"value": "istio-envoy"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {},\n    \"data\": {\n        \"id\": \"1234\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Map Tiles (default provider)",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -68,6 +1596,22 @@
 		},
 		{
 			"name": "Register Map Service Provider",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"var providerName = jsonData.data.providerName;",
+							"",
+							"pm.environment.set(\"providerName\", providerName);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -102,7 +1646,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"name\": \"myGoogleMaps\", // Enter your provider name\n  \"type\": \"google\",\n  \"credentials\": {\n     \"apiKey\": \"bXltYXBzYXBpa2V5\"  // provide your on API key to register the provider\n  }\n}",
+					"raw": "{\n  \"name\": \"myMapBoxApp1\", // Enter your own provider name\n  \"type\": \"mapBox\", // Choose the type as \"google\", \"mapBox\", \"mapMyIndia\" or \"hereMaps\" as per your access.\n  \"credentials\": {\n     \"apiKey\": \"bXltYXBzYXBpa2V5\"  // provide your own API key to register the provider\n  }\n}",
 					"options": {
 						"raw": {
 							"headerFamily": "json",
@@ -631,7 +2175,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/core/api/v1/mts/maps/providers/:providerName",
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/providers/{{providerName}}",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -642,14 +2186,7 @@
 						"mts",
 						"maps",
 						"providers",
-						":providerName"
-					],
-					"variable": [
-						{
-							"key": "providerName",
-							"value": "myGoogleMaps",
-							"description": "(Required) denotes the map service provider name"
-						}
+						"{{providerName}}"
 					]
 				},
 				"description": "This endpoint will fetch the details of a specific map service provider"
@@ -990,6 +2527,64 @@
 			]
 		},
 		{
+			"name": "Get Map Tiles (your service provider)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"description": "(Required) Tenant ID.",
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}"
+					},
+					{
+						"description": "(Required) Core-os access token.",
+						"key": "X-COREOS-ACCESS",
+						"value": "{{token}}"
+					},
+					{
+						"description": "(Required) Unique RequestId.",
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}"
+					},
+					{
+						"description": "Core-os user info.",
+						"key": "X-COREOS-USERINFO",
+						"value": "<string>"
+					},
+					{
+						"key": "Accept",
+						"value": "image/png"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/tiles/3/5/3?providerName={{providerName}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"mts",
+						"maps",
+						"tiles",
+						"3",
+						"5",
+						"3"
+					],
+					"query": [
+						{
+							"key": "providerName",
+							"value": "{{providerName}}",
+							"description": "denotes the map provider type. Default value is \"mapTiler\" for india tenants and \"osm\" for US tenants"
+						}
+					]
+				},
+				"description": "This endpoint returns map tile based on map coordinates and zoom level"
+			},
+			"response": []
+		},
+		{
 			"name": "Update a Map Service Provider",
 			"request": {
 				"method": "PUT",
@@ -1034,7 +2629,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/core/api/v1/mts/maps/providers/:providerName",
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/providers/{{providerName}}",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -1045,14 +2640,7 @@
 						"mts",
 						"maps",
 						"providers",
-						":providerName"
-					],
-					"variable": [
-						{
-							"key": "providerName",
-							"value": "myGoogleMaps",
-							"description": "(Required) denotes the map service provider name"
-						}
+						"{{providerName}}"
 					]
 				},
 				"description": "This endpoint will update the details of a specific map service provider"
@@ -1493,7 +3081,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/core/api/v1/mts/maps/providers/:providerName",
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/providers/{{providerName}}",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -1504,14 +3092,7 @@
 						"mts",
 						"maps",
 						"providers",
-						":providerName"
-					],
-					"variable": [
-						{
-							"key": "providerName",
-							"value": "myGoogleMaps",
-							"description": "(Required) denotes the map service provider name"
-						}
+						"{{providerName}}"
 					]
 				},
 				"description": "This endpoint will delete a specific map service provider"
@@ -2199,742 +3780,6 @@
 					],
 					"cookie": [],
 					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
-				}
-			]
-		},
-		{
-			"name": "API to fetch ETA duration",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"description": "(Required) Tenant ID.",
-						"key": "X-COREOS-TID",
-						"value": "{{tenant_id}}"
-					},
-					{
-						"description": "(Required) Core-os access token.",
-						"key": "X-COREOS-ACCESS",
-						"value": "{{token}}"
-					},
-					{
-						"description": "(Required) Unique RequestId.",
-						"key": "X-COREOS-REQUEST-ID",
-						"value": "{{request_id}}"
-					},
-					{
-						"description": "Core-os user info.",
-						"key": "X-COREOS-USERINFO",
-						"value": "<string>"
-					},
-					{
-						"description": "base64 encoded callback secret",
-						"key": "X-COREOS-CALLBACK-SECRET",
-						"value": "<string>"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "{{baseUrl}}/core/api/v1/mts/maps/eta?source=37.974420,-121.705365&destination=37.964406,-121.664853&mode=driving&callback={\"url\":\"https://webhook.site/91b9aab4-46cf-49e0-822d-3d0c498e0a60\",\"headers\":{}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"core",
-						"api",
-						"v1",
-						"mts",
-						"maps",
-						"eta"
-					],
-					"query": [
-						{
-							"key": "source",
-							"value": "37.974420,-121.705365",
-							"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
-						},
-						{
-							"key": "destination",
-							"value": "37.964406,-121.664853",
-							"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
-						},
-						{
-							"key": "departureTime",
-							"value": "<number>",
-							"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past",
-							"disabled": true
-						},
-						{
-							"key": "mode",
-							"value": "driving",
-							"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
-						},
-						{
-							"key": "avoid",
-							"value": "<string>",
-							"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways",
-							"disabled": true
-						},
-						{
-							"key": "trafficModel",
-							"value": "<string>",
-							"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory",
-							"disabled": true
-						},
-						{
-							"key": "callback",
-							"value": "{\"url\":\"https://webhook.site/91b9aab4-46cf-49e0-822d-3d0c498e0a60\",\"headers\":{}}",
-							"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
-						}
-					]
-				},
-				"description": "This endpoint returns the eta duration between 2 geolocations"
-			},
-			"response": [
-				{
-					"name": "OK - The request succeeded.",
-					"originalRequest": {
-						"method": "GET",
-						"header": [
-							{
-								"description": "(Required) Tenant ID.",
-								"key": "X-COREOS-TID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Core-os access token.",
-								"key": "X-COREOS-ACCESS",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Unique RequestId.",
-								"key": "X-COREOS-REQUEST-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "Core-os user info.",
-								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
-							},
-							{
-								"description": "base64 encoded callback secret",
-								"key": "X-COREOS-CALLBACK-SECRET",
-								"value": "<string>"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"mts",
-								"maps",
-								"eta"
-							],
-							"query": [
-								{
-									"key": "source",
-									"value": "<string>",
-									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
-								},
-								{
-									"key": "destination",
-									"value": "<string>",
-									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
-								},
-								{
-									"key": "departureTime",
-									"value": "<number>",
-									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
-								},
-								{
-									"key": "mode",
-									"value": "<string>",
-									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
-								},
-								{
-									"key": "avoid",
-									"value": "<string>",
-									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
-								},
-								{
-									"key": "trafficModel",
-									"value": "<string>",
-									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
-								},
-								{
-									"key": "callback",
-									"value": "<string>",
-									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
-								}
-							]
-						}
-					},
-					"status": "Accepted",
-					"code": 202,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						}
-					],
-					"cookie": [],
-					"body": "{\n  \"error\": {\n    \"additionalInfo\": {},\n    \"code\": \"<number>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
-				},
-				{
-					"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
-					"originalRequest": {
-						"method": "GET",
-						"header": [
-							{
-								"description": "(Required) Tenant ID.",
-								"key": "X-COREOS-TID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Core-os access token.",
-								"key": "X-COREOS-ACCESS",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Unique RequestId.",
-								"key": "X-COREOS-REQUEST-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "Core-os user info.",
-								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
-							},
-							{
-								"description": "base64 encoded callback secret",
-								"key": "X-COREOS-CALLBACK-SECRET",
-								"value": "<string>"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"mts",
-								"maps",
-								"eta"
-							],
-							"query": [
-								{
-									"key": "source",
-									"value": "<string>",
-									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
-								},
-								{
-									"key": "destination",
-									"value": "<string>",
-									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
-								},
-								{
-									"key": "departureTime",
-									"value": "<number>",
-									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
-								},
-								{
-									"key": "mode",
-									"value": "<string>",
-									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
-								},
-								{
-									"key": "avoid",
-									"value": "<string>",
-									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
-								},
-								{
-									"key": "trafficModel",
-									"value": "<string>",
-									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
-								},
-								{
-									"key": "callback",
-									"value": "<string>",
-									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
-								}
-							]
-						}
-					},
-					"status": "Bad Request",
-					"code": 400,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "X-COREOS-REQUEST-ID",
-							"value": "<string>",
-							"description": {
-								"content": "Unique request ID that was passed as header parameter in the request.",
-								"type": "text/plain"
-							}
-						}
-					],
-					"cookie": [],
-					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
-				},
-				{
-					"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
-					"originalRequest": {
-						"method": "GET",
-						"header": [
-							{
-								"description": "(Required) Tenant ID.",
-								"key": "X-COREOS-TID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Core-os access token.",
-								"key": "X-COREOS-ACCESS",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Unique RequestId.",
-								"key": "X-COREOS-REQUEST-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "Core-os user info.",
-								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
-							},
-							{
-								"description": "base64 encoded callback secret",
-								"key": "X-COREOS-CALLBACK-SECRET",
-								"value": "<string>"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"mts",
-								"maps",
-								"eta"
-							],
-							"query": [
-								{
-									"key": "source",
-									"value": "<string>",
-									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
-								},
-								{
-									"key": "destination",
-									"value": "<string>",
-									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
-								},
-								{
-									"key": "departureTime",
-									"value": "<number>",
-									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
-								},
-								{
-									"key": "mode",
-									"value": "<string>",
-									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
-								},
-								{
-									"key": "avoid",
-									"value": "<string>",
-									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
-								},
-								{
-									"key": "trafficModel",
-									"value": "<string>",
-									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
-								},
-								{
-									"key": "callback",
-									"value": "<string>",
-									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
-								}
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "X-COREOS-REQUEST-ID",
-							"value": "<string>",
-							"description": {
-								"content": "Unique request ID that was passed as header parameter in the request.",
-								"type": "text/plain"
-							}
-						}
-					],
-					"cookie": [],
-					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
-				},
-				{
-					"name": "Not found - The server can not find the requested resource.",
-					"originalRequest": {
-						"method": "GET",
-						"header": [
-							{
-								"description": "(Required) Tenant ID.",
-								"key": "X-COREOS-TID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Core-os access token.",
-								"key": "X-COREOS-ACCESS",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Unique RequestId.",
-								"key": "X-COREOS-REQUEST-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "Core-os user info.",
-								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
-							},
-							{
-								"description": "base64 encoded callback secret",
-								"key": "X-COREOS-CALLBACK-SECRET",
-								"value": "<string>"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"mts",
-								"maps",
-								"eta"
-							],
-							"query": [
-								{
-									"key": "source",
-									"value": "<string>",
-									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
-								},
-								{
-									"key": "destination",
-									"value": "<string>",
-									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
-								},
-								{
-									"key": "departureTime",
-									"value": "<number>",
-									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
-								},
-								{
-									"key": "mode",
-									"value": "<string>",
-									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
-								},
-								{
-									"key": "avoid",
-									"value": "<string>",
-									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
-								},
-								{
-									"key": "trafficModel",
-									"value": "<string>",
-									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
-								},
-								{
-									"key": "callback",
-									"value": "<string>",
-									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
-								}
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "X-COREOS-REQUEST-ID",
-							"value": "<string>",
-							"description": {
-								"content": "Unique request ID that was passed as header parameter in the request.",
-								"type": "text/plain"
-							}
-						}
-					],
-					"cookie": [],
-					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
-				},
-				{
-					"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
-					"originalRequest": {
-						"method": "GET",
-						"header": [
-							{
-								"description": "(Required) Tenant ID.",
-								"key": "X-COREOS-TID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Core-os access token.",
-								"key": "X-COREOS-ACCESS",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Unique RequestId.",
-								"key": "X-COREOS-REQUEST-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "Core-os user info.",
-								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
-							},
-							{
-								"description": "base64 encoded callback secret",
-								"key": "X-COREOS-CALLBACK-SECRET",
-								"value": "<string>"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"mts",
-								"maps",
-								"eta"
-							],
-							"query": [
-								{
-									"key": "source",
-									"value": "<string>",
-									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
-								},
-								{
-									"key": "destination",
-									"value": "<string>",
-									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
-								},
-								{
-									"key": "departureTime",
-									"value": "<number>",
-									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
-								},
-								{
-									"key": "mode",
-									"value": "<string>",
-									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
-								},
-								{
-									"key": "avoid",
-									"value": "<string>",
-									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
-								},
-								{
-									"key": "trafficModel",
-									"value": "<string>",
-									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
-								},
-								{
-									"key": "callback",
-									"value": "<string>",
-									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
-								}
-							]
-						}
-					},
-					"status": "Service Unavailable",
-					"code": 503,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "X-COREOS-REQUEST-ID",
-							"value": "<string>",
-							"description": {
-								"content": "Unique request ID that was passed as header parameter in the request.",
-								"type": "text/plain"
-							}
-						}
-					],
-					"cookie": [],
-					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
-				},
-				{
-					"name": "API to fetch ETA duration",
-					"originalRequest": {
-						"method": "GET",
-						"header": [
-							{
-								"description": "(Required) Tenant ID.",
-								"key": "X-COREOS-TID",
-								"value": "{{tenant_id}}"
-							},
-							{
-								"description": "(Required) Core-os access token.",
-								"key": "X-COREOS-ACCESS",
-								"value": "{{token}}"
-							},
-							{
-								"description": "(Required) Unique RequestId.",
-								"key": "X-COREOS-REQUEST-ID",
-								"value": "{{request_id}}"
-							},
-							{
-								"description": "Core-os user info.",
-								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
-							},
-							{
-								"description": "base64 encoded callback secret",
-								"key": "X-COREOS-CALLBACK-SECRET",
-								"value": "<string>"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/core/api/v1/mts/maps/eta?source=1201 S Main St, Walnut Creek, CA 94596&destination=3070 Main St, Oakley, CA 94561&mode=driving&callback={\"url\":\"https://alexa1.requestcatcher.com/test\",\"headers\":{}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"core",
-								"api",
-								"v1",
-								"mts",
-								"maps",
-								"eta"
-							],
-							"query": [
-								{
-									"key": "source",
-									"value": "1201 S Main St, Walnut Creek, CA 94596",
-									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
-								},
-								{
-									"key": "destination",
-									"value": "3070 Main St, Oakley, CA 94561",
-									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
-								},
-								{
-									"key": "departureTime",
-									"value": "<number>",
-									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past",
-									"disabled": true
-								},
-								{
-									"key": "mode",
-									"value": "driving",
-									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
-								},
-								{
-									"key": "avoid",
-									"value": "<string>",
-									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways",
-									"disabled": true
-								},
-								{
-									"key": "trafficModel",
-									"value": "<string>",
-									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory",
-									"disabled": true
-								},
-								{
-									"key": "callback",
-									"value": "{\"url\":\"https://alexa1.requestcatcher.com/test\",\"headers\":{}}",
-									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
-								}
-							]
-						}
-					},
-					"status": "Accepted",
-					"code": 202,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Date",
-							"value": "Thu, 18 Jan 2024 07:34:39 GMT"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=UTF-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "34"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "vary",
-							"value": "Origin"
-						},
-						{
-							"key": "x-envoy-upstream-service-time",
-							"value": "53"
-						},
-						{
-							"key": "server",
-							"value": "istio-envoy"
-						},
-						{
-							"key": "strict-transport-security",
-							"value": "max-age=31536000; includeSubDomains"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"error\": {},\n    \"data\": {\n        \"id\": \"1234\"\n    }\n}"
 				}
 			]
 		}
