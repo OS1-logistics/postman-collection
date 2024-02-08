@@ -1,0 +1,3793 @@
+{
+	"info": {
+		"_postman_id": "639cf28e-33ef-4823-8d79-e260f78a40e8",
+		"name": "UAT: MTS Tiles and ETA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25995643",
+		"_collection_link": "https://dark-satellite-592830.postman.co/workspace/My-Workspace~877911b8-d08d-49e8-88ab-901b2b383645/collection/25995643-639cf28e-33ef-4823-8d79-e260f78a40e8?action=share&source=collection_link&creator=25995643"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var accessToken = jsonData.data.accessToken;",
+							"",
+							"pm.environment.set(\"token\", accessToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"clientId\":\"{{client_id}}\",\n    \"clientSecret\":\"{{client_secret}}\",\n  \"audience\": \"platform:app:coreos\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/aaa/auth/client-credentials",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"aaa",
+						"auth",
+						"client-credentials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get ETA Duration by Addrress",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"description": "(Required) Tenant ID.",
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}"
+					},
+					{
+						"description": "(Required) Core-os access token.",
+						"key": "X-COREOS-ACCESS",
+						"value": "{{token}}"
+					},
+					{
+						"description": "(Required) Unique RequestId.",
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}"
+					},
+					{
+						"description": "Core-os user info.",
+						"key": "X-COREOS-USERINFO",
+						"value": "<string>"
+					},
+					{
+						"description": "base64 encoded callback secret",
+						"key": "X-COREOS-CALLBACK-SECRET",
+						"value": "<string>"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/eta?source=ODX LM, 5, Sector 44, Gurugram&destination=Millennium City Centre Gurugram, Gurgaon - Delhi Expy, Sector 29, Gurugram, Haryana 122007&mode=driving&callback={\"url\":\"https://webhook.site/91b9aab4-46cf-49e0-822d-3d0c498e0a60\",\"headers\":{}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"mts",
+						"maps",
+						"eta"
+					],
+					"query": [
+						{
+							"key": "source",
+							"value": "ODX LM, 5, Sector 44, Gurugram",
+							"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+						},
+						{
+							"key": "destination",
+							"value": "Millennium City Centre Gurugram, Gurgaon - Delhi Expy, Sector 29, Gurugram, Haryana 122007",
+							"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+						},
+						{
+							"key": "departureTime",
+							"value": "<number>",
+							"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past",
+							"disabled": true
+						},
+						{
+							"key": "mode",
+							"value": "driving",
+							"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+						},
+						{
+							"key": "avoid",
+							"value": "<string>",
+							"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways",
+							"disabled": true
+						},
+						{
+							"key": "trafficModel",
+							"value": "<string>",
+							"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory",
+							"disabled": true
+						},
+						{
+							"key": "callback",
+							"value": "{\"url\":\"https://webhook.site/91b9aab4-46cf-49e0-822d-3d0c498e0a60\",\"headers\":{}}",
+							"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+						}
+					]
+				},
+				"description": "This endpoint returns the eta duration between 2 geolocations"
+			},
+			"response": [
+				{
+					"name": "OK - The request succeeded.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"additionalInfo\": {},\n    \"code\": \"<number>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+				},
+				{
+					"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Not found - The server can not find the requested resource.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "API to fetch ETA duration",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "{{tenant_id}}"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "{{token}}"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "{{request_id}}"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/core/api/v1/mts/maps/eta?source=1201 S Main St, Walnut Creek, CA 94596&destination=3070 Main St, Oakley, CA 94561&mode=driving&callback={\"url\":\"https://alexa1.requestcatcher.com/test\",\"headers\":{}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "1201 S Main St, Walnut Creek, CA 94596",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "3070 Main St, Oakley, CA 94561",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past",
+									"disabled": true
+								},
+								{
+									"key": "mode",
+									"value": "driving",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways",
+									"disabled": true
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory",
+									"disabled": true
+								},
+								{
+									"key": "callback",
+									"value": "{\"url\":\"https://alexa1.requestcatcher.com/test\",\"headers\":{}}",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 18 Jan 2024 07:34:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "53"
+						},
+						{
+							"key": "server",
+							"value": "istio-envoy"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {},\n    \"data\": {\n        \"id\": \"1234\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get ETA Duration by Coordinates",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"description": "(Required) Tenant ID.",
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}"
+					},
+					{
+						"description": "(Required) Core-os access token.",
+						"key": "X-COREOS-ACCESS",
+						"value": "{{token}}"
+					},
+					{
+						"description": "(Required) Unique RequestId.",
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}"
+					},
+					{
+						"description": "Core-os user info.",
+						"key": "X-COREOS-USERINFO",
+						"value": "<string>"
+					},
+					{
+						"description": "base64 encoded callback secret",
+						"key": "X-COREOS-CALLBACK-SECRET",
+						"value": "<string>"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/eta?source=28.673980543290554,77.08028318182417&destination=28.661782,77.083259&mode=driving&callback={\"url\":\"https://webhook.site/91b9aab4-46cf-49e0-822d-3d0c498e0a60\",\"headers\":{}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"mts",
+						"maps",
+						"eta"
+					],
+					"query": [
+						{
+							"key": "source",
+							"value": "28.673980543290554,77.08028318182417",
+							"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+						},
+						{
+							"key": "destination",
+							"value": "28.661782,77.083259",
+							"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+						},
+						{
+							"key": "departureTime",
+							"value": "<number>",
+							"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past",
+							"disabled": true
+						},
+						{
+							"key": "mode",
+							"value": "driving",
+							"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+						},
+						{
+							"key": "avoid",
+							"value": "<string>",
+							"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways",
+							"disabled": true
+						},
+						{
+							"key": "trafficModel",
+							"value": "<string>",
+							"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory",
+							"disabled": true
+						},
+						{
+							"key": "callback",
+							"value": "{\"url\":\"https://webhook.site/91b9aab4-46cf-49e0-822d-3d0c498e0a60\",\"headers\":{}}",
+							"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+						}
+					]
+				},
+				"description": "This endpoint returns the eta duration between 2 geolocations"
+			},
+			"response": [
+				{
+					"name": "OK - The request succeeded.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"additionalInfo\": {},\n    \"code\": \"<number>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
+				},
+				{
+					"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Not found - The server can not find the requested resource.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/eta?source=<string>&destination=<string>&departureTime=<number>&mode=<string>&avoid=<string>&trafficModel=<string>&callback=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "<string>",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past"
+								},
+								{
+									"key": "mode",
+									"value": "<string>",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways"
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory"
+								},
+								{
+									"key": "callback",
+									"value": "<string>",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "API to fetch ETA duration",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "{{tenant_id}}"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "{{token}}"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "{{request_id}}"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"description": "base64 encoded callback secret",
+								"key": "X-COREOS-CALLBACK-SECRET",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/core/api/v1/mts/maps/eta?source=1201 S Main St, Walnut Creek, CA 94596&destination=3070 Main St, Oakley, CA 94561&mode=driving&callback={\"url\":\"https://alexa1.requestcatcher.com/test\",\"headers\":{}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"mts",
+								"maps",
+								"eta"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "1201 S Main St, Walnut Creek, CA 94596",
+									"description": "(Required) comma separated lat and lon which denotes the starting position OR the address of the source point"
+								},
+								{
+									"key": "destination",
+									"value": "3070 Main St, Oakley, CA 94561",
+									"description": "(Required) comma separated lat and lon which denotes the ending position OR the address of the destination point"
+								},
+								{
+									"key": "departureTime",
+									"value": "<number>",
+									"description": "time in epoch seconds at which the vehicle is scheduled to depart from the origin(s). The provided time can be either current time or a later time. It cannot be in the past",
+									"disabled": true
+								},
+								{
+									"key": "mode",
+									"value": "driving",
+									"description": "(Required) denotes the mode of transportation. Should be oneOf [\"driving\", \"walking\", \"bicycling\"]"
+								},
+								{
+									"key": "avoid",
+									"value": "<string>",
+									"description": "Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. Comma separated. The following restrictions are supported tolls\", \"highways\", \"ferries\", \"indoor\". Default - none. Example- tolls,highways",
+									"disabled": true
+								},
+								{
+									"key": "trafficModel",
+									"value": "<string>",
+									"description": "Specifies the assumptions to use when calculating time in traffic <br/> <br/> **best_guess:** (default) indicates that the returned duration_in_traffic should be the best estimate of travel time given what is known about both historical traffic conditions and live traffic. <br/> <br/> **pessimistic:** indicates that the returned duration_in_traffic should be longer than the actual travel time on most days, though occasional days with particularly bad traffic conditions may exceed this value. <br/> <br/> **optimistic:** indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, though occasional days with particularly good traffic conditions may be faster than this value. <br/> <br/> if trafficModel is provided in request, then departureTime is mandatory",
+									"disabled": true
+								},
+								{
+									"key": "callback",
+									"value": "{\"url\":\"https://alexa1.requestcatcher.com/test\",\"headers\":{}}",
+									"description": "(Required) json string with the callback details. If provided, the API response will be sent to the callback url in an async manner."
+								}
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 18 Jan 2024 07:34:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "53"
+						},
+						{
+							"key": "server",
+							"value": "istio-envoy"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {},\n    \"data\": {\n        \"id\": \"1234\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Map Tiles (default provider)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"description": "(Required) Tenant ID.",
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}"
+					},
+					{
+						"description": "(Required) Core-os access token.",
+						"key": "X-COREOS-ACCESS",
+						"value": "{{token}}"
+					},
+					{
+						"description": "(Required) Unique RequestId.",
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}"
+					},
+					{
+						"description": "Core-os user info.",
+						"key": "X-COREOS-USERINFO",
+						"value": "<string>"
+					},
+					{
+						"key": "Accept",
+						"value": "image/png"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/tiles/3/5/3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"mts",
+						"maps",
+						"tiles",
+						"3",
+						"5",
+						"3"
+					],
+					"query": [
+						{
+							"key": "providerName",
+							"value": "\"mapTiler\"",
+							"description": "denotes the map provider type. Default value is \"mapTiler\" for india tenants and \"osm\" for US tenants",
+							"disabled": true
+						}
+					]
+				},
+				"description": "This endpoint returns map tile based on map coordinates and zoom level"
+			},
+			"response": []
+		},
+		{
+			"name": "Register Map Service Provider",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"var providerName = jsonData.data.providerName;",
+							"",
+							"pm.environment.set(\"providerName\", providerName);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"description": "(Required) Tenant ID.",
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}"
+					},
+					{
+						"description": "(Required) Core-os access token.",
+						"key": "X-COREOS-ACCESS",
+						"value": "{{token}}"
+					},
+					{
+						"description": "(Required) Unique RequestId.",
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}"
+					},
+					{
+						"description": "Core-os user info.",
+						"key": "X-COREOS-USERINFO",
+						"value": "<string>"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"myMapBoxApp1\", // Enter your own provider name\n  \"type\": \"mapBox\", // Choose the type as \"google\", \"mapBox\", \"mapMyIndia\" or \"hereMaps\" as per your access.\n  \"credentials\": {\n     \"apiKey\": \"bXltYXBzYXBpa2V5\"  // provide your own API key to register the provider\n  }\n}",
+					"options": {
+						"raw": {
+							"headerFamily": "json",
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/providers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"mts",
+						"maps",
+						"providers"
+					]
+				},
+				"description": "This endpoint register a map service provider"
+			},
+			"response": [
+				{
+					"name": "OK - The request succeeded.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"credentials\": {\n    \"apiKey\": \"<string>\"\n  }\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"additionalInfo\": {},\n    \"code\": \"<number>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"providerName\": \"<string>\"\n  }\n}"
+				},
+				{
+					"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"credentials\": {\n    \"apiKey\": \"<string>\"\n  }\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"credentials\": {\n    \"apiKey\": \"<string>\"\n  }\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Not found - The server can not find the requested resource.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"credentials\": {\n    \"apiKey\": \"<string>\"\n  }\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"credentials\": {\n    \"apiKey\": \"<string>\"\n  }\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "API to register map service provider",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "{{tenant_id}}"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "{{token}}"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "{{request_id}}"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"myGoogleMaps\",\n  \"type\": \"google\",\n  \"credentials\": {\n     \"apiKey\": \"bXltYXBzYXBpa2V5\"  \n  }\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/core/api/v1/mts/maps/providers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"core",
+								"api",
+								"v1",
+								"mts",
+								"maps",
+								"providers"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 18 Jan 2024 07:58:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "194"
+						},
+						{
+							"key": "server",
+							"value": "istio-envoy"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {},\n    \"data\": {\n        \"providerName\": \"myGoogleMaps\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get a Specific Map Service Provider",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"description": "(Required) Tenant ID.",
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}"
+					},
+					{
+						"description": "(Required) Core-os access token.",
+						"key": "X-COREOS-ACCESS",
+						"value": "{{token}}"
+					},
+					{
+						"description": "(Required) Unique RequestId.",
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}"
+					},
+					{
+						"description": "Core-os user info.",
+						"key": "X-COREOS-USERINFO",
+						"value": "<string>"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/providers/{{providerName}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"mts",
+						"maps",
+						"providers",
+						"{{providerName}}"
+					]
+				},
+				"description": "This endpoint will fetch the details of a specific map service provider"
+			},
+			"response": [
+				{
+					"name": "OK - The request succeeded.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"additionalInfo\": {},\n    \"code\": \"<number>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"urlBasePath\": \"https://~d9fEdMV76uz5bUF58gyv:xdHk8oPCYUVSHXYSEL5dFcqNm1eSm1Fg3Y1P+vmrrZ=K2ILmNOUVpQDmK+rx2:y2JPG@BOuSZqXS-fwOSlI-j7Dc9A.~QlD9jdpI7@rJ%dacjq2=_~AXRu=ild~abFYLV2..puTjk\",\n    \"apiKey\": \"<string>\",\n    \"name\": \"<string>\",\n    \"createdAt\": \"<number>\",\n    \"updatedAt\": \"<number>\",\n    \"createdBy\": \"<string>\",\n    \"updatedBy\": \"<string>\"\n  }\n}"
+				},
+				{
+					"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Not found - The server can not find the requested resource.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Map Tiles (your service provider)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"description": "(Required) Tenant ID.",
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}"
+					},
+					{
+						"description": "(Required) Core-os access token.",
+						"key": "X-COREOS-ACCESS",
+						"value": "{{token}}"
+					},
+					{
+						"description": "(Required) Unique RequestId.",
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}"
+					},
+					{
+						"description": "Core-os user info.",
+						"key": "X-COREOS-USERINFO",
+						"value": "<string>"
+					},
+					{
+						"key": "Accept",
+						"value": "image/png"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/tiles/3/5/3?providerName={{providerName}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"mts",
+						"maps",
+						"tiles",
+						"3",
+						"5",
+						"3"
+					],
+					"query": [
+						{
+							"key": "providerName",
+							"value": "{{providerName}}",
+							"description": "denotes the map provider type. Default value is \"mapTiler\" for india tenants and \"osm\" for US tenants"
+						}
+					]
+				},
+				"description": "This endpoint returns map tile based on map coordinates and zoom level"
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Map Service Provider",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"description": "(Required) Tenant ID.",
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}"
+					},
+					{
+						"description": "(Required) Core-os access token.",
+						"key": "X-COREOS-ACCESS",
+						"value": "{{token}}"
+					},
+					{
+						"description": "(Required) Unique RequestId.",
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}"
+					},
+					{
+						"description": "Core-os user info.",
+						"key": "X-COREOS-USERINFO",
+						"value": "<string>"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"apiKey\": \"<string>\"\n}",
+					"options": {
+						"raw": {
+							"headerFamily": "json",
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/providers/{{providerName}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"mts",
+						"maps",
+						"providers",
+						"{{providerName}}"
+					]
+				},
+				"description": "This endpoint will update the details of a specific map service provider"
+			},
+			"response": [
+				{
+					"name": "OK - The request succeeded.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"apiKey\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"additionalInfo\": {},\n    \"code\": \"<number>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"urlBasePath\": \"https://~d9fEdMV76uz5bUF58gyv:xdHk8oPCYUVSHXYSEL5dFcqNm1eSm1Fg3Y1P+vmrrZ=K2ILmNOUVpQDmK+rx2:y2JPG@BOuSZqXS-fwOSlI-j7Dc9A.~QlD9jdpI7@rJ%dacjq2=_~AXRu=ild~abFYLV2..puTjk\",\n    \"apiKey\": \"<string>\",\n    \"name\": \"<string>\",\n    \"createdAt\": \"<number>\",\n    \"updatedAt\": \"<number>\",\n    \"createdBy\": \"<string>\",\n    \"updatedBy\": \"<string>\"\n  }\n}"
+				},
+				{
+					"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"apiKey\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"apiKey\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Not found - The server can not find the requested resource.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"apiKey\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"apiKey\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete a Map Service Provider",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"description": "(Required) Tenant ID.",
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}"
+					},
+					{
+						"description": "(Required) Core-os access token.",
+						"key": "X-COREOS-ACCESS",
+						"value": "{{token}}"
+					},
+					{
+						"description": "(Required) Unique RequestId.",
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}"
+					},
+					{
+						"description": "Core-os user info.",
+						"key": "X-COREOS-USERINFO",
+						"value": "<string>"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/providers/{{providerName}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"mts",
+						"maps",
+						"providers",
+						"{{providerName}}"
+					]
+				},
+				"description": "This endpoint will delete a specific map service provider"
+			},
+			"response": [
+				{
+					"name": "OK - The request succeeded.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"additionalInfo\": {},\n    \"code\": \"<number>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": {\n    \"providerName\": \"<string>\"\n  }\n}"
+				},
+				{
+					"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Not found - The server can not find the requested resource.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers/:providerName",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers",
+								":providerName"
+							],
+							"variable": [
+								{
+									"key": "providerName"
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get All Registered Map Service Providers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"description": "(Required) Tenant ID.",
+						"key": "X-COREOS-TID",
+						"value": "{{tenant_id}}"
+					},
+					{
+						"description": "(Required) Core-os access token.",
+						"key": "X-COREOS-ACCESS",
+						"value": "{{token}}"
+					},
+					{
+						"description": "(Required) Unique RequestId.",
+						"key": "X-COREOS-REQUEST-ID",
+						"value": "{{request_id}}"
+					},
+					{
+						"description": "Core-os user info.",
+						"key": "X-COREOS-USERINFO",
+						"value": "<string>"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/core/api/v1/mts/maps/providers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"core",
+						"api",
+						"v1",
+						"mts",
+						"maps",
+						"providers"
+					]
+				},
+				"description": "This endpoint returns all registered map service providers"
+			},
+			"response": [
+				{
+					"name": "OK - The request succeeded.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"additionalInfo\": {},\n    \"code\": \"<number>\",\n    \"description\": \"<string>\"\n  },\n  \"data\": [\n    {\n      \"urlBasePath\": \"http://www.%C9vqcn@Mug+JqKuyKJ1Fz2RxF=e1CC~=zyh%ama7q:i4ICoyG-@cZ_XkFU_0QWDqkl7dfPWBRPikKXuP_Qh10qnY~2:Xf1kOdO%e%=Y+ws%CV1gn+B:%f:kFsByos7k0BD2iqHwTuJLJLw_tT~AQe5NMwhP7bUmvl6.6DU75+pP_1yftKm6TbEmNEWJyRXyoPnWPvVmOrL9o~EA-GuJkrlWKn2XeiqgqY=.anrEg2c@\",\n      \"apiKey\": \"<string>\",\n      \"name\": \"<string>\",\n      \"createdAt\": \"<number>\",\n      \"updatedAt\": \"<number>\",\n      \"createdBy\": \"<string>\",\n      \"updatedBy\": \"<string>\"\n    },\n    {\n      \"urlBasePath\": \"https://www.I=OobxQ2eZAOQ.13Svp5@3GxtTVXB1wHXH=RZGUhjOlK.H0nN.cx9B%.kt7sqFUQR~8\",\n      \"apiKey\": \"<string>\",\n      \"name\": \"<string>\",\n      \"createdAt\": \"<number>\",\n      \"updatedAt\": \"<number>\",\n      \"createdBy\": \"<string>\",\n      \"updatedBy\": \"<string>\"\n    }\n  ]\n}"
+				},
+				{
+					"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Not found - The server can not find the requested resource.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				},
+				{
+					"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "(Required) Tenant ID.",
+								"key": "X-COREOS-TID",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Core-os access token.",
+								"key": "X-COREOS-ACCESS",
+								"value": "<string>"
+							},
+							{
+								"description": "(Required) Unique RequestId.",
+								"key": "X-COREOS-REQUEST-ID",
+								"value": "<string>"
+							},
+							{
+								"description": "Core-os user info.",
+								"key": "X-COREOS-USERINFO",
+								"value": "<string>"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/mts/maps/providers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mts",
+								"maps",
+								"providers"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-COREOS-REQUEST-ID",
+							"value": "<string>",
+							"description": {
+								"content": "Unique request ID that was passed as header parameter in the request.",
+								"type": "text/plain"
+							}
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": {\n    \"code\": \"<number>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": \"deserunt voluptate in\"\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://{{base_url}}/core/api/v1"
+		}
+	]
+}
