@@ -65,9 +65,9 @@
 			"response": []
 		},
 		{
-			"name": "Create app configuration.",
+			"name": "Get All Events",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [
 					{
 						"description": "(Required) Tenant ID",
@@ -80,19 +80,15 @@
 						"value": "{{token}}"
 					},
 					{
-						"description": "(Required) App Id of the app which wants to either publish events or subscribe to specific events. App should be registered with Dev portal, you will get this id there. e.g. app:9694716b-f563-46cc-9cc8-255873f28553.",
-						"key": "X-COREOS-APP-ID",
-						"value": "{{app_id}}"
-					},
-					{
 						"description": "Core-os authentication token.",
 						"key": "X-COREOS-AUTH",
-						"value": "{{token}}"
+						"value": "{{token}}",
+						"disabled": true
 					},
 					{
 						"description": "(Required) Unique request ID",
 						"key": "X-COREOS-REQUEST-ID",
-						"value": "{{$guid}}"
+						"value": "{{request_id}}"
 					},
 					{
 						"description": "(Required) User info header having JSON stringified object having following properties {\"appId\", \"name\", \"id\"}",
@@ -100,590 +96,12 @@
 						"value": "{{user_info}}"
 					},
 					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n \"appId\": \"platform:app:service:60cf75b2-2ad2-5257-866f-b10469f9b866\",\n \"name\": \"user-fpa\",\n \"permissions\": [\n    \"get-participant-fpa-single-user\",\n    \"get-participant-fpa-single-user-2\"\n ]\n}",
-					"options": {
-						"raw": {
-							"headerFamily": "json",
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/core/api/v1/webhooks/apps",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"core",
-						"api",
-						"v1",
-						"webhooks",
-						"apps"
-					],
-					"query": [
-						{
-							"key": "limit",
-							"value": "20",
-							"disabled": true
-						}
-					]
-				},
-				"description": "Register the app configurations.\n### **Permissions**: \nPermissions are the access rights needed to control who can do what within the app. This list specifies the permissions required to access particular resources. \n                \nFor instance, if your app exposes User-related events and provides an API for fetching user details at '/api/v1/users/:userId', the permissions necessary to access this endpoint should be added here. You can find them in your app's AAA YAML. \n                \nSubscribers who want to receive events from this app must have at least one of the role that includes these listed permissions. This will be used to control only authorized apps are able to subscribe to your events.\n        \n\n### **Name**: \nUser friendly name for the app, subscribers will use this name to subscribe to the app's published events. It will be automatically fetched from dev portal. Listing-id of the app will be used as app name.\n"
-			},
-			"response": [
-				{
-					"name": "OK - The request succeeded.",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"description": "(Required) Tenant ID",
-								"key": "X-COREOS-TID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Core-os access token",
-								"key": "X-COREOS-ACCESS",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) App Id of the app which wants to either publish events or subscribe to specific events. App should be registered with Dev portal, you will get this id there. e.g. app:9694716b-f563-46cc-9cc8-255873f28553.",
-								"key": "X-COREOS-APP-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "Core-os authentication token.",
-								"key": "X-COREOS-AUTH",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Unique request ID",
-								"key": "X-COREOS-REQUEST-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) User info header having JSON stringified object having following properties {\"appId\", \"name\", \"id\"}",
-								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-							"options": {
-								"raw": {
-									"headerFamily": "json",
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/apps",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"apps"
-							]
-						}
-					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "X-COREOS-REQUEST-ID",
-							"value": "<string>",
-							"description": {
-								"content": "Unique request ID that was passed as header parameter in the request.",
-								"type": "text/plain"
-							}
-						}
-					],
-					"cookie": [],
-					"body": "{\n  \"data\": {\n    \"id\": \"<string>\"\n  }\n}"
-				},
-				{
-					"name": "Bad request - The server is unable to process the request due to something that is perceived to be a client error.",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"description": "(Required) Tenant ID",
-								"key": "X-COREOS-TID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Core-os access token",
-								"key": "X-COREOS-ACCESS",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) App Id of the app which wants to either publish events or subscribe to specific events. App should be registered with Dev portal, you will get this id there. e.g. app:9694716b-f563-46cc-9cc8-255873f28553.",
-								"key": "X-COREOS-APP-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "Core-os authentication token.",
-								"key": "X-COREOS-AUTH",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Unique request ID",
-								"key": "X-COREOS-REQUEST-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) User info header having JSON stringified object having following properties {\"appId\", \"name\", \"id\"}",
-								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-							"options": {
-								"raw": {
-									"headerFamily": "json",
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/apps",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"apps"
-							]
-						}
-					},
-					"status": "Bad Request",
-					"code": 400,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "X-COREOS-REQUEST-ID",
-							"value": "<string>",
-							"description": {
-								"content": "Unique request ID that was passed as header parameter in the request.",
-								"type": "text/plain"
-							}
-						}
-					],
-					"cookie": [],
-					"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-				},
-				{
-					"name": "Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"description": "(Required) Tenant ID",
-								"key": "X-COREOS-TID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Core-os access token",
-								"key": "X-COREOS-ACCESS",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) App Id of the app which wants to either publish events or subscribe to specific events. App should be registered with Dev portal, you will get this id there. e.g. app:9694716b-f563-46cc-9cc8-255873f28553.",
-								"key": "X-COREOS-APP-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "Core-os authentication token.",
-								"key": "X-COREOS-AUTH",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Unique request ID",
-								"key": "X-COREOS-REQUEST-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) User info header having JSON stringified object having following properties {\"appId\", \"name\", \"id\"}",
-								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-							"options": {
-								"raw": {
-									"headerFamily": "json",
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/apps",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"apps"
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "X-COREOS-REQUEST-ID",
-							"value": "<string>",
-							"description": {
-								"content": "Unique request ID that was passed as header parameter in the request.",
-								"type": "text/plain"
-							}
-						}
-					],
-					"cookie": [],
-					"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-				},
-				{
-					"name": "Forbidden - The client's identity is known to the server but it does not have access rights to the requested resource. Verify that you're using the correct client ID and client secret or grant the client the necessary roles to access the resource.",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"description": "(Required) Tenant ID",
-								"key": "X-COREOS-TID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Core-os access token",
-								"key": "X-COREOS-ACCESS",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) App Id of the app which wants to either publish events or subscribe to specific events. App should be registered with Dev portal, you will get this id there. e.g. app:9694716b-f563-46cc-9cc8-255873f28553.",
-								"key": "X-COREOS-APP-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "Core-os authentication token.",
-								"key": "X-COREOS-AUTH",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Unique request ID",
-								"key": "X-COREOS-REQUEST-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) User info header having JSON stringified object having following properties {\"appId\", \"name\", \"id\"}",
-								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-							"options": {
-								"raw": {
-									"headerFamily": "json",
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/apps",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"apps"
-							]
-						}
-					},
-					"status": "Forbidden",
-					"code": 403,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "X-COREOS-REQUEST-ID",
-							"value": "<string>",
-							"description": {
-								"content": "Unique request ID that was passed as header parameter in the request.",
-								"type": "text/plain"
-							}
-						}
-					],
-					"cookie": [],
-					"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-				},
-				{
-					"name": "Not found - The server can not find the requested resource.",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"description": "(Required) Tenant ID",
-								"key": "X-COREOS-TID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Core-os access token",
-								"key": "X-COREOS-ACCESS",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) App Id of the app which wants to either publish events or subscribe to specific events. App should be registered with Dev portal, you will get this id there. e.g. app:9694716b-f563-46cc-9cc8-255873f28553.",
-								"key": "X-COREOS-APP-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "Core-os authentication token.",
-								"key": "X-COREOS-AUTH",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Unique request ID",
-								"key": "X-COREOS-REQUEST-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) User info header having JSON stringified object having following properties {\"appId\", \"name\", \"id\"}",
-								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-							"options": {
-								"raw": {
-									"headerFamily": "json",
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/apps",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"apps"
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "X-COREOS-REQUEST-ID",
-							"value": "<string>",
-							"description": {
-								"content": "Unique request ID that was passed as header parameter in the request.",
-								"type": "text/plain"
-							}
-						}
-					],
-					"cookie": [],
-					"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-				},
-				{
-					"name": "Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"description": "(Required) Tenant ID",
-								"key": "X-COREOS-TID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Core-os access token",
-								"key": "X-COREOS-ACCESS",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) App Id of the app which wants to either publish events or subscribe to specific events. App should be registered with Dev portal, you will get this id there. e.g. app:9694716b-f563-46cc-9cc8-255873f28553.",
-								"key": "X-COREOS-APP-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "Core-os authentication token.",
-								"key": "X-COREOS-AUTH",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) Unique request ID",
-								"key": "X-COREOS-REQUEST-ID",
-								"value": "<string>"
-							},
-							{
-								"description": "(Required) User info header having JSON stringified object having following properties {\"appId\", \"name\", \"id\"}",
-								"key": "X-COREOS-USERINFO",
-								"value": "<string>"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-							"options": {
-								"raw": {
-									"headerFamily": "json",
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/apps",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"apps"
-							]
-						}
-					},
-					"status": "Service Unavailable",
-					"code": 503,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "X-COREOS-REQUEST-ID",
-							"value": "<string>",
-							"description": {
-								"content": "Unique request ID that was passed as header parameter in the request.",
-								"type": "text/plain"
-							}
-						}
-					],
-					"cookie": [],
-					"body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"description\": \"<string>\",\n    \"additionalInfo\": {}\n  },\n  \"request\": {\n    \"uri\": \"<string>\",\n    \"method\": \"POST\",\n    \"queryString\": \"<string>\",\n    \"body\": {}\n  }\n}"
-				}
-			]
-		},
-		{
-			"name": "Get All Events",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"description": "(Required) Tenant ID",
-						"key": "X-COREOS-TID",
-						"value": "<string>"
-					},
-					{
-						"description": "(Required) Core-os access token",
-						"key": "X-COREOS-ACCESS",
-						"value": "<string>"
-					},
-					{
-						"description": "Core-os authentication token.",
-						"key": "X-COREOS-AUTH",
-						"value": "<string>"
-					},
-					{
-						"description": "(Required) Unique request ID",
-						"key": "X-COREOS-REQUEST-ID",
-						"value": "<string>"
-					},
-					{
-						"description": "(Required) User info header having JSON stringified object having following properties {\"appId\", \"name\", \"id\"}",
-						"key": "X-COREOS-USERINFO",
-						"value": "<string>"
-					},
-					{
 						"key": "Accept",
 						"value": "application/json"
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/core/api/v1/webhooks/:topic/events?nextPage=e785af1d-cd05-ad9f-8acb-1ae59f928e31&limit=20&appId=<string>&fields=<string>",
+					"raw": "{{baseUrl}}/core/api/v1/webhooks/:topic/events?limit=20&appId=app:db4320c4-8810-54e6-9172-d90471c2d1cc",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -699,7 +117,8 @@
 						{
 							"key": "nextPage",
 							"value": "e785af1d-cd05-ad9f-8acb-1ae59f928e31",
-							"description": "uuid of next page"
+							"description": "uuid of next page",
+							"disabled": true
 						},
 						{
 							"key": "limit",
@@ -708,13 +127,14 @@
 						},
 						{
 							"key": "appId",
-							"value": "<string>",
+							"value": "app:db4320c4-8810-54e6-9172-d90471c2d1cc",
 							"description": "App id of the app which registered events"
 						},
 						{
 							"key": "fields",
 							"value": "<string>",
-							"description": "Specifies list of attributes to be included in response with default attribute. If not specified, following attribute will be returned: name, description, type, appId, appName. \n\n**Note**: Event Name will be returned in app responses.\n"
+							"description": "Specifies list of attributes to be included in response with default attribute. If not specified, following attribute will be returned: name, description, type, appId, appName. \n\n**Note**: Event Name will be returned in app responses.\n",
+							"disabled": true
 						}
 					],
 					"variable": [
@@ -1311,7 +731,8 @@
 					{
 						"description": "Core-os authentication token.",
 						"key": "X-COREOS-AUTH",
-						"value": "{{token}}"
+						"value": "{{token}}",
+						"disabled": true
 					},
 					{
 						"description": "(Required) Unique request ID",
@@ -1334,7 +755,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"topic\": \"participant-egress\",\n  \"webhook\": {\n    \"url\": \"https://webhook.site/90c52ac3-4219-4d55-bd63-d466ee8dd46c\",\n    \"signatureKey\": \"YmFzZTY0ZW5jb2RlZFNpZ25hdHVyZQ==\"\n  },\n  \"description\": \"Participant webhook test\",\n  \"eventsAppName\": \"otter-backend\",\n  \"events\": [\n    \"AvailableUserEvent\",\n    \"AllocatedUsersEvent\"\n  ],\n  \"isActive\": true,\n  \"customAttr\": false\n}",
+					"raw": "{\n  \"topic\": \"participant-egress\",\n  \"webhook\": {\n    \"url\": \"https://webhook.test.com\", // Enter your webhook URL\n    \"signatureKey\": \"YmFzZTY0ZW5jb2RlZFNpZ25hdHVyZQ==\"\n  },\n  \"description\": \"New Participant webhook test\", // Enter your preferred description.\n  \"eventsAppName\": \"otter-backend\",\n  \"events\": [\n    \"UsersCreation1\",\n    \"UsersUpdation1\"\n  ],\n  \"isActive\": true,\n  \"customAttr\": true\n}",
 					"options": {
 						"raw": {
 							"headerFamily": "json",
@@ -1865,7 +1286,7 @@
 			]
 		},
 		{
-			"name": "Get subscriptions",
+			"name": "Get subscriptions by Id",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -1887,7 +1308,8 @@
 					{
 						"description": "Core-os authentication token.",
 						"key": "X-COREOS-AUTH",
-						"value": "{{token}}"
+						"value": "{{token}}",
+						"disabled": true
 					},
 					{
 						"description": "(Required) Unique request ID",
@@ -1905,7 +1327,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/core/api/v1/webhooks/subscriptions",
+					"raw": "{{baseUrl}}/core/api/v1/webhooks/subscriptions/:subscriptionId?limit=20",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -1914,7 +1336,8 @@
 						"api",
 						"v1",
 						"webhooks",
-						"subscriptions"
+						"subscriptions",
+						":subscriptionId"
 					],
 					"query": [
 						{
@@ -1926,8 +1349,13 @@
 						{
 							"key": "limit",
 							"value": "20",
-							"description": "Number of items to return. Value should be between 1 to 50. Default is 20",
-							"disabled": true
+							"description": "Number of items to return. Value should be between 1 to 50. Default is 20"
+						}
+					],
+					"variable": [
+						{
+							"key": "subscriptionId",
+							"value": ""
 						}
 					]
 				},
@@ -2429,7 +1857,7 @@
 			]
 		},
 		{
-			"name": "Update subscription",
+			"name": "Update subscription by Id",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -2451,7 +1879,8 @@
 					{
 						"description": "Core-os authentication token.",
 						"key": "X-COREOS-AUTH",
-						"value": "{{token}}"
+						"value": "{{token}}",
+						"disabled": true
 					},
 					{
 						"description": "(Required) Unique request ID",
@@ -3049,7 +2478,7 @@
 			]
 		},
 		{
-			"name": "Get subscription executions.",
+			"name": "Get subscription executions by id",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -3071,12 +2500,13 @@
 					{
 						"description": "Core-os authentication token.",
 						"key": "X-COREOS-AUTH",
-						"value": "{{token}}"
+						"value": "{{token}}",
+						"disabled": true
 					},
 					{
 						"description": "(Required) Unique request ID",
 						"key": "X-COREOS-REQUEST-ID",
-						"value": "{{$guid}}"
+						"value": "{{request_id}}"
 					},
 					{
 						"description": "(Required) User info header having JSON stringified object having following properties {\"appId\", \"name\", \"id\"}",
@@ -3089,7 +2519,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/core/api/v1/webhooks/subscriptions/:subscriptionId/executions?date=<string>&status=success",
+					"raw": "{{baseUrl}}/core/api/v1/webhooks/subscriptions/:subscriptionId/executions?status=success",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -3106,7 +2536,8 @@
 						{
 							"key": "date",
 							"value": "<string>",
-							"description": "Execution Log date in YYYY-MM-DD format - if not provided will fallback to today (GMT)"
+							"description": "Execution Log date in YYYY-MM-DD format - if not provided will fallback to today (GMT)",
+							"disabled": true
 						},
 						{
 							"key": "nextPage",
@@ -3123,7 +2554,7 @@
 					"variable": [
 						{
 							"key": "subscriptionId",
-							"value": "<string>",
+							"value": "",
 							"description": "(Required) Unique subscription id"
 						}
 					]
