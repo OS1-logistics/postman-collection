@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "Address Standardiization",
+			"name": "Address Standardization",
 			"item": [
 				{
 					"name": "Standardize address",
@@ -70,7 +70,7 @@
 							{
 								"description": "(Required) This key is used for authentication and billing.",
 								"key": "x-api-key",
-								"value": "QqypN3pz75VASxBZH4FFNVX3tYyOA0dNbG9qRjS45G3gcAWC"
+								"value": "<string>"
 							},
 							{
 								"key": "Content-Type",
@@ -1235,7 +1235,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.getos1.com/locateone/v1/reverse-geocode?type=<string>&lat=<number>&lng=<number>&error_radius=<number>",
+							"raw": "https://api.getos1.com/locateone/v1/reverse-geocode?type=country&lat=74.46097160087743&lng=74.46097160087743&error_radius=123111",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -1250,22 +1250,22 @@
 							"query": [
 								{
 									"key": "type",
-									"value": "<string>",
+									"value": "country",
 									"description": "(Required) The reverse geocode type. Acceptable alues are country, address, and address_suggestions."
 								},
 								{
 									"key": "lat",
-									"value": "<number>",
+									"value": "74.46097160087743",
 									"description": "(Required) Latitude value"
 								},
 								{
 									"key": "lng",
-									"value": "<number>",
+									"value": "74.46097160087743",
 									"description": "(Required) Longitude value"
 								},
 								{
 									"key": "error_radius",
-									"value": "<number>",
+									"value": "123111",
 									"description": "(Required) Error radius in meters"
 								}
 							]
@@ -1655,7 +1655,7 @@
 							{
 								"description": "(Required) This key is used for authentication and billing.",
 								"key": "x-api-key",
-								"value": "QqypN3pz75VASxBZH4FFNVX3tYyOA0dNbG9qRjS45G3gcAWC"
+								"value": "<string>"
 							},
 							{
 								"key": "Content-Type",
